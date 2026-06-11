@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# GitHub CLI wrapper — uses abenjamin765 auth for this project only.
+export GH_CONFIG_DIR="$(cd "$(dirname "$0")/.." && pwd)/.gh"
+exec gh "$@"

@@ -16,6 +16,10 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.envrc
+
+# project-scoped GitHub CLI auth (abenjamin765)
+.gh/
 
 # macOS-specific files
 .DS_Store
