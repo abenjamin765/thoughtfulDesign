@@ -1,17 +1,34 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getPublishedLessons, groupLessonsByModule } from '../lib/lessons';
 
+const lessons = await getPublishedLessons();
+const modules = groupLessonsByModule(lessons);
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Thoughtful Design — Learn Object-Oriented UX">
+  <section class="hero container">
+    <p class="muted">A practical course in Object-Oriented UX</p>
+    <h1>Design systems that match how people think.</h1>
+    <p>
+      Learn through short lessons, reflection prompts, and knowledge checks.
+      Structure is flexible — the outline will grow as the curriculum matures.
+    </p>
+    <div class="nav-links">
+      <a class="button button--primary" href="/signup">Start learning</a>
+      <a class="button button--secondary" href="/course">Browse lessons</a>
+    </div>
+  </section>
+
+  <section class="container" style="padding-bottom: 3rem;">
+    <h2>What you'll explore</h2>
+    <div class="card-grid">
+      {modules.map((module) => (
+        <article class="card">
+          <h3>{module.name}</h3>
+          <p class="muted">{module.lessons.length} lesson{module.lessons.length === 1 ? '' : 's'} available now</p>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

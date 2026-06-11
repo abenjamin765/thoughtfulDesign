@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AuthGuard from '../../components/AuthGuard';
+import SignOutButton from '../../components/SignOutButton';
+import { getPublishedLessons, getLessonSlug, groupLessonsByModule } from '../../lib/lessons';
+
+const lessons = await getPublishedLessons();
+const modules = groupLessonsByModule(lessons);
+---
+
+<BaseLayout title="Course — Thoughtful Design">
+  <AuthGuard client:load>
+    <section class="container" style="padding: 2.5rem 0;">
+      <div style="display: flex; justify-content: space-between; gap: 1rem; align-items: center; flex-wrap: wrap;">
+        <div>
+          <h1>Course outline</h1>
+          <p class="muted">Modules are derived from lesson frontmatter and can evolve as the curriculum develops.</p>
+        </div>
+        <SignOutButton client:load />
+      </div>
+
+      {modules.map((module) => (
+        <section class="module-section">
+          <h2>{module.name}</h2>
+          <ul class="lesson-list">
+            {module.lessons.map((lesson) => (
+              <li>
+                <a href={`/lessons/${getLessonSlug(lesson)}`}>
+                  <span>
+                    <strong>{lesson.data.title}</strong>
+                    <span class="muted" style="display: block;">
+                      {lesson.data.estimated_minutes} min
+                    </span>
+                  </span>
+                  <span class="muted">Lesson {lesson.data.order}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </section>
+  </AuthGuard>
+</BaseLayout>

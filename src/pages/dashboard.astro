@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AuthGuard from '../components/AuthGuard';
+import DashboardProgress from '../components/DashboardProgress';
+import SignOutButton from '../components/SignOutButton';
+import { getPublishedLessons, getLessonSlug } from '../lib/lessons';
+
+const lessons = await getPublishedLessons();
+const lessonSlugs = lessons.map(getLessonSlug);
+---
+
+<BaseLayout title="Dashboard — Thoughtful Design">
+  <AuthGuard client:load>
+    <section class="container" style="padding: 2.5rem 0;">
+      <div style="display: flex; justify-content: space-between; gap: 1rem; align-items: center; flex-wrap: wrap;">
+        <div>
+          <h1>Your progress</h1>
+          <p class="muted">Track completed lessons and pick up where you left off.</p>
+        </div>
+        <SignOutButton client:load />
+      </div>
+
+      <DashboardProgress client:load lessonSlugs={lessonSlugs} />
+    </section>
+  </AuthGuard>
+</BaseLayout>

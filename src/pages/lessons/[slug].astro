@@ -1,0 +1,70 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AuthGuard from '../../components/AuthGuard';
+import Callout from '../../components/Callout.astro';
+import Reveal from '../../components/Reveal.astro';
+import Quiz from '../../components/Quiz';
+import ReflectionPrompt from '../../components/ReflectionPrompt';
+import LessonComplete from '../../components/LessonComplete';
+import SignOutButton from '../../components/SignOutButton';
+import { getPublishedLessons, getLessonSlug } from '../../lib/lessons';
+
+export async function getStaticPaths() {
+  const lessons = await getPublishedLessons();
+  return lessons.map((lesson) => ({
+    params: { slug: getLessonSlug(lesson) },
+  }));
+}
+
+const { slug } = Astro.params;
+const lessons = await getPublishedLessons();
+const lesson = lessons.find((entry) => getLessonSlug(entry) === slug);
+
+if (!lesson) {
+  return Astro.redirect('/course');
+}
+
+const { Content } = await render(lesson);
+const lessonSlug = getLessonSlug(lesson);
+---
+
+<BaseLayout title={`${lesson.data.title} — Thoughtful Design`}>
+  <AuthGuard client:load>
+    <article class="container" style="padding: 2.5rem 0;">
+      <div style="display: flex; justify-content: space-between; gap: 1rem; align-items: center; flex-wrap: wrap;">
+        <a href="/course" class="muted">← Back to course</a>
+        <SignOutButton client:load />
+      </div>
+
+      <header style="margin: 1.5rem 0 2rem;">
+        <p class="muted">{lesson.data.module}</p>
+        <h1>{lesson.data.title}</h1>
+        <div class="lesson-meta">
+          <span>Lesson {lesson.data.order}</span>
+          <span>{lesson.data.estimated_minutes} minutes</span>
+        </div>
+      </header>
+
+      <div class="prose">
+        <Content components={{ Callout, Reveal }} />
+      </div>
+
+      <div class="lesson-footer">
+        {lesson.data.quiz && lesson.data.quiz.length > 0 && (
+          <Quiz client:load lessonSlug={lessonSlug} questions={lesson.data.quiz} />
+        )}
+
+        {lesson.data.reflection && (
+          <ReflectionPrompt
+            client:load
+            lessonSlug={lessonSlug}
+            prompt={lesson.data.reflection.prompt}
+          />
+        )}
+
+        <LessonComplete client:load lessonSlug={lessonSlug} />
+      </div>
+    </article>
+  </AuthGuard>
+</BaseLayout>
