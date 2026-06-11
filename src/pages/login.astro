@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AuthForm from '../components/AuthForm';
+import { withBase } from '../lib/paths';
 
-const redirectTo = Astro.url.searchParams.get('redirect') ?? '/course';
+const redirectTo = Astro.url.searchParams.get('redirect') ?? withBase('/course');
 ---
 
 <BaseLayout title="Sign in — Thoughtful Design">

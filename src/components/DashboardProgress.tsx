@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getSupabase } from '../lib/supabase';
+import { withBase } from '../lib/paths';
 
 type Props = {
   lessonSlugs: string[];
@@ -72,7 +73,7 @@ export default function DashboardProgress({ lessonSlugs }: Props) {
           const done = completedSlugs.includes(slug);
           return (
             <li key={slug}>
-              <a href={`/lessons/${slug}`}>
+              <a href={withBase(`/lessons/${slug}`)}>
                 <span>{slug.replace(/-/g, ' ')}</span>
                 <span className={done ? 'success-text' : 'muted'}>{done ? 'Complete' : 'In progress'}</span>
               </a>

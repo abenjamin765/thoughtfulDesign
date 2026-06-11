@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { getSupabase } from '../lib/supabase';
+import { withBase } from '../lib/paths';
 
 type Mode = 'login' | 'signup';
 
@@ -8,7 +9,7 @@ type Props = {
   redirectTo?: string;
 };
 
-export default function AuthForm({ mode, redirectTo = '/course' }: Props) {
+export default function AuthForm({ mode, redirectTo = withBase('/course') }: Props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [displayName, setDisplayName] = useState('');

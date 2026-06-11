@@ -1,13 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AuthForm from '../components/AuthForm';
+import { withBase } from '../lib/paths';
 ---
 
 <BaseLayout title="Sign up — Thoughtful Design">
   <div class="auth-shell container">
     <AuthForm client:load mode="signup" />
     <p class="muted" style="text-align: center;">
-      Already have an account? <a href="/login">Sign in</a>
+      Already have an account? <a href={withBase('/login')}>Sign in</a>
     </p>
   </div>
 </BaseLayout>

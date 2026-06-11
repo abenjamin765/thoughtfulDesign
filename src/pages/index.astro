@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getPublishedLessons, groupLessonsByModule } from '../lib/lessons';
+import { withBase } from '../lib/paths';
 
 const lessons = await getPublishedLessons();
 const modules = groupLessonsByModule(lessons);
@@ -15,8 +16,8 @@ const modules = groupLessonsByModule(lessons);
       Structure is flexible — the outline will grow as the curriculum matures.
     </p>
     <div class="nav-links">
-      <a class="button button--primary" href="/signup">Start learning</a>
-      <a class="button button--secondary" href="/course">Browse lessons</a>
+      <a class="button button--primary" href={withBase('/signup')}>Start learning</a>
+      <a class="button button--secondary" href={withBase('/course')}>Browse lessons</a>
     </div>
   </section>
 

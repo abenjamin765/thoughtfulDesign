@@ -9,6 +9,7 @@ import ReflectionPrompt from '../../components/ReflectionPrompt';
 import LessonComplete from '../../components/LessonComplete';
 import SignOutButton from '../../components/SignOutButton';
 import { getPublishedLessons, getLessonSlug } from '../../lib/lessons';
+import { withBase } from '../../lib/paths';
 
 export async function getStaticPaths() {
   const lessons = await getPublishedLessons();
@@ -22,7 +23,7 @@ const lessons = await getPublishedLessons();
 const lesson = lessons.find((entry) => getLessonSlug(entry) === slug);
 
 if (!lesson) {
-  return Astro.redirect('/course');
+  return Astro.redirect(withBase('/course'));
 }
 
 const { Content } = await render(lesson);
@@ -33,7 +34,7 @@ const lessonSlug = getLessonSlug(lesson);
   <AuthGuard client:load>
     <article class="container" style="padding: 2.5rem 0;">
       <div style="display: flex; justify-content: space-between; gap: 1rem; align-items: center; flex-wrap: wrap;">
-        <a href="/course" class="muted">← Back to course</a>
+        <a href={withBase('/course')} class="muted">← Back to course</a>
         <SignOutButton client:load />
       </div>
 

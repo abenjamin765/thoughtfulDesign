@@ -1,5 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { getSupabase } from '../lib/supabase';
+import { withBase } from '../lib/paths';
 
 type Props = {
   children: ReactNode;
@@ -28,7 +29,7 @@ export default function AuthGuard({ children, fallback }: Props) {
 
       if (!session) {
         const redirect = `${window.location.pathname}${window.location.search}`;
-        window.location.href = `/login?redirect=${encodeURIComponent(redirect)}`;
+        window.location.href = `${withBase('/login')}?redirect=${encodeURIComponent(redirect)}`;
       }
     }
 
