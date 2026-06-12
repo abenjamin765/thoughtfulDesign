@@ -1,0 +1,99 @@
+---
+title: "Writing a design rationale"
+module: "Product Strategy and Design Judgment"
+module_id: "06-product-strategy"
+part: "Understanding People and Decisions"
+order: 3
+estimated_minutes: 20
+published: true
+public_preview: false
+core_claim: "Design judgment means choosing what matters most under real constraints."
+loop_steps: ["Align", "Shape"]
+scenario: "enterprise"
+quiz:
+  - prompt: "Which rationale is strongest?"
+    options:
+      - "I chose prioritized alerts because it looks cleaner."
+      - "I chose prioritized alerts because ops is alert-fatigued (user need) and we track resolution time (business goal); it surfaces urgent items fast within our 3-week, no-backend constraint, trading away full configurability."
+      - "I chose prioritized alerts because that's the modern pattern."
+    answer: 1
+    feedback: "The strong rationale connects the choice to user need, business goal, constraints, and the tradeoff accepted. 'Looks cleaner' and 'it's modern' are assertions of taste or trend, not reasoning a teammate can evaluate."
+  - prompt: "What information would most improve a shaky design decision?"
+    options:
+      - "Whatever reduces the biggest uncertainty behind the choice."
+      - "More color options."
+      - "A longer rationale document."
+    answer: 0
+    feedback: "Target the uncertainty that matters most — the unknown that, if resolved, would most change the decision. Cosmetic options and length do not strengthen the underlying reasoning."
+  - prompt: "Why document a rationale even when the team already agrees?"
+    options:
+      - "To create paperwork."
+      - "So the decision can be revisited later with its original reasoning and tradeoffs intact."
+      - "To assign blame if it fails."
+    answer: 1
+    feedback: "A rationale preserves why a choice was made and what it traded off, so future changes are informed rather than blind. It is not bureaucracy or blame — it is institutional memory."
+reflection:
+  prompt: "Write a one-paragraph rationale for a recent design choice using need, goal, evidence, tradeoff, and risk."
+---
+
+## The situation
+
+The dashboard designer has made her call: prioritized alerts with simple defaults. In the old days she would have just built it. But a thoughtful designer knows a decision is only as durable as the reasoning behind it. So she writes a short rationale — and it pays off the first time someone asks "why didn't you make it configurable?"
+
+## What a rationale contains
+
+A design rationale connects a recommendation to the forces behind it. A useful one is short and covers:
+
+1. **Recommendation** — what you are proposing.
+2. **User need** — the human problem it serves.
+3. **Business goal** — the outcome the company wants.
+4. **Evidence** — what supports the choice (and how strong it is).
+5. **Tradeoffs** — what you are deliberately giving up.
+6. **Risks** — what could make this wrong.
+7. **Next step** — what happens now, and what would make you revisit.
+
+> A rationale is not a justification written after the fact.
+> It is the thinking made visible, so others can check it and the future can revisit it.
+
+## Why it matters
+
+A written rationale does three jobs. It lets stakeholders evaluate your *reasoning* rather than react to your *pixels*. It survives turnover and time, so a decision is not blindly reversed a year later. And it forces you to notice when your own reasoning is thin — if the "evidence" line is empty, you have learned something.
+
+<Callout type="tip">
+
+Name the strongest argument *against* your choice in the rationale, and answer it. A rationale that engages its best counterargument is far more persuasive than one that pretends none exists.
+
+</Callout>
+
+## Try it
+
+Use the **Design Rationale Template** resource. Take a real or recent design decision and write a rationale covering recommendation, user need, business goal, evidence, tradeoffs, risks, and next step. Keep it to a single page.
+
+<Callout type="warning">
+
+A common trap is writing a rationale that only lists strengths. If there are no tradeoffs and no risks, it is marketing, not reasoning. Every real decision gives something up — name it.
+
+</Callout>
+
+<Reveal label="What good looks like">
+
+A strong rationale fits on one page, distinguishes user need from business goal, labels its evidence by strength, states the tradeoff plainly, and names a risk with what would trigger a rethink. Example close: "Risk: if configuration requests spike in month one, we revisit. Next step: ship prioritized defaults; instrument how often users want to tune thresholds."
+
+</Reveal>
+
+## Summary
+
+- Design judgment is choosing what matters most under real constraints — distinct from taste.
+- Make the forces explicit: user needs vs. business goals, constraints, and tradeoffs.
+- Satisfice: choose the strongest option achievable under real limits and incomplete information.
+- Write a rationale connecting recommendation, need, goal, evidence, tradeoffs, risks, and next step.
+- Engage the best counterargument; name what you give up.
+- This module spans the **Align** and **Shape** steps of the loop.
+
+**Key terms:** product strategy, user need vs. business goal, constraint, tradeoff, decision quality, satisficing, design rationale.
+
+## Carry forward
+
+You have completed Part 2: you can learn what reality is asking, help a team decide, and choose well with clear reasoning. Milestone 2 brings these together on one product situation.
+
+Continue to Milestone 2: Understanding People and Decisions.

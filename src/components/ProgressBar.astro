@@ -1,0 +1,56 @@
+---
+// Presentational progress bar (static). Renders the canonical `.progress-bar`
+// markup from global.css so static surfaces match the React progress markup
+// used on the dashboard (Phase 7). Status that depends on the logged-in user
+// is computed in client islands, which render this same markup.
+//
+// API:
+//   <ProgressBar value={3} max={4} label="3 of 4 lessons" />
+//   - value      number  completed amount (0..max)
+//   - max        number  total amount (default 100)
+//   - label      string  optional caption shown above the bar
+//   - showValue  boolean append "X%" to the label row (default false)
+interface Props {
+  value: number;
+  max?: number;
+  label?: string;
+  showValue?: boolean;
+}
+
+const { value, max = 100, label, showValue = false } = Astro.props;
+const safeMax = max <= 0 ? 1 : max;
+const clamped = Math.max(0, Math.min(value, safeMax));
+const percent = Math.round((clamped / safeMax) * 100);
+---
+
+<div class="progress">
+  {(label || showValue) && (
+    <div class="progress__label">
+      {label && <span>{label}</span>}
+      {showValue && <span class="muted">{percent}%</span>}
+    </div>
+  )}
+  <div
+    class="progress-bar"
+    role="progressbar"
+    aria-valuenow={clamped}
+    aria-valuemin={0}
+    aria-valuemax={safeMax}
+    aria-label={label ?? `${percent}% complete`}
+  >
+    <div class="progress-bar__fill" style={`width: ${percent}%;`}></div>
+  </div>
+</div>
+
+<style>
+  .progress {
+    display: grid;
+    gap: 0.4rem;
+  }
+  .progress__label {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+  }
+</style>

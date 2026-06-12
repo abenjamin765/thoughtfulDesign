@@ -1,0 +1,44 @@
+---
+import FocusedLayout from '../../../layouts/FocusedLayout.astro';
+import AuthGuard from '../../../components/AuthGuard';
+import AssessmentRunner from '../../../components/AssessmentRunner';
+import { getFinalAssessment, getAllModules, getMilestones } from '../../../lib/course';
+import { loadAssessment } from '../../../lib/assessment-loader';
+import type { UnlockSpec } from '../../../lib/assessments';
+import { withBase } from '../../../lib/paths';
+
+const final = getFinalAssessment();
+const assessment = final ? await loadAssessment('final', final.id) : null;
+
+if (!final || !assessment) {
+  return Astro.redirect(withBase('/course'));
+}
+
+// The final unlocks once all 11 module assessments and all 3 milestones pass.
+const unlock: UnlockSpec = {
+  kind: 'final',
+  requiredAssessmentIds: getAllModules().map((module) => module.id),
+  requiredMilestoneIds: getMilestones().map((milestone) => milestone.id),
+};
+
+const exitHref = withBase('/course');
+const continueHref = withBase('/dashboard');
+---
+
+<FocusedLayout
+  title={`${assessment.title} — Thoughtful Design`}
+  exitHref={exitHref}
+  exitLabel="Exit assessment"
+>
+  <AuthGuard client:load>
+    <AssessmentRunner
+      client:load
+      assessment={assessment}
+      unlock={unlock}
+      continueHref={continueHref}
+      continueLabel="Go to your dashboard"
+      exitHref={exitHref}
+      exitLabel="Back to course"
+    />
+  </AuthGuard>
+</FocusedLayout>

@@ -1,0 +1,98 @@
+---
+title: "Designing for variation"
+module: "Accessibility and Human Variation"
+module_id: "08-accessibility-and-human-variation"
+part: "Shaping Responsible Experiences"
+order: 3
+estimated_minutes: 20
+published: true
+public_preview: false
+core_claim: "Good design respects human variation."
+loop_steps: ["Shape", "Account"]
+scenario: "healthcare"
+quiz:
+  - prompt: "Which assumption likely excludes the most users in the portal?"
+    options:
+      - "That patients will read and understand medical jargon while stressed."
+      - "That some patients prefer dark mode."
+      - "That a few patients use older browsers."
+    answer: 0
+    feedback: "Assuming fluency-under-stress excludes a huge share of patients across language, literacy, and emotional state. Theme preference and rare browsers affect far fewer people and are easier to accommodate."
+  - prompt: "What makes a human variation audit useful rather than performative?"
+    options:
+      - "It checks each variation and ends with specific design changes."
+      - "It confirms the design is already fine."
+      - "It produces a long list with no priorities."
+    answer: 0
+    feedback: "A useful audit examines each kind of variation and turns findings into concrete changes. An audit that only reassures, or that lists issues without action, changes nothing."
+  - prompt: "Designing for variation tends to…"
+    options:
+      - "help only the specific group you designed for."
+      - "improve the experience for many users, including everyone under stress."
+      - "slow products down with no benefit."
+    answer: 1
+    feedback: "Accessibility improvements usually help broadly — captions help in noisy rooms, plain language helps everyone, large targets help on the move. This is the 'curb-cut effect.'"
+reflection:
+  prompt: "Run a quick variation pass on one flow. Which single change would help the most people?"
+---
+
+## The situation
+
+The healthcare team is ready to fix the portal, but they want to do it systematically rather than patching whatever the last complaint mentioned. They run a human variation audit.
+
+## A structured audit
+
+For a given flow, walk through each dimension of variation and ask: who could be excluded here, and how?
+
+| Dimension | Question | Portal example fix |
+| --- | --- | --- |
+| Visual | Enough contrast? Meaning beyond color? | Raise contrast; add labels to color cues |
+| Motor | Targets big enough? Keyboard-operable? | Enlarge tap targets; remove hover-only actions |
+| Cognitive | Plain language? Memory aids? Progress shown? | Rewrite jargon; show step progress; allow save-and-resume |
+| Emotional | Calm under stress? Forgiving of mistakes? | Reassuring tone; easy undo; no punishing timeouts |
+| Linguistic | Avoids idioms/acronyms? Translatable? | Simplify wording; support translation |
+| Situational | Holds up in glare, one-handed, slow network? | Test in real conditions; lightweight pages |
+| Assistive tech | Proper labels and structure? | Label controls; logical reading order |
+
+The audit converts a vague goal ("make it accessible") into a concrete list of changes tied to real people.
+
+## The curb-cut effect
+
+Curb cuts were built for wheelchairs and now help anyone with a stroller, suitcase, or cart. Digital accessibility works the same way. Captions help in noisy waiting rooms. Plain language helps everyone who is rushed. Large targets help one-handed users. Designing for the edges improves the middle.
+
+> Designing for variation is not charity for a few.
+> It is quality for the many — including the stressed, tired version of every user.
+
+## Try it
+
+Use the **Human Variation Audit** resource. Take a real flow and walk it through visual, motor, cognitive, emotional, linguistic, situational, and assistive-technology lenses. For each, note one barrier and one concrete fix. Then pick the single change that would help the most people and do it first.
+
+<Callout type="warning">
+
+A common trap is auditing and then deprioritizing every fix as "nice to have." Accessibility is a measure of design quality, not a backlog of optional extras. Treat the highest-impact exclusions as defects.
+
+</Callout>
+
+<Reveal label="What good looks like">
+
+A strong audit names a real person behind each barrier, proposes a specific change, and ranks by how many people it affects. For the portal: "Cognitive — jargon excludes stressed, lower-literacy patients (large group); fix: rewrite confirmation and error copy in plain language. Do this first." It reads as a prioritized plan, not a reassurance.
+
+</Reveal>
+
+## Summary
+
+- Good design respects human variation: visual, motor, cognitive, auditory, linguistic, emotional, and situational.
+- Variation is permanent, temporary, and situational — and the same barriers hurt all three.
+- WCAG-informed thinking asks whether content is perceivable, operable, understandable, and robust. Compliance is the floor, not the goal.
+- Never carry meaning by color alone; support keyboard use; write plain language.
+- A human variation audit turns "make it accessible" into prioritized, concrete changes.
+- Accessibility improvements help broadly — the curb-cut effect.
+- This module spans **Shape** and **Account** in the loop.
+
+**Key terms:** human variation, permanent/temporary/situational, WCAG (perceivable, operable, understandable, robust), keyboard access, plain language, curb-cut effect, human variation audit.
+
+## Carry forward
+
+Designing for everyone raises the question of who benefits and who bears cost from our choices. That is the heart of design ethics — the next module.
+
+Continue to Module 9: Ethics and Product Consequences.

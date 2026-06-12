@@ -1,0 +1,141 @@
+id: "02-object-oriented-ux"
+title: "Module 2 Assessment — Object-Oriented UX"
+type: module
+covers: ["02-object-oriented-ux"]
+pass_threshold: 0.8
+scenario: "school-analytics"
+
+questions:
+  - id: q1
+    type: multiple_choice
+    difficulty: early
+    stem: "In the school analytics platform, which is most likely a true object?"
+    options:
+      - text: "'Export'"
+        correct: false
+        feedback: "Export is an action performed on objects, not an object."
+      - text: "Assessment"
+        correct: true
+        feedback: "Correct. An Assessment has structure, distinct instances, and a clear purpose."
+      - text: "'Average score' (a number on a report)"
+        correct: false
+        feedback: "That is an attribute of a Student or Report, not its own object."
+
+  - id: q2
+    type: multiple_choice
+    difficulty: early
+    stem: "Which is an attribute of a Class?"
+    options:
+      - text: "Subject"
+        correct: true
+        feedback: "Correct. Subject is a property the Class carries."
+      - text: "Teacher"
+        correct: false
+        feedback: "A Teacher is a related object, not an attribute."
+      - text: "Archive"
+        correct: false
+        feedback: "Archive is an action (CTA) you perform on a Class."
+
+  - id: q3
+    type: multiple_choice
+    difficulty: mid
+    stem: "Which of the three SIP dimensions does 'Submit' most clearly fail?"
+    options:
+      - text: "Structure"
+        correct: false
+        feedback: "It is not mainly a shape problem."
+      - text: "Purpose"
+        correct: true
+        feedback: "Correct. 'Submit' is an action; it has no independent user-facing purpose as a thing — it is a CTA on an object."
+      - text: "Identity"
+        correct: false
+        feedback: "Identity is about distinguishing instances; the deeper issue is that 'Submit' is not a thing at all."
+
+  - id: q4
+    type: multiple_select
+    difficulty: mid
+    stem: "Which of these belong in an object map? (Choose all that apply.)"
+    options:
+      - text: "An object's key attributes"
+        correct: true
+        feedback: "Yes — attributes are core to the map."
+      - text: "Relationships between objects"
+        correct: true
+        feedback: "Yes — relationships are essential."
+      - text: "Pixel-perfect screen layouts"
+        correct: false
+        feedback: "No — the map is low-fidelity and pre-layout."
+      - text: "The main actions on each object"
+        correct: true
+        feedback: "Yes — actions belong on the map."
+
+  - id: q5
+    type: multiple_choice
+    difficulty: mid
+    stem: "A Student looks and behaves differently on two screens of the same product. Which Ancient Truth is violated?"
+    options:
+      - text: "Attributes (the 'shapeshifters' anti-pattern)"
+        correct: true
+        feedback: "Correct. The same object should behave the same across contexts."
+      - text: "Relationships (the 'isolated objects' anti-pattern)"
+        correct: false
+        feedback: "That is about missing connections, not inconsistency."
+      - text: "CTAs (the 'broken objects' anti-pattern)"
+        correct: false
+        feedback: "That is about objects you cannot act on."
+
+  - id: q6
+    type: true_false
+    difficulty: early
+    stem: "True or false: Passing the SIP test means an object should be included in version one of the product."
+    options:
+      - text: "True"
+        correct: false
+        feedback: "False. SIP validates that something is an object; prioritization decides what ships in v1."
+      - text: "False"
+        correct: true
+        feedback: "Correct. SIP is about objecthood, not priority."
+
+  - id: q7
+    type: multiple_choice
+    difficulty: late
+    stem: "Why does modeling objects before pages reduce UI confusion?"
+    options:
+      - text: "Because pages load faster when objects are defined first."
+        correct: false
+        feedback: "Performance is unrelated to object modeling."
+      - text: "Because UI confusion usually traces back to an unclear or inconsistent object model."
+        correct: true
+        feedback: "Correct. Shared object definitions give every page something coherent to stand on."
+      - text: "Because it lets you skip user research."
+        correct: false
+        feedback: "Object modeling complements research; it does not replace it."
+
+  - id: q8
+    type: judgment
+    difficulty: late
+    no_single_correct: true
+    stem: "Your team debates whether 'Score' should be its own object or just an attribute of Student. Both views have support. How do you decide?"
+    options:
+      - text: "Make Score its own object because it relates to both Student and Assessment and has its own states."
+        rationale: "Treating Score as an object captures that it sits between two parents and can change state (provisional, final). Risk: more model complexity than a small product may need."
+      - text: "Keep Score as an attribute of Student to keep the model simple."
+        rationale: "Simpler model, fewer objects to design for. Risk: you lose the Score–Assessment relationship and struggle when scores need their own history or states."
+      - text: "Decide based on whether users ever need to act on a Score independently."
+        rationale: "Lets real user behavior settle the question rather than theory. Risk: requires evidence you may not have yet, so you may need to revisit as you learn."
+    synthesis: "There is no universally correct answer — it depends on how the product uses scores. The strongest reasoning ties the decision to relationships, states, and real user actions rather than to personal preference."
+
+  - id: q9
+    type: multiple_choice
+    difficulty: mid
+    stem: "Which pair is a real object relationship rather than a UI pairing?"
+    options:
+      - text: "Teacher → Class"
+        correct: true
+        feedback: "Correct. A Teacher has Classes — two objects in a real relationship."
+      - text: "Filter → Export"
+        correct: false
+        feedback: "Both are features, not objects."
+      - text: "Button → Dashboard"
+        correct: false
+        feedback: "These are UI elements, not domain objects."

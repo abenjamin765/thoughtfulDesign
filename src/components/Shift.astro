@@ -1,0 +1,34 @@
+---
+// The Shift — the signature reframe couplet (typographic-pattern-spec §2.3).
+// Two serif display lines: the first (the surface ask) in --muted, the second
+// (the deeper need) in --accent. A visually-hidden caption names the pattern
+// and a visually-hidden connector carries the "becomes" meaning so the contrast
+// is never color-only (WCAG 1.4.1).
+//
+// API (Phase 2 registers this in the lesson MDX component map):
+//   <Shift line1="The team asked for a better screen."
+//          line2="The user needed a clearer system." />
+//   - line1   string  first/surface line (rendered muted). Falls back to the
+//                      named slot `line1`.
+//   - line2   string  second/deeper line (rendered accent). Falls back to the
+//                      named slot `line2`.
+//   - caption string  visually-hidden pattern name. Default "The shift".
+interface Props {
+  line1?: string;
+  line2?: string;
+  caption?: string;
+}
+
+const { line1, line2, caption = 'The shift' } = Astro.props;
+---
+
+<figure class="shift">
+  <figcaption class="visually-hidden">{caption}</figcaption>
+  <p class="shift__line shift__line--from">
+    {line1 ?? <slot name="line1" />}
+  </p>
+  <span class="visually-hidden">→ becomes →</span>
+  <p class="shift__line shift__line--to">
+    {line2 ?? <slot name="line2" />}
+  </p>
+</figure>

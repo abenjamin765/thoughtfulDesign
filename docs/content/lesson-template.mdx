@@ -1,0 +1,81 @@
+---
+# Lesson authoring template. Copy into content/lessons/<NN-module>/<slug>.mdx and fill in.
+# Required structural fields are first; optional fields are documented inline.
+title: "Lesson title in sentence case"
+module: "Human-readable module name (matches course.yaml title)"
+module_id: "NN-module-id" # matches course.yaml module id
+part: "Part name" # e.g. "Seeing the System"
+order: 1 # sequence within the module
+estimated_minutes: 20
+published: true
+public_preview: false # true for the one preview lesson per module
+core_claim: "The one memorable claim for this lesson/module."
+loop_steps: ["Model"] # which Thoughtful Design Loop steps this lesson touches
+scenario: "school-analytics" # one of the scenario ids, or omit
+# Inline knowledge checks (3–8 per lesson). Every question needs feedback (requirements §9.2).
+quiz:
+  - prompt: "A scenario-based question, not a vocabulary question."
+    options:
+      - "Tempting but incomplete option"
+      - "Best answer"
+      - "Plausible distractor"
+    answer: 1
+    feedback: "Why the correct answer is correct, why the tempting one is incomplete, and what principle is being tested."
+reflection:
+  prompt: "An open prompt that asks the learner to apply the idea to their own work."
+---
+
+{/* NOTE: Do NOT import Callout or Reveal. The lesson page (src/pages/lessons/[slug].astro)
+    injects them via <Content components={{ Callout, Reveal }} />, so they are available
+    in every lesson without an import. The frontmatter `quiz` renders as the inline-check
+    Quiz after the body automatically. */}
+
+{/* SECTION ORDER (requirements §3.1 + typographic-pattern-spec). Not every lesson needs every pattern,
+    but follow this order when patterns are present. Inline checks (frontmatter quiz) render after the body. */}
+
+## The situation
+
+A realistic product or team moment. Primary content — plain prose, not a callout.
+
+## The hidden problem
+
+What is really going on beneath the surface request. A contrast table is welcome here.
+
+| Surface request | Real problem |
+| --- | --- |
+| What the team asked for | What the system actually needs |
+
+{/* The Shift — the signature reframe. Until a dedicated <Shift> component ships, render as a blockquote couplet. */}
+
+> The team asked for a better screen.
+> The user needed a clearer system.
+
+## Concept
+
+Explain the core idea in plain, vivid language. Short paragraphs. 2–4 concept sections.
+
+<Callout type="tip">
+
+A principle worth remembering, stated positively (see voice rules in style-guide.md).
+
+</Callout>
+
+## Try it
+
+A small, self-contained exercise the learner can do alone. Connect it to a downloadable resource if the module has one.
+
+<Callout type="warning">
+
+A common trap — framed correctively, never shaming. "A common trap is…", not "Don't be the designer who…".
+
+</Callout>
+
+<Reveal label="What good looks like">
+
+A model answer or rubric for the Try It exercise.
+
+</Reveal>
+
+## Carry forward
+
+One paragraph that names what changed in the learner's thinking and links to the next lesson by its title (never "Next" alone — WCAG 2.4.4).

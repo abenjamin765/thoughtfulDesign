@@ -1,0 +1,103 @@
+---
+title: "Building an object map"
+module: "Object-Oriented UX"
+module_id: "02-object-oriented-ux"
+part: "Seeing the System"
+order: 4
+estimated_minutes: 22
+published: true
+public_preview: false
+core_claim: "Before you design what people do, understand what they are working with."
+loop_steps: ["Model"]
+scenario: "school-analytics"
+quiz:
+  - prompt: "Which item is an attribute of a Course?"
+    options:
+      - "Teacher"
+      - "Title"
+      - "Enroll"
+    answer: 1
+    feedback: "A title is a property the Course carries — an attribute. A Teacher is a related object, and 'Enroll' is an action (CTA) performed on the Course."
+  - prompt: "Which relationship is most plausible in a school analytics product?"
+    options:
+      - "Teacher → Class"
+      - "Button → Dashboard"
+      - "Filter → Export"
+    answer: 0
+    feedback: "Teacher → Class is a real relationship between two objects (a teacher has classes). The others pair UI elements or features, which are not objects, so they are not object relationships."
+  - prompt: "What belongs in a simple object map?"
+    options:
+      - "Pixel-perfect layouts for each screen."
+      - "Objects, their key attributes, their relationships, and their main actions."
+      - "A full backlog of engineering tickets."
+    answer: 1
+    feedback: "An object map is a low-fidelity model of objects, attributes, relationships, and actions — not a layout or a backlog. It captures the structure of the domain before any screen exists."
+reflection:
+  prompt: "Sketch a tiny object map (3–5 objects) for a product you know. Note one relationship and three attributes for one object."
+---
+
+## The situation
+
+You have validated the objects in the school analytics platform — Student, Class, Assessment, Score, Teacher, Standard. Now you need to turn that list into something the whole team can design from. That artifact is an **object map**.
+
+## What an object map captures
+
+An object map is the "x-ray" of a system. For each object it records four things:
+
+- **Attributes** — the properties the object carries (a Student has a name, a grade level, an enrollment date).
+- **Relationships** — how the object connects to others (a Student belongs to Classes; a Class has Assessments).
+- **Actions** — what users can do with it (assign, grade, export).
+- **States** — the conditions it can be in (an Assignment is draft, assigned, submitted, or graded).
+
+It is deliberately low-fidelity. The point is shared understanding of the domain, not visual design.
+
+## A worked fragment
+
+Here is part of an object map for the school analytics platform.
+
+| Object | Key attributes | Relationships | Main actions | States |
+| --- | --- | --- | --- | --- |
+| Student | name, grade level, enrollment date | belongs to Classes; has Scores | view, message | active, inactive |
+| Class | title, subject, term | has Students; has Assessments; taught by Teacher | open, archive | active, archived |
+| Assessment | title, standard, due date | belongs to Class; produces Scores | assign, grade | draft, assigned, graded |
+| Score | value, date | belongs to Student and Assessment | view | provisional, final |
+
+Notice how the Four Ancient Truths show up: distinct objects (so they should look distinct), real relationships (so users can navigate between them), actions attached to objects (so they are not "broken"), and consistent attributes (so a Student is the same Student everywhere).
+
+<Callout type="tip">
+
+Object maps make hidden disagreements visible. The moment you try to write attributes for "Student," the team discovers it disagreed about what a student record even contains. That argument is cheaper to have on a whiteboard than in code.
+
+</Callout>
+
+## Try it
+
+Use the **Object Map Template** (the downloadable resource for this module). Take any product you know and map 5 objects. For each, fill in attributes, at least one relationship, and one or two states. Then sanity-check it against the Four Ancient Truths.
+
+<Callout type="warning">
+
+A common trap is sneaking pages and features into the map ("Reports," "Settings"). If a candidate fails the SIP test, it is not an object — leave it out. The map models the user's world, not the app's screens.
+
+</Callout>
+
+<Reveal label="What good looks like">
+
+A good object map is small, honest, and argued over. Five to nine objects is plenty for a first pass. Every object has at least one relationship (no isolated objects), every attribute is something a user would recognize, and the team can point to one place where the map already resolved a disagreement — for example, agreeing that "Score" is its own object that belongs to both a Student and an Assessment.
+
+</Reveal>
+
+## Summary
+
+- Model objects before designing pages; UI confusion usually traces to model confusion.
+- The Four Ancient Truths make object design feel right: distinct objects, visible relationships, attached actions, consistent attributes.
+- The SIP test (Structure, Identity, Purpose) separates true objects from attributes, actions, and features.
+- An object map captures objects, attributes, relationships, actions, and states — the x-ray of the domain.
+- This module is the **Model** step of the Thoughtful Design Loop.
+
+**Key terms:** object, attribute, relationship, action/CTA, state, object map, mental model, SIP test, the Four Ancient Truths.
+
+## Carry forward
+
+You can now see the things in a system. The next module zooms out from the things to the forces between them: feedback loops, incentives, and consequences.
+
+Continue to Module 3: Systems Thinking for UX.

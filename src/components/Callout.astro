@@ -1,6 +1,6 @@
 ---
 interface Props {
-  type?: 'tip' | 'warning' | 'truth';
+  type?: 'tip' | 'warning' | 'truth' | 'principle' | 'tryit' | 'trap';
   title?: string;
 }
 
@@ -10,6 +10,9 @@ const labels: Record<NonNullable<Props['type']>, string> = {
   tip: 'Tip',
   warning: 'Watch out',
   truth: 'Ancient Truth',
+  principle: 'Principle',
+  tryit: 'Try it',
+  trap: 'Common trap',
 };
 ---
 

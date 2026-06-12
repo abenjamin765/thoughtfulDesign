@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AuthGuard from '../components/AuthGuard';
+import Certificate from '../components/Certificate';
+import { getCourseMeta, getAllModules, getMilestones, getFinalAssessment } from '../lib/course';
+import { withBase } from '../lib/paths';
+
+const meta = getCourseMeta();
+const final = getFinalAssessment();
+
+// All assessments that must be passed to earn the certificate:
+// 11 module assessments + 3 milestones + the final. assessment ids match the
+// YAML `id` (module id / milestone id / "thoughtful-design-final").
+const requiredAssessmentIds = [
+  ...getAllModules().map((module) => module.id),
+  ...getMilestones().map((milestone) => milestone.id),
+  ...(final ? [final.id] : []),
+];
+
+const dashboardHref = withBase('/dashboard');
+const certificatePath = withBase('/certificate');
+---
+
+<BaseLayout
+  title={`Certificate — ${meta.title}`}
+  description="Your Thoughtful Design certificate of completion."
+>
+  <AuthGuard client:load>
+    <section class="container cert-page">
+      <Certificate
+        client:load
+        courseTitle={meta.title}
+        requiredAssessmentIds={requiredAssessmentIds}
+        dashboardHref={dashboardHref}
+        certificatePath={certificatePath}
+      />
+    </section>
+  </AuthGuard>
+</BaseLayout>
+
+<style>
+  .cert-page {
+    padding: 2.5rem 0 3.5rem;
+  }
+</style>
+
+<!-- Print rules: render the certificate alone (hide global chrome + actions). -->
+<style is:global>
+  @media print {
+    .site-header,
+    .site-footer,
+    .no-print {
+      display: none !important;
+    }
+
+    body {
+      background: #fff;
+    }
+
+    main {
+      margin: 0;
+    }
+
+    .cert-sheet {
+      box-shadow: none !important;
+    }
+  }
+</style>

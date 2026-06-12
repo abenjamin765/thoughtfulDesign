@@ -5,6 +5,7 @@ export type QuizQuestion = {
   prompt: string;
   options: string[];
   answer: number;
+  feedback?: string;
 };
 
 type Props = {
@@ -67,7 +68,7 @@ export default function Quiz({ lessonSlug, questions, onComplete }: Props) {
     setSaving(false);
 
     if (saveError) {
-      setError(saveError.message);
+      setError(`We couldn't save your answers (${saveError.message}). Your feedback is shown above; check your connection and press “Update answers” to try again.`);
       return;
     }
 
@@ -105,16 +106,30 @@ export default function Quiz({ lessonSlug, questions, onComplete }: Props) {
               <span>{option}</span>
             </label>
           ))}
-          {submitted && answers[index] !== question.answer && (
-            <p className="error-text">
-              Correct answer: {question.options[question.answer]}
-            </p>
+          {submitted && (
+            <div className="quiz__feedback" role="status" aria-live="polite">
+              <p className={answers[index] === question.answer ? 'success-text' : 'error-text'}>
+                <strong>{answers[index] === question.answer ? 'Correct — ' : 'Not quite — '}</strong>
+                {answers[index] === question.answer
+                  ? 'that matches the best answer.'
+                  : `the best answer is: ${question.options[question.answer]}`}
+              </p>
+              {question.feedback && <p className="muted">{question.feedback}</p>}
+            </div>
           )}
         </fieldset>
       ))}
-      {error && <p className="error-text">{error}</p>}
+      {error && (
+        <p className="error-text" role="alert">
+          {error}
+        </p>
+      )}
       {submitted && score && (
-        <p className={score.correct === score.total ? 'success-text' : 'muted'}>
+        <p
+          className={score.correct === score.total ? 'success-text' : 'muted'}
+          role="status"
+          aria-live="polite"
+        >
           You got {score.correct} of {score.total} correct.
         </p>
       )}

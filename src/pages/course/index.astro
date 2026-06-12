@@ -2,44 +2,111 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import AuthGuard from '../../components/AuthGuard';
 import SignOutButton from '../../components/SignOutButton';
-import { getPublishedLessons, getLessonSlug, groupLessonsByModule } from '../../lib/lessons';
+import ModuleCard from '../../components/ModuleCard.astro';
+import ModuleCardStatus from '../../components/ModuleCardStatus';
+import CourseProgressSummary from '../../components/CourseProgressSummary';
+import { getCourseMeta, getParts, getModuleLessons } from '../../lib/course';
+import { getLessonSlug } from '../../lib/lessons';
 import { withBase } from '../../lib/paths';
 
-const lessons = await getPublishedLessons();
-const modules = groupLessonsByModule(lessons);
+const meta = getCourseMeta();
+const parts = getParts();
+
+// Join each module to its published lesson entries so cards can show real
+// lesson counts and estimated minutes, and so the client islands receive the
+// exact slug set used for completion lookups.
+const partsView = await Promise.all(
+  parts.map(async (part) => ({
+    ...part,
+    modules: await Promise.all(
+      part.modules
+        .slice()
+        .sort((a, b) => a.order - b.order)
+        .map(async (module) => {
+          const lessons = (await getModuleLessons(module.id)).filter((l) => l.data.published);
+          const lessonSlugs = lessons.map(getLessonSlug);
+          const estimatedMinutes = lessons.reduce(
+            (sum, l) => sum + (l.data.estimated_minutes ?? 0),
+            0,
+          );
+          return { module, lessonSlugs, estimatedMinutes };
+        }),
+    ),
+  })),
+);
+
+const allModules = partsView.flatMap((part) =>
+  part.modules.map(({ module, lessonSlugs }) => ({ moduleId: module.id, lessonSlugs })),
+);
+const moduleCount = allModules.length;
 ---
 
 <BaseLayout title="Course — Thoughtful Design">
   <AuthGuard client:load>
     <section class="container" style="padding: 2.5rem 0;">
-      <div style="display: flex; justify-content: space-between; gap: 1rem; align-items: center; flex-wrap: wrap;">
+      <div style="display: flex; justify-content: space-between; gap: 1rem; align-items: flex-start; flex-wrap: wrap;">
         <div>
-          <h1>Course outline</h1>
-          <p class="muted">Modules are derived from lesson frontmatter and can evolve as the curriculum develops.</p>
+          <h1>{meta.title}</h1>
+          <p class="muted" style="max-width: 48ch;">{meta.subtitle}</p>
         </div>
         <SignOutButton client:load />
       </div>
 
-      {modules.map((module) => (
-        <section class="module-section">
-          <h2>{module.name}</h2>
-          <ul class="lesson-list">
-            {module.lessons.map((lesson) => (
-              <li>
-                <a href={withBase(`/lessons/${getLessonSlug(lesson)}`)}>
-                  <span>
-                    <strong>{lesson.data.title}</strong>
-                    <span class="muted" style="display: block;">
-                      {lesson.data.estimated_minutes} min
-                    </span>
-                  </span>
-                  <span class="muted">Lesson {lesson.data.order}</span>
-                </a>
-              </li>
+      <div style="margin: 1.5rem 0 2.5rem;">
+        <CourseProgressSummary client:load modules={allModules} />
+      </div>
+
+      {partsView.map((part) => (
+        <section class="part-section">
+          <header class="part-section__header">
+            <span class="part-section__eyebrow muted">Part {part.order}</span>
+            <h2>{part.name}</h2>
+          </header>
+          <div class="card-grid">
+            {part.modules.map(({ module, lessonSlugs, estimatedMinutes }) => (
+              <ModuleCard
+                order={module.order}
+                title={module.title}
+                coreClaim={module.core_claim}
+                lessonCount={lessonSlugs.length}
+                estimatedMinutes={estimatedMinutes}
+                href={withBase(`/course/modules/${module.id}`)}
+              >
+                <ModuleCardStatus
+                  slot="status"
+                  client:load
+                  moduleId={module.id}
+                  assessmentId={module.id}
+                  lessonSlugs={lessonSlugs}
+                />
+              </ModuleCard>
             ))}
-          </ul>
+          </div>
         </section>
       ))}
+
+      <p class="muted" style="margin-top: 2rem;">{moduleCount} modules across {parts.length} parts.</p>
     </section>
   </AuthGuard>
 </BaseLayout>
+
+<style>
+  .part-section + .part-section {
+    margin-top: 2.5rem;
+  }
+
+  .part-section__header {
+    margin-bottom: 1rem;
+  }
+
+  .part-section__eyebrow {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .part-section__header h2 {
+    margin: 0.15rem 0 0;
+  }
+</style>

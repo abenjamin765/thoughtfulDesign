@@ -1,0 +1,87 @@
+---
+title: "Goals, constraints, and tradeoffs"
+module: "Product Strategy and Design Judgment"
+module_id: "06-product-strategy"
+part: "Understanding People and Decisions"
+order: 2
+estimated_minutes: 18
+published: true
+public_preview: false
+core_claim: "Design judgment means choosing what matters most under real constraints."
+loop_steps: ["Align", "Shape"]
+scenario: "enterprise"
+quiz:
+  - prompt: "Which best distinguishes a user need from a business goal?"
+    options:
+      - "A user need is what a person is trying to accomplish; a business goal is an outcome the company wants."
+      - "User needs matter; business goals do not."
+      - "They are the same thing described differently."
+    answer: 0
+    feedback: "User needs and business goals are distinct and often in tension. Good design serves both honestly. Dismissing business goals (or pretending they are identical to user needs) leads to designs that get overruled or that quietly harm users."
+  - prompt: "A constraint says the alerts feature must ship in three weeks with no backend changes. How should this affect the design choice?"
+    options:
+      - "Ignore it and design the ideal version."
+      - "Treat it as a real boundary and choose the strongest option achievable within it."
+      - "Cancel the feature."
+    answer: 1
+    feedback: "Constraints are real boundaries to design within, not suggestions. Designing the ideal version that cannot ship wastes effort; cancelling overreacts to a normal limit."
+  - prompt: "What is satisficing under uncertainty?"
+    options:
+      - "Choosing a good-enough option that meets the real constraints rather than searching forever for the perfect one."
+      - "Settling for low quality."
+      - "Refusing to decide until you have complete information."
+    answer: 0
+    feedback: "Satisficing means making a sound, good-enough decision under real limits and incomplete information. It is not low quality, and it is the opposite of waiting endlessly for certainty that never comes."
+reflection:
+  prompt: "For a current decision, list the top user need, the top business goal, and the constraint that matters most."
+---
+
+## The situation
+
+The dashboard designer now asks the strategy question directly. To choose among her three alert directions, she maps the forces around the decision: the goals, the constraints, and the tradeoffs each option represents.
+
+## Three forces to make explicit
+
+**Goals.** Separate the *user need* from the *business goal*, because they often pull in different directions.
+
+- User need: ops staff need to catch real incidents quickly without drowning in noise.
+- Business goal: reduce mean time to resolution, which leadership tracks.
+
+Both are legitimate. Thoughtful design serves both honestly instead of pretending only one exists.
+
+**Constraints.** The real limits the decision lives within: three weeks to ship, no backend changes, an ops team already fatigued by notifications. Constraints are not failures of ambition — they are the shape of the actual problem.
+
+**Tradeoffs.** What each option gives up. Aggressive alerts buy speed at the cost of calm. Configuration buys flexibility at the cost of simplicity most users will never use.
+
+## Choosing with judgment
+
+With the forces visible, the choice becomes reasoning instead of agonizing. Given a fatigued ops team (constraint), a need to catch real incidents fast (user need), and a metric for resolution time (business goal), the designer chooses **smart prioritized alerts** — urgent items surface, the rest stay quiet — with simple defaults and configuration deferred to later.
+
+She did not find a perfect option. She found the strongest option achievable under real constraints. That is **satisficing**, and it is what real decisions require.
+
+> Perfect is a luxury of unlimited time and information.
+> Judgment is what you use when you have neither.
+
+<Callout type="tip">
+
+When goals conflict, do not average them into a compromise that serves none. Decide which leads, design primarily for it, and protect the others where you can.
+
+</Callout>
+
+<Callout type="warning">
+
+A common trap is treating constraints as enemies to overcome. Often the constraint is the most honest description of the problem. "Ship in three weeks for a fatigued team" is not in the way of the design — it *is* the design brief.
+
+</Callout>
+
+<Reveal label="A decision-forces sketch">
+
+For any hard choice, write four lines: top user need, top business goal, the binding constraint, and the key tradeoff. If the right option is still unclear, you are usually missing information about one of these four — go get it.
+
+</Reveal>
+
+## Carry forward
+
+Making a good choice is half the job. The other half is being able to explain *why* — to a skeptical PM, an engineer, or your future self. The next lesson turns judgment into a written rationale.
+
+Continue to the next lesson, Writing a design rationale.

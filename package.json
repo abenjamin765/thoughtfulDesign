@@ -16,8 +16,12 @@
     "@astrojs/react": "^5.0.7",
     "@supabase/supabase-js": "^2.108.1",
     "astro": "^6.4.6",
+    "js-yaml": "^4.2.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9"
   }
 }

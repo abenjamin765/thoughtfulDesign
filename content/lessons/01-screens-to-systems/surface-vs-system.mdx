@@ -1,0 +1,86 @@
+---
+title: "Surface versus system"
+module: "From Screens to Systems"
+module_id: "01-screens-to-systems"
+part: "Seeing the System"
+order: 2
+estimated_minutes: 18
+published: true
+public_preview: false
+core_claim: "A screen is only the visible surface of a deeper system."
+loop_steps: ["Model"]
+scenario: "enterprise"
+quiz:
+  - prompt: "A search results page returns slow, irrelevant results. Which is most likely a *system* cause rather than a screen cause?"
+    options:
+      - "The result cards have weak visual hierarchy."
+      - "The ranking logic optimizes for clicks, not for what users came to find."
+      - "The 'sort' control is hard to spot."
+    answer: 1
+    feedback: "Ranking logic is a system decision about what the product rewards. Visual hierarchy and control placement are surface fixes. You can polish the cards all day, but if the ranking rewards the wrong thing, the page still fails its purpose."
+  - prompt: "Which statement best describes 'design as decision-making'?"
+    options:
+      - "Designers should make decisions quickly to keep projects moving."
+      - "Every design choice encodes a decision about what matters and who it serves."
+      - "Decisions belong to product managers; designers execute them."
+    answer: 1
+    feedback: "Design is not just making things look right — each choice quietly decides what the product values and who benefits. Speed (the first option) is unrelated, and the third gives away the judgment that makes design thoughtful."
+  - prompt: "A team hides advanced settings to simplify a screen. What is a likely hidden dependency?"
+    options:
+      - "Power users who relied on those settings now flood support with requests."
+      - "The screen loads slightly faster."
+      - "The color contrast improves."
+    answer: 0
+    feedback: "Simplifying the surface moved complexity somewhere else — into the support queue. That downstream effect is a dependency the screen-level view does not show. The other options are local surface effects, not dependencies."
+reflection:
+  prompt: "Pick a product you know well. Name one interface-level, one product-level, and one system-level design question it faces."
+---
+
+## The situation
+
+The operations dashboard from the last lesson is not unusual. Most products that feel "confusing" are confusing for reasons that do not live on the screen. To work at that depth, it helps to name the layers we design across.
+
+## Three layers of design work
+
+Design happens at three depths at once. None is more virtuous than another — but modern UX increasingly asks designers to work in the deeper two.
+
+| Layer | Question it answers | Example move |
+| --- | --- | --- |
+| Interface design | How does this look and behave? | Improve the hierarchy of a result card |
+| Product design | What should this feature do, and for whom? | Decide what "active account" means |
+| Systems design | What objects, decisions, and consequences does this create? | Reconcile three teams' conflicting definitions |
+
+The dashboard request lived at the interface layer in the ask, but its real problem lived at the product and systems layers.
+
+## Design as decision-making
+
+Every design choice encodes a decision about what matters. When you choose what to show first, you decide what is important. When you choose a default, you decide what most people will do. When you choose a metric to highlight, you decide what the team will optimize.
+
+This is why "just make it simpler" is never neutral. Simplifying always moves complexity somewhere — to another screen, another team, or another moment in time.
+
+> Simplicity on the screen is not the same as simplicity in the system.
+> Sometimes a cleaner screen just hides a messier system.
+
+<Callout type="warning">
+
+A common trap is treating every request at the layer it arrived in. A surface request can have a system cause. Translating the request to the right layer is part of the work, not a detour from it.
+
+</Callout>
+
+## Hidden dependencies
+
+Behind a simple interface sit dependencies the screen never shows: who owns the data, which teams are affected, what behavior a change will encourage, and what happens downstream when you move complexity around.
+
+Hiding advanced settings makes a screen calmer and sends power users to the support queue. Adding a single "engagement" number makes a dashboard tidier and flattens very different situations into one figure people then misread.
+
+<Reveal label="A quick way to surface dependencies">
+
+For any change, ask three questions: Who else touches this? What behavior will it encourage? What happens one step downstream? If you cannot answer, you have found something worth investigating before you design.
+
+</Reveal>
+
+## Carry forward
+
+Interface, product, and system are not competing skills — they are depths of the same craft. The thoughtful designer learns to tell which layer a problem really lives in, and to work there even when the request arrived at the surface.
+
+Next, in *The role of the thoughtful designer*, we will turn this way of seeing into a practice — and meet the loop that ties the whole course together.

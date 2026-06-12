@@ -1,0 +1,123 @@
+id: "05-facilitation-for-designers"
+title: "Module 5 Assessment — Facilitation for Designers"
+type: module
+covers: ["05-facilitation-for-designers"]
+pass_threshold: 0.8
+scenario: "enterprise"
+
+questions:
+  - id: q1
+    type: multiple_choice
+    difficulty: early
+    stem: "A review produces lots of feedback but no decision. What was most likely missing?"
+    options:
+      - text: "A more polished prototype."
+        correct: false
+        feedback: "Polish does not fix an unframed conversation."
+      - text: "A clear statement of the decision the meeting needed to make."
+        correct: true
+        feedback: "Correct. Without a framed decision, feedback scatters."
+      - text: "More attendees."
+        correct: false
+        feedback: "More people usually makes an unframed meeting worse."
+
+  - id: q2
+    type: multiple_choice
+    difficulty: mid
+    stem: "Which is a well-framed decision for a meeting?"
+    options:
+      - text: "Let's talk about the dashboard."
+        correct: false
+        feedback: "Open-ended; no decision to converge on."
+      - text: "Should the default view prioritize exceptions or totals for the ops team?"
+        correct: true
+        feedback: "Correct. Specific, with real alternatives and a clear tradeoff."
+      - text: "Let's get everyone's thoughts."
+        correct: false
+        feedback: "A discussion prompt, not a decision."
+
+  - id: q3
+    type: multiple_choice
+    difficulty: mid
+    stem: "Who most needs to be in the room for a decision?"
+    options:
+      - text: "Everyone who might have an opinion."
+        correct: false
+        feedback: "Large rooms dilute responsibility and stall decisions."
+      - text: "The people who hold the information and the authority the decision requires."
+        correct: true
+        feedback: "Correct. Decisions need relevant knowledge and the power to commit."
+      - text: "Only the design team."
+        correct: false
+        feedback: "Then the meeting cannot actually decide cross-functional tradeoffs."
+
+  - id: q4
+    type: multiple_choice
+    difficulty: mid
+    stem: "Which prompt is most likely to produce useful feedback?"
+    options:
+      - text: "What do you think of this design?"
+        correct: false
+        feedback: "Invites scattered, taste-based reactions."
+      - text: "Where might the ops team get stuck during morning triage with this layout?"
+        correct: true
+        feedback: "Correct. Anchored to a real user and moment."
+      - text: "Does everyone like this?"
+        correct: false
+        feedback: "Pushes toward false consensus."
+
+  - id: q5
+    type: multiple_choice
+    difficulty: late
+    stem: "Two stakeholders disagree but stay polite and vague. Best move?"
+    options:
+      - text: "Move on quickly to avoid conflict."
+        correct: false
+        feedback: "Hidden disagreement resurfaces later."
+      - text: "Name the disagreement and make the tradeoff explicit."
+        correct: true
+        feedback: "Correct. Surfacing disagreement productively is the point."
+      - text: "Take a vote immediately."
+        correct: false
+        feedback: "Voting before the tradeoff is clear hides it behind a tally."
+
+  - id: q6
+    type: multiple_choice
+    difficulty: mid
+    stem: "What makes a decision stick after the meeting?"
+    options:
+      - text: "Recording the decision, its rationale, and who owns the next step."
+        correct: true
+        feedback: "Correct. Documented decisions resist being relitigated."
+      - text: "A verbal 'sounds good' from the room."
+        correct: false
+        feedback: "Warmth fades and the decision gets reopened."
+      - text: "Sending the slides afterward."
+        correct: false
+        feedback: "Slides show the design, not the decision or owner."
+
+  - id: q7
+    type: true_false
+    difficulty: early
+    stem: "True or false: Discussion and decision are the same activity in a meeting."
+    options:
+      - text: "True"
+        correct: false
+        feedback: "False. Discussion explores; decision commits. A facilitator keeps them distinct."
+      - text: "False"
+        correct: true
+        feedback: "Correct. They are different, and the transition should be signaled."
+
+  - id: q8
+    type: judgment
+    difficulty: late
+    no_single_correct: true
+    stem: "Mid-meeting, a senior stakeholder raises an important issue unrelated to today's framed decision. What do you do?"
+    options:
+      - text: "Capture it in a parking lot and return to the decision."
+        rationale: "Protects the meeting's purpose while honoring the issue. Risk: a senior person may feel deflected if not handled with care."
+      - text: "Pause the agenda and address it now since they're senior."
+        rationale: "Respects seniority and the issue's importance. Risk: sacrifices the decision the group convened to make."
+      - text: "Offer to take it offline with a scheduled follow-up owner and time."
+        rationale: "Gives the issue real weight without derailing. Risk: 'offline' can become 'never' without a concrete commitment."
+    synthesis: "All can work. The strongest answers keep today's decision on track while giving the raised issue a credible, owned path forward — not a brush-off."

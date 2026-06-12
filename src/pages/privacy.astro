@@ -1,0 +1,155 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/paths';
+
+// Public privacy policy (sign-off-ledger gate; ethics-equity-checklist §2.1).
+// Discloses exactly what is collected, why, and how to delete it. MVP scope:
+// no payments, no third-party advertising, no email marketing.
+const updated = 'June 12, 2026';
+const contactEmail = 'hello@thoughtfuldesign.io';
+---
+
+<BaseLayout
+  title="Privacy Policy — Thoughtful Design"
+  description="What Thoughtful Design collects, why, and how to access or delete your data."
+>
+  <article class="container legal">
+    <header class="legal__head">
+      <h1>Privacy Policy</h1>
+      <p class="muted">Last updated {updated}</p>
+    </header>
+
+    <div class="prose legal__body">
+      <p>
+        Thoughtful Design is a self-led online course. This policy explains exactly what
+        information we collect when you create an account and use the course, why we collect
+        it, and how you can access or delete it. We keep this short and specific on purpose.
+      </p>
+
+      <h2>What we collect</h2>
+      <p>We only collect what the course needs to work and to track your progress:</p>
+      <table class="legal__table">
+        <thead>
+          <tr><th>Data</th><th>Why we collect it</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Email address</strong></td>
+            <td>To create and secure your account and to let you sign in.</td>
+          </tr>
+          <tr>
+            <td><strong>Display name</strong></td>
+            <td>To greet you in the app and to print your name on your certificate.</td>
+          </tr>
+          <tr>
+            <td><strong>Lesson progress</strong></td>
+            <td>Which lessons you have completed and any reflection notes you save, so you can resume where you left off.</td>
+          </tr>
+          <tr>
+            <td><strong>Quiz responses</strong></td>
+            <td>Your answers to the inline checks in each lesson, so we can show feedback and track your learning.</td>
+          </tr>
+          <tr>
+            <td><strong>Assessment attempts</strong></td>
+            <td>Your scores on module, milestone, and final assessments, so we can show pass/fail status and unlock your certificate.</td>
+          </tr>
+          <tr>
+            <td><strong>Certificate record</strong></td>
+            <td>The date your certificate was issued and whether it was awarded with distinction.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        We also record a small number of <strong>product analytics events</strong> (for example,
+        when a lesson is started or completed, an assessment is passed, or a certificate is
+        issued) so we can understand whether the course is working as a learning tool. These
+        events are tied to your account while you are signed in.
+      </p>
+
+      <h2>What we do not do</h2>
+      <ul>
+        <li>We do <strong>not</strong> sell your personal data to third parties.</li>
+        <li>We do <strong>not</strong> share your data with advertisers or run ad tracking.</li>
+        <li>We do <strong>not</strong> send marketing email. Account email (such as a password reset) is transactional only.</li>
+        <li>We do <strong>not</strong> collect payment information in this version of the course.</li>
+      </ul>
+
+      <h2>How your data is stored</h2>
+      <p>
+        Your account and progress are stored using <a href="https://supabase.com/privacy" rel="noopener noreferrer">Supabase</a>,
+        our database and authentication provider, acting as a data processor on our behalf.
+        Access is restricted so that you can only read and write your own records.
+      </p>
+
+      <h2>Accessing and deleting your data</h2>
+      <p>
+        You can delete your learning data at any time from your
+        <a href={withBase('/account')}>account settings</a>. Deleting your account removes your
+        profile, lesson progress, reflection notes, quiz responses, assessment attempts,
+        certificate record, and analytics events.
+      </p>
+      <p>
+        If you would like a copy of your data, or you want us to confirm full removal of your
+        sign-in record, email <a href={`mailto:${contactEmail}`}>{contactEmail}</a> and we will
+        respond within 30 days.
+      </p>
+
+      <h2>Children</h2>
+      <p>
+        Thoughtful Design is built for working professionals and is not intended for anyone
+        under 18. We do not knowingly collect data from children.
+      </p>
+
+      <h2>Changes to this policy</h2>
+      <p>
+        If we change what we collect or how we use it, we will update this page and revise the
+        date above. Questions? Email <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+      </p>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal {
+    padding: 2.5rem 0 3.5rem;
+    max-width: var(--content-width);
+  }
+
+  .legal__head {
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .legal__head h1 {
+    font-family: var(--font-serif);
+    margin: 0 0 0.35rem;
+  }
+
+  .legal__body h2 {
+    font-family: var(--font-serif);
+    margin-top: 2.25rem;
+  }
+
+  .legal__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+  }
+
+  .legal__table th,
+  .legal__table td {
+    text-align: left;
+    vertical-align: top;
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .legal__table th {
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+</style>

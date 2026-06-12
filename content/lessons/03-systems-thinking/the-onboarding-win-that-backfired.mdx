@@ -1,0 +1,69 @@
+---
+title: "The onboarding win that backfired"
+module: "Systems Thinking for UX"
+module_id: "03-systems-thinking"
+part: "Seeing the System"
+order: 1
+estimated_minutes: 12
+published: true
+public_preview: true
+core_claim: "Every design decision changes behavior somewhere in the system."
+loop_steps: ["Model", "Account"]
+scenario: "school-analytics"
+quiz:
+  - prompt: "A team boosts onboarding completion by auto-skipping the setup steps. What is a likely second-order effect?"
+    options:
+      - "Users finish onboarding but later flood support because their accounts are misconfigured."
+      - "The onboarding screen loads faster."
+      - "The completion metric becomes harder to measure."
+    answer: 0
+    feedback: "The first-order win (more 'completed' onboardings) pushed a cost downstream into support and into confused users. That displaced cost is the second-order effect. The other options are not consequences of skipping setup."
+  - prompt: "What is the difference between a symptom and a system cause?"
+    options:
+      - "A symptom is what you observe; a system cause is the structure producing it."
+      - "A symptom is minor; a system cause is severe."
+      - "There is no difference; they are the same thing."
+    answer: 0
+    feedback: "A symptom (rising support tickets) is the visible effect. The system cause (onboarding that skips real setup) is the structure generating it. Fixing symptoms without causes just moves the problem."
+reflection:
+  prompt: "Recall a metric your team improved. Did anything get worse elsewhere that no one connected to the change?"
+---
+
+## The situation
+
+The school analytics team had one goal for the quarter: raise onboarding completion. Too many teachers signed up and never finished setup. So the team made onboarding shorter — they auto-skipped the steps where teachers connect their classes and import their rosters.
+
+Completion shot up. The metric turned green. Everyone celebrated.
+
+## The hidden problem
+
+A month later, support tickets spiked. Teachers had "completed" onboarding but their dashboards were empty or wrong, because the skipped steps were the ones that actually made the product work. Some teachers concluded the tool was broken and stopped logging in.
+
+| First-order effect (intended) | Second-order effects (unplanned) |
+| --- | --- |
+| Onboarding completion rose | Misconfigured accounts increased |
+| Setup felt faster | Support tickets spiked |
+| The metric looked healthy | Trust dropped; some teachers churned |
+
+The team optimized one number and pushed the cost into a part of the system they were not looking at.
+
+> They did not make onboarding better.
+> They moved the difficulty from a place they measured to a place they didn't.
+
+## The core idea
+
+Every design decision changes behavior somewhere in the system. A product is not just a set of screens — it is a web of people, incentives, data, and feedback loops. When you press on one part, another part moves.
+
+This is why a "win" on one metric can be a loss for the whole. Improving a single number while ignoring the system around it is called **local optimization**, and it is one of the most common ways thoughtful-looking decisions go wrong.
+
+<Callout type="tip">
+
+Before shipping a change that moves a metric, ask: "If this number goes up, what else might move — and would I see it?" The costs you cannot see are the ones that hurt most.
+
+</Callout>
+
+## Carry forward
+
+Seeing a system means seeing more than the thing you are optimizing. In the next lesson, we will build the vocabulary that makes systems visible: feedback loops, constraints, incentives, and boundaries.
+
+Continue to the next lesson, Feedback loops and constraints.

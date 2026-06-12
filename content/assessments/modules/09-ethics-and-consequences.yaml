@@ -1,0 +1,123 @@
+id: "09-ethics-and-consequences"
+title: "Module 9 Assessment — Ethics and Product Consequences"
+type: module
+covers: ["09-ethics-and-consequences"]
+pass_threshold: 0.8
+scenario: "marketplace"
+
+questions:
+  - id: q1
+    type: multiple_choice
+    difficulty: early
+    stem: "What is the clearest difference between persuasion and manipulation?"
+    options:
+      - text: "Persuasion respects the user's ability to choose; manipulation undermines it."
+        correct: true
+        feedback: "Correct. The line is the user's preserved autonomy."
+      - text: "Persuasion is slow; manipulation is fast."
+        correct: false
+        feedback: "Speed is not the distinction."
+      - text: "Persuasion is for ads; manipulation is for apps."
+        correct: false
+        feedback: "Medium is not the distinction."
+
+  - id: q2
+    type: multiple_choice
+    difficulty: early
+    stem: "Which is most clearly a dark pattern?"
+    options:
+      - text: "An honest plan comparison with real prices."
+        correct: false
+        feedback: "That informs choice."
+      - text: "A 'cancel' link in tiny gray text next to a big 'keep subscription' button."
+        correct: true
+        feedback: "Correct. Burying the user's choice while amplifying the business's subverts autonomy."
+      - text: "A truthful reminder that a trial ends in two days."
+        correct: false
+        feedback: "Honest information, not manipulation."
+
+  - id: q3
+    type: multiple_choice
+    difficulty: mid
+    stem: "A pre-checked paid add-on lifts revenue. Why is it an ethical concern despite being legal?"
+    options:
+      - text: "It shifts a cost onto users who didn't actively choose it, relying on inattention."
+        correct: true
+        feedback: "Correct. Legality is not ethics; the harm is exploiting default inertia."
+      - text: "It isn't a concern — revenue rose."
+        correct: false
+        feedback: "Revenue does not settle the ethics."
+      - text: "Pre-checking is always illegal."
+        correct: false
+        feedback: "It is not automatically illegal — the reliance on users not noticing is the issue."
+
+  - id: q4
+    type: multiple_choice
+    difficulty: mid
+    stem: "What is power asymmetry in a product relationship?"
+    options:
+      - text: "The product holds far more information and control than the user."
+        correct: true
+        feedback: "Correct. It raises the stakes of every default and nudge."
+      - text: "Some users are wealthier than others."
+        correct: false
+        feedback: "That's user demographics, not the product relationship."
+      - text: "The design team outnumbers the research team."
+        correct: false
+        feedback: "Unrelated to the user relationship."
+
+  - id: q5
+    type: multiple_choice
+    difficulty: mid
+    stem: "In a 'hidden costs' pattern, what is concealed?"
+    options:
+      - text: "The true total price until the user is committed."
+        correct: true
+        feedback: "Correct. Fees or add-ons appear too late to affect the decision."
+      - text: "The company logo."
+        correct: false
+        feedback: "Not the decision-distorting information."
+      - text: "The number of other shoppers."
+        correct: false
+        feedback: "Not the hidden cost."
+
+  - id: q6
+    type: true_false
+    difficulty: early
+    stem: "True or false: If the team did not intend harm, a design cannot be a dark pattern."
+    options:
+      - text: "True"
+        correct: false
+        feedback: "False. Judge by the effect on the user's ability to choose, not by intent."
+      - text: "False"
+        correct: true
+        feedback: "Correct. Harm can occur without anyone intending it."
+
+  - id: q7
+    type: multiple_choice
+    difficulty: late
+    stem: "Which alternative best preserves business value and user trust for the add-on?"
+    options:
+      - text: "Pre-check it but enlarge the box."
+        correct: false
+        feedback: "Still manipulation."
+      - text: "Leave it unchecked with an honest one-line case and easy one-tap accept."
+        correct: true
+        feedback: "Correct. Keeps the opportunity while respecting choice."
+      - text: "Remove the add-on entirely."
+        correct: false
+        feedback: "Discards legitimate value the review didn't require sacrificing."
+
+  - id: q8
+    type: judgment
+    difficulty: late
+    no_single_correct: true
+    stem: "Your ethical risk review flags the pre-checked add-on, but leadership says revenue targets depend on it this quarter. What do you do?"
+    options:
+      - text: "Propose the honest opt-in and model the revenue difference, arguing trust protects long-term revenue."
+        rationale: "Keeps value while making the long-term case with data. Risk: the honest version may miss the short-term target leadership is measured on."
+      - text: "Ask for a time-boxed trial of the honest version with a revenue and refund comparison."
+        rationale: "Replaces opinion with evidence and lowers the stakes of the change. Risk: a short trial may not capture the trust effects that play out over months."
+      - text: "Escalate the ethical concern formally while implementing the requested version under protest."
+        rationale: "Creates a record and respects the chain of decision. Risk: ships a pattern you believe harms users, which is itself an ethical cost."
+    synthesis: "All are defensible under business pressure. The strongest answers seek a design that keeps legitimate value while reducing harm, make the long-term trust case concretely, and are honest about the tension rather than pretending it away."

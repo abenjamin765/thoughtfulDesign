@@ -1,0 +1,141 @@
+id: "01-seeing-the-system"
+title: "Milestone 1 — Seeing the System"
+type: milestone
+covers: ["01-screens-to-systems", "02-object-oriented-ux", "03-systems-thinking"]
+pass_threshold: 0.8
+scenario: "school-analytics"
+
+# Cross-module transfer. Single scenario, applied through all three Part 1 lenses.
+scenario_brief: >
+  A school district uses an analytics platform. Teachers say the "student
+  performance" view is "confusing and hard to trust." Leadership asks the design
+  team to "clean it up." On investigation: three teams define "proficient"
+  differently, a single "engagement score" combines logins, time-on-task, and
+  assignment completion, and a new auto-ranking of classes has teachers worried
+  about how they look. Use this scenario for every question below.
+
+questions:
+  - id: q1
+    type: multiple_choice
+    difficulty: mid
+    stem: "Leadership's request is to 'clean up' the performance view. What is the deepest problem actually present?"
+    options:
+      - text: "The view needs better spacing and color."
+        correct: false
+        feedback: "That is a surface fix; it would not resolve the disagreement underneath."
+      - text: "Stakeholders do not share definitions for the objects and metrics shown."
+        correct: true
+        feedback: "Correct. Conflicting definitions of 'proficient' and a fused 'engagement score' are system problems, not layout problems."
+      - text: "There are too few charts."
+        correct: false
+        feedback: "Adding charts to an unclear model would deepen the confusion."
+
+  - id: q2
+    type: multiple_choice
+    difficulty: mid
+    stem: "Applying object thinking, what should the team clarify first?"
+    options:
+      - text: "Which chart library to use."
+        correct: false
+        feedback: "Tooling does not resolve a modeling problem."
+      - text: "Shared definitions for core objects like Student, Assessment, and Score, and what 'proficient' means."
+        correct: true
+        feedback: "Correct. A shared object model with agreed definitions is the foundation for any clear view."
+      - text: "The marketing copy for the dashboard."
+        correct: false
+        feedback: "Copy cannot fix an inconsistent underlying model."
+
+  - id: q3
+    type: multiple_select
+    difficulty: mid
+    stem: "The single 'engagement score' fuses logins, time-on-task, and completion. Why is this a problem? (Choose all that apply.)"
+    options:
+      - text: "It masks very different student situations behind one number."
+        correct: true
+        feedback: "Yes — a quiet student and an absent student can score the same."
+      - text: "It makes the number easy to misread as 'effort' or 'ability.'"
+        correct: true
+        feedback: "Yes — a fused metric invites misinterpretation."
+      - text: "It improves data trust."
+        correct: false
+        feedback: "It does the opposite — teachers distrust a number they cannot decompose."
+      - text: "It hides which input is driving a change."
+        correct: true
+        feedback: "Yes — you cannot tell whether logins or completion moved the score."
+
+  - id: q4
+    type: multiple_choice
+    difficulty: late
+    stem: "The new class auto-ranking worries teachers. Using systems thinking, what is the most likely second-order effect?"
+    options:
+      - text: "Teachers change behavior to protect their ranking, distorting the underlying data."
+        correct: true
+        feedback: "Correct. An incentive tied to ranking can corrupt the very data the platform relies on."
+      - text: "The ranking page loads more slowly."
+        correct: false
+        feedback: "That is a surface concern, not a system consequence."
+      - text: "Nothing — rankings are neutral displays."
+        correct: false
+        feedback: "Rankings create incentives; they are never neutral."
+
+  - id: q5
+    type: multiple_choice
+    difficulty: mid
+    stem: "Which is a screen-level fix versus a system fix here?"
+    options:
+      - text: "Screen: increase chart contrast. System: agree on one definition of 'proficient.'"
+        correct: true
+        feedback: "Correct. Contrast is surface; a shared definition is structural."
+      - text: "Screen: redefine 'proficient.' System: change the font."
+        correct: false
+        feedback: "These are reversed."
+      - text: "Both are screen-level."
+        correct: false
+        feedback: "Definitions and incentives are system-level, not surface."
+
+  - id: q6
+    type: multiple_choice
+    difficulty: late
+    stem: "Which sequence best reflects the Thoughtful Design Loop applied to this scenario?"
+    options:
+      - text: "Shape the new layout first, then model the objects."
+        correct: false
+        feedback: "Shaping before modeling repeats the original mistake."
+      - text: "Model the objects and definitions, understand who is affected, then shape the view."
+        correct: true
+        feedback: "Correct. Model and Understand precede Shape."
+      - text: "Test the visuals, then decide what 'proficient' means."
+        correct: false
+        feedback: "You cannot meaningfully test a view built on undefined objects."
+
+  - id: q7
+    type: multiple_select
+    difficulty: late
+    stem: "To rebuild trust in the performance view, which moves address the real (system) problems? (Choose all that apply.)"
+    options:
+      - text: "Let users see which inputs make up a metric (decompose the engagement score)."
+        correct: true
+        feedback: "Yes — transparency rebuilds trust and fixes misreading."
+      - text: "Agree on and label one definition of 'proficient' across teams."
+        correct: true
+        feedback: "Yes — shared definitions resolve the core confusion."
+      - text: "Add more decorative charts."
+        correct: false
+        feedback: "Decoration does not address definitions or incentives."
+      - text: "Decouple any class ranking from individual teacher evaluation."
+        correct: true
+        feedback: "Yes — breaking the harmful incentive protects the data."
+
+  - id: q8
+    type: judgment
+    difficulty: late
+    no_single_correct: true
+    stem: "You have two weeks before a district board meeting. Reconciling 'proficient' across teams will take longer. What is your plan?"
+    options:
+      - text: "Ship a clearly labeled interim view that shows each team's definition side by side."
+        rationale: "Honest about the disagreement and useful immediately. Risk: side-by-side definitions can look like indecision to the board."
+      - text: "Pick one reasonable definition for the meeting and flag it as provisional."
+        rationale: "Gives a single clear story while being transparent that it is not final. Risk: a provisional choice can harden into a permanent one without the real reconciliation happening."
+      - text: "Present the system problem itself to the board as the finding, with a plan to resolve it."
+        rationale: "Reframes the meeting around the real issue and buys time to do it right. Risk: leadership wanted a cleaned-up view, not a problem statement, so it may land as not delivering."
+    synthesis: "All three are defensible. The strongest answers keep the disagreement visible rather than papering over it, and pair the short-term move with a path to genuine reconciliation. This question rewards system-level honesty under real constraints."

@@ -1,0 +1,93 @@
+---
+title: "Critique with heuristics"
+module: "Interaction Design Craft"
+module_id: "07-interaction-design-craft"
+part: "Shaping Responsible Experiences"
+order: 4
+estimated_minutes: 20
+published: true
+public_preview: false
+core_claim: "Craft is where thoughtful decisions become visible."
+loop_steps: ["Shape"]
+scenario: "marketplace"
+quiz:
+  - prompt: "What is the value of using heuristics to critique an interface?"
+    options:
+      - "They replace user testing entirely."
+      - "They give a shared, evidence-based vocabulary to find likely problems quickly."
+      - "They guarantee a design is perfect."
+    answer: 1
+    feedback: "Heuristics are a fast, structured lens for spotting probable issues and discussing them with a shared vocabulary. They complement user testing rather than replacing it, and they reveal likely problems, not certainties."
+  - prompt: "A heuristic review flags a confusing error message. What makes the critique actionable?"
+    options:
+      - "Naming the heuristic, the specific instance, and a concrete improvement."
+      - "Saying the design 'feels off.'"
+      - "Listing every possible issue without prioritizing."
+    answer: 0
+    feedback: "Actionable critique names which principle is violated, points to the exact instance, and proposes a fix. 'Feels off' is vague, and an unprioritized dump of issues leaves the team unsure what to address first."
+  - prompt: "Which improvement is likely most effective for the marketplace listing flow?"
+    options:
+      - "Reordering the flow so motivation comes before friction (describe item before tax info)."
+      - "Changing the accent color."
+      - "Adding more fields for completeness."
+    answer: 0
+    feedback: "Reordering to match the user's mindset addresses the root cause of abandonment. Color is cosmetic, and adding fields increases load — the opposite of what the flow needs."
+reflection:
+  prompt: "Run a 10-minute heuristic pass on one of your screens. What are the top three issues, ranked?"
+---
+
+## The situation
+
+The marketplace team wants to stop fixing usability problems one bug report at a time and start finding them proactively. The tool for that is a heuristic critique: a structured pass through an interface using known principles.
+
+## What a heuristic review is
+
+A heuristic review evaluates an interface against a set of established usability principles — the kind you have met in this module: match the user's flow, design every state, give feedback, reduce load, prefer recognition over recall, keep choices manageable. It is fast, needs no recruiting, and gives a team a shared vocabulary for talking about quality.
+
+It does not replace watching real users. It catches the likely problems early and cheaply, so user testing can focus on the deeper questions.
+
+## Make critique actionable
+
+Vague critique ("this feels off") helps no one. Strong critique has three parts:
+
+1. **The principle** at stake ("This violates feedback — the user gets no confirmation after submitting").
+2. **The specific instance** ("After 'Publish listing,' the screen just sits there").
+3. **A concrete improvement** ("Show a success state with the live listing and a 'share' action").
+
+And it is **prioritized** — the team needs to know which three issues matter most, not a flat list of twenty.
+
+> Critique that names a principle, an instance, and a fix turns opinion into engineering.
+
+## Try it
+
+Use the **Interaction Design Heuristic Checklist** resource. Take a real screen or flow and review it across hierarchy, flow, copy, states, feedback, and effort. For each issue, write the principle, the instance, and a fix. Then rank your top three.
+
+<Callout type="warning">
+
+A common trap is reviewing for taste instead of principle ("I'd use a different font"). Anchor every critique to a usability principle and the user impact, or it is just preference dressed up as analysis.
+
+</Callout>
+
+<Reveal label="What good looks like">
+
+A strong review of the marketplace flow reads like: "(1) Flow order — tax info is requested before item details, draining motivation; reorder so describing the item comes first. (2) States — the loading state is a frozen screen; add visible progress. (3) Cognitive load — 40 categories shown at once (Hick's Law); show top categories with search. Top priority: flow order, because it drives the abandonment we measured." Each item names a principle, points to the instance, proposes a fix, and the set is ranked.
+
+</Reveal>
+
+## Summary
+
+- Working is not the same as usable; craft turns sound thinking into a low-effort, trustworthy experience.
+- Design the flow to match the user's mindset, not the database.
+- Design every state — empty, loading, error, success — not just the happy path.
+- Give timely, specific feedback for every action.
+- Reduce cognitive load: recognition over recall, fewer clear choices (Hick's), easy targets (Fitts's), progressive disclosure, plain language.
+- Critique with heuristics: name the principle, the instance, and a fix; prioritize.
+- This module is the **Shape** step of the loop.
+
+**Key terms:** flow, empty/loading/error/success states, feedback, cognitive load, recognition vs. recall, Hick's Law, Fitts's Law, progressive disclosure, heuristic review.
+
+## Carry forward
+
+Crafting a clear experience raises a deeper question: clear and usable *for whom?* The next module expands the picture to the full range of human variation.
+
+Continue to Module 8: Accessibility and Human Variation.

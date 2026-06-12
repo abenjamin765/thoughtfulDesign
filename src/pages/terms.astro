@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/paths';
+
+// Public terms of use for a self-led, free-account course (MVP — no payments).
+const updated = 'June 12, 2026';
+const contactEmail = 'hello@thoughtfuldesign.io';
+---
+
+<BaseLayout
+  title="Terms of Use — Thoughtful Design"
+  description="The terms for using the Thoughtful Design self-led course."
+>
+  <article class="container legal">
+    <header class="legal__head">
+      <h1>Terms of Use</h1>
+      <p class="muted">Last updated {updated}</p>
+    </header>
+
+    <div class="prose legal__body">
+      <p>
+        These terms cover your use of Thoughtful Design (the “course”). By creating an account,
+        you agree to them. If you do not agree, please don't create an account.
+      </p>
+
+      <h2>Your account</h2>
+      <ul>
+        <li>You must be at least 18 years old to enroll.</li>
+        <li>You're responsible for keeping your sign-in details secure and for activity under your account.</li>
+        <li>One account is for one person. Please don't share account credentials.</li>
+      </ul>
+
+      <h2>How the course works</h2>
+      <ul>
+        <li>The course is self-led and asynchronous. There are no live sessions, deadlines, or cohorts.</li>
+        <li>One preview lesson per module is open to everyone. The full course unlocks when you enroll.</li>
+        <li>
+          Module, milestone, and final assessments are scored. You need 80% to pass each one, and you
+          can retry as many times as you need. A certificate is issued automatically once you pass
+          every required assessment.
+        </li>
+        <li>
+          We may update, add, or revise lessons, assessments, and resources to improve the course over time.
+        </li>
+      </ul>
+
+      <h2>Using the content</h2>
+      <p>
+        The lessons, assessments, and framework templates are provided for your own professional
+        learning and practice. You may use the framework templates in your own work. Please don't
+        resell, republish, or redistribute the course content as your own.
+      </p>
+
+      <h2>Acceptable use</h2>
+      <p>
+        Don't attempt to break, scrape, overload, or gain unauthorized access to the platform or
+        to other learners' data. We may suspend accounts that do.
+      </p>
+
+      <h2>Cancellation</h2>
+      <p>
+        You can delete your account at any time from your
+        <a href={withBase('/account')}>account settings</a>. There is nothing to cancel or unsubscribe
+        from — this version of the course is free and does not bill you.
+      </p>
+
+      <h2>Disclaimer</h2>
+      <p>
+        The course is provided “as is.” It offers professional education and judgment, not guaranteed
+        outcomes. You're responsible for how you apply what you learn in your own work.
+      </p>
+
+      <h2>Privacy</h2>
+      <p>
+        Our <a href={withBase('/privacy')}>Privacy Policy</a> explains what we collect and how to
+        delete it. It's part of these terms.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about these terms? Email <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+      </p>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal {
+    padding: 2.5rem 0 3.5rem;
+    max-width: var(--content-width);
+  }
+
+  .legal__head {
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .legal__head h1 {
+    font-family: var(--font-serif);
+    margin: 0 0 0.35rem;
+  }
+
+  .legal__body h2 {
+    font-family: var(--font-serif);
+    margin-top: 2.25rem;
+  }
+</style>

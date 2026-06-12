@@ -1,0 +1,69 @@
+---
+title: "Objects before screens"
+module: "Object-Oriented UX"
+module_id: "02-object-oriented-ux"
+part: "Seeing the System"
+order: 1
+estimated_minutes: 12
+published: true
+public_preview: true
+core_claim: "Before you design what people do, understand what they are working with."
+loop_steps: ["Model"]
+scenario: "school-analytics"
+quiz:
+  - prompt: "In a school app, which of these is most likely an object?"
+    options:
+      - "Assign"
+      - "Assignment"
+      - "Submit"
+    answer: 1
+    feedback: "An Assignment is a thing users recognize, create, and act on — an object. 'Assign' and 'Submit' are actions you perform on objects, not objects themselves."
+  - prompt: "What is the clearest difference between an object and a page?"
+    options:
+      - "An object is a thing in the user's world; a page is one place we might show it."
+      - "Objects are for engineers; pages are for designers."
+      - "There is no real difference — they are two words for the same idea."
+    answer: 0
+    feedback: "An object (like Student) exists in the user's mental model regardless of where it appears. A page is just one location where one or more objects might be displayed. One object can appear on many pages."
+reflection:
+  prompt: "Name a product you know. List three things users would call 'the stuff' in it. Those are likely its objects."
+---
+
+## The situation
+
+A team building the school analytics platform jumps straight into screens. They design a "Reports page," a "Students page," and a "Classes page." Each page is built by a different person, in a different week, with a different idea of what a student record contains.
+
+Months later, the product feels incoherent. A Student looks one way on the Reports page and another way on the Classes page. Teachers ask, "Is this the same student?" The team keeps redesigning pages, and the confusion keeps coming back.
+
+## The hidden problem
+
+The team designed pages before agreeing on objects. So every page reinvented the same things slightly differently.
+
+| What they designed first | What they skipped |
+| --- | --- |
+| Pages (Reports, Students, Classes) | A shared definition of Student, Class, Assessment |
+| Layouts and navigation | How those objects relate to each other |
+| Features (filter, export) | What attributes each object actually has |
+
+Confusion in the interface usually traces back to confusion in the model. If the team cannot say clearly what a "Student" is, no page about students will feel clear.
+
+> The team kept redesigning the screens.
+> The problem was that they never agreed on the things.
+
+## What an object is
+
+An object is a meaningful thing in a product's domain that users recognize and care about: a Student, a Class, an Assessment, a Score. Objects are not pages, features, or buttons. They are the nouns of the user's world.
+
+The shift at the heart of this module is simple to say and hard to practice: **understand what people are working with before you design what they do.** Model the objects first. Then the pages, flows, and features have something coherent to stand on.
+
+<Callout type="tip">
+
+A fast way to find candidate objects: listen for the nouns users repeat when they describe their work. "I check a *student's* *scores* against the *standard* before I plan the *lesson*." Four likely objects in one sentence.
+
+</Callout>
+
+## Carry forward
+
+Objects are the foundation of object-oriented UX. But not every noun is an object, and good object design follows a few deep principles. The next two lessons give you both: the Four Ancient Truths that make object design feel right, and the SIP test that tells you which nouns are true objects.
+
+Continue to the next lesson, The Four Ancient Truths.

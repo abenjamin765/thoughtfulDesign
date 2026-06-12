@@ -1,0 +1,109 @@
+---
+title: "The Four Ancient Truths"
+module: "Object-Oriented UX"
+module_id: "02-object-oriented-ux"
+part: "Seeing the System"
+order: 2
+estimated_minutes: 15
+published: true
+public_preview: false
+core_claim: "Before you design what people do, understand what they are working with."
+loop_steps: ["Model"]
+scenario: "school-analytics"
+quiz:
+  - prompt: "Which Ancient Truth is violated when two different objects look the same in the UI?"
+    options:
+      - "Objects"
+      - "Relationships"
+      - "CTAs"
+      - "Attributes"
+    answer: 0
+    feedback: "The Objects truth says different things should look different. When distinct objects share one appearance, users build a wrong mental model — the 'masked objects' anti-pattern."
+  - prompt: "A teacher viewing a Student cannot see that student's Class without leaving the page. Which truth is most at risk?"
+    options:
+      - "Objects"
+      - "Relationships"
+      - "CTAs"
+      - "Attributes"
+    answer: 1
+    feedback: "People navigate through relationships between objects. Hiding the Student–Class connection forces unnatural navigation — the 'isolated objects' anti-pattern."
+  - prompt: "Which truth focuses on acting directly on the thing you are looking at?"
+    options:
+      - "Objects"
+      - "Relationships"
+      - "CTAs"
+      - "Attributes"
+    answer: 2
+    feedback: "CTAs are about direct manipulation: if you are looking at an Assignment, you should be able to act on it there, not hunt through a settings menu."
+reflection:
+  prompt: "Pick a product you use often. Which Ancient Truth does it break most clearly? Describe one concrete example."
+---
+
+## The situation
+
+A school analytics platform shows teachers a wall of cards. Some cards are students, some are classes, some are assessments — but they all look nearly identical. Teachers squint, click the wrong things, and slowly lose trust in the tool.
+
+The problem is not the color palette. It is that the interface ignores how people perceive things.
+
+## The bedrock of object-oriented UX
+
+Object-Oriented UX (OOUX) is grounded in how people perceive the world. Four truths capture the most common ways digital systems break a user's mental model.
+
+<Callout type="truth" title="Ancient Truth #1 — Objects">
+
+Things that are different should look different.
+
+</Callout>
+
+When objects are visually distinct, users build accurate mental models quickly. When different things look the same — or the same thing appears under different names — confusion follows. In the school platform, a Student card and an Assessment card should never be mistaken for each other.
+
+<Callout type="truth" title="Ancient Truth #2 — Relationships">
+
+People navigate most naturally through relationships between objects.
+
+</Callout>
+
+Users do not think in nested menus. They think: "I'm looking at this Student, show me their Classes" or "show me this Class's Assessments." Design should let them move along those connections.
+
+<Callout type="truth" title="Ancient Truth #3 — CTAs">
+
+People act on objects through direct manipulation.
+
+</Callout>
+
+Actions should attach to the object they affect. If a teacher is viewing an Assignment, they should be able to assign, reschedule, or grade it right there — not dig through a separate settings area.
+
+<Callout type="truth" title="Ancient Truth #4 — Attributes">
+
+Objects that are the same should behave the same.
+
+</Callout>
+
+Consistency does not mean identical layout everywhere. It means the same object type carries the same core attributes and behaviors across contexts. A Student should not gain or lose meaning depending on which screen you find them on.
+
+## The matching anti-patterns
+
+| Truth | Anti-pattern | What the user feels |
+| --- | --- | --- |
+| Objects | Masked objects — different things disguised as one | "Wait, which of these is which?" |
+| Relationships | Isolated objects — no visible connections | "How do I get from here to there?" |
+| CTAs | Broken objects — visible but not actionable | "I can see it, but I can't do anything with it." |
+| Attributes | Shapeshifters — same object, inconsistent behavior | "This worked differently a screen ago." |
+
+<Callout type="warning">
+
+A common trap is treating these as visual-design rules to apply at the end. They are modeling rules. If the underlying object model is muddled, no amount of late-stage styling will make different things feel different.
+
+</Callout>
+
+<Reveal label="Quick memory hook">
+
+Objects = recognition. Relationships = navigation. CTAs = action. Attributes = consistency.
+
+</Reveal>
+
+## Carry forward
+
+The Four Ancient Truths tell you *what good object design feels like*. But before you can honor them, you need to know which nouns in your domain are actually objects. That is what the next lesson gives you: a simple test.
+
+Continue to the next lesson, The SIP test.

@@ -1,0 +1,87 @@
+---
+title: "Communicating and documenting judgment"
+module: "The Thoughtful Designer's Practice"
+module_id: "11-thoughtful-designers-practice"
+part: "Designing With Intelligence"
+order: 2
+estimated_minutes: 18
+published: true
+public_preview: false
+core_claim: "The next generation of UX requires stronger thinking, not just stronger tools."
+loop_steps: ["Align", "Account"]
+scenario: "ai-assistant"
+quiz:
+  - prompt: "Which project update communicates design rationale most clearly?"
+    options:
+      - "'Made the AI suggestions look cleaner.'"
+      - "'Moved AI suggestions behind a one-tap approve because auto-send caused costly errors; trades a little speed for trust and recoverability.'"
+      - "'Improved the AI feature.'"
+    answer: 1
+    feedback: "The strong update names the change, the reason, and the tradeoff. The other two report activity without reasoning, so a reader can't evaluate or build on the decision."
+  - prompt: "When should a designer push for more evidence rather than proceed?"
+    options:
+      - "When the decision is high-impact and rests on a risky, untested assumption."
+      - "Always, before any decision."
+      - "Never; shipping fast is what matters."
+    answer: 0
+    feedback: "Push for evidence when the stakes are high and the assumption is risky and unverified. Demanding evidence for everything stalls work; ignoring it on high-stakes bets is reckless."
+  - prompt: "What makes a decision record useful later?"
+    options:
+      - "It captures the decision, the reasoning, the tradeoffs, and what would trigger a revisit."
+      - "It lists everyone who attended the meeting."
+      - "It records only the final choice."
+    answer: 0
+    feedback: "A useful record preserves *why*, not just *what*, so future teams can revisit it intelligently. Attendance and a bare choice don't carry the reasoning forward."
+reflection:
+  prompt: "Write a two-sentence update for a recent decision that names the change, the reason, and the tradeoff."
+---
+
+## The situation
+
+The designer's judgment is only as valuable as her ability to share it. A great decision explained as "I made it cleaner" is indistinguishable from taste. The same decision explained with its reasoning becomes something a team can trust, challenge, and build on.
+
+## Communicating rationale
+
+Thoughtful designers translate decisions into reasoning others can evaluate. Whether in a standup, a doc, or a review, a clear communication of a design decision names three things: **the change, the reason, and the tradeoff.**
+
+| Weak update | Strong update |
+| --- | --- |
+| "Improved the AI feature." | "Moved AI suggestions behind a one-tap approve, because auto-send caused costly errors. Trades a little speed for trust and recoverability." |
+| "Cleaned up onboarding." | "Reordered onboarding so value comes before the account step, because users dropped at the form. Trades immediate data capture for completion." |
+
+The strong version invites scrutiny — which is the point. Reasoning you can defend is reasoning others can improve.
+
+## Knowing when to push, pause, or compromise
+
+Judgment includes reading the situation:
+
+- **Push** for more evidence when a decision is high-impact and rests on a risky, untested assumption.
+- **Pause** when the team is deciding before it understands the problem.
+- **Compromise** when the remaining options are all reasonable and the cost of delay exceeds the benefit of being right.
+
+Knowing which move fits is itself a skill — and it improves with reflection on how past calls turned out.
+
+## Documenting decisions
+
+Decisions that live only in memory get relitigated and silently reversed. A **decision record** is a short, durable note that captures what was decided, why, what it traded off, and what would make you revisit it. It is institutional memory and, working with PMs and engineers, a shared reference that keeps everyone aligned after the meeting ends.
+
+> Undocumented judgment evaporates.
+> Documented judgment compounds.
+
+<Callout type="warning">
+
+A common trap is documenting only the final choice and not the reasoning. A record that says "we chose prioritized alerts" without the why is nearly useless a year later, when the context that made it right has been forgotten.
+
+</Callout>
+
+<Reveal label="The shape of a good decision record">
+
+Decision, date, and owner; the reasoning (user need, goal, evidence); the tradeoff accepted; the main alternative and why it lost; and the trigger that would make you reopen it. Short enough to actually write, complete enough to actually help.
+
+</Reveal>
+
+## Carry forward
+
+You can now communicate and record judgment. The final lesson assembles the whole course — every method and the full loop — into your own ongoing practice.
+
+Continue to the next lesson, Your thoughtful design practice.

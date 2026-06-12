@@ -1,0 +1,98 @@
+---
+title: "Questions, assumptions, and evidence"
+module: "Research as Sensemaking"
+module_id: "04-research-as-sensemaking"
+part: "Understanding People and Decisions"
+order: 2
+estimated_minutes: 18
+published: true
+public_preview: false
+core_claim: "Research is not just validation. It is how teams learn what reality is asking of them."
+loop_steps: ["Understand"]
+scenario: "healthcare"
+quiz:
+  - prompt: "Which of these is a leading interview question?"
+    options:
+      - "Walk me through the last time you booked an appointment."
+      - "Don't you find the old booking flow frustrating?"
+      - "What were you trying to do when you stopped?"
+    answer: 1
+    feedback: "'Don't you find it frustrating?' plants the answer. The other two invite the participant to describe their real experience without steering them toward a conclusion."
+  - prompt: "A finding says '80% of users want a faster flow.' Why might this evidence be weak?"
+    options:
+      - "It comes from asking people what they want rather than observing what they do."
+      - "80% is too small a majority to matter."
+      - "Speed is never a real user need."
+    answer: 0
+    feedback: "Stated preferences ('I want faster') are weaker than observed behavior. People are poor predictors of their own future actions. The percentage size is not the issue, and speed can be a real need — it just needs behavioral evidence."
+  - prompt: "Which belief is the riskiest assumption to test first?"
+    options:
+      - "The one that, if wrong, would most damage the design — and that you have the least evidence for."
+      - "The one that is easiest to test."
+      - "The one the loudest stakeholder cares about."
+    answer: 0
+    feedback: "Prioritize assumptions by risk: high impact if wrong, low current evidence. Ease and stakeholder volume are tempting but can send you chasing low-stakes or already-known answers."
+reflection:
+  prompt: "Write one assumption your current project depends on. How strong is your evidence for it, honestly?"
+---
+
+## The situation
+
+The healthcare team restarts. This time, before booking sessions, they separate three things they had been blurring together: research questions, assumptions, and evidence.
+
+## Research questions vs. interview questions
+
+These are not the same, and confusing them ruins studies.
+
+| Research question (for the team) | Interview question (for the participant) |
+| --- | --- |
+| Why do patients abandon booking before confirming? | "Walk me through the last time you booked an appointment." |
+| What makes patients distrust the appointment times shown? | "What were you thinking when you saw these times?" |
+
+A research question is what the *team* needs to learn. An interview question is what you actually *say* to a participant — and it must not lead them to an answer.
+
+<Callout type="warning">
+
+A common trap is asking participants to design or predict: "Would you use this?" or "What would make this better?" People are kind and imaginative, so they say yes and invent features. Ask about past behavior and real experiences instead.
+
+</Callout>
+
+## Assumptions and risk
+
+Every design rests on assumptions. The job is not to eliminate them — it is to find the *riskiest* ones and test those first.
+
+Rank an assumption by two things:
+
+- **Impact if wrong:** how badly does the design break?
+- **Current evidence:** how much do we actually know?
+
+The assumptions that are high-impact and low-evidence are where research pays off. In the portal: "patients abandon because the flow is too long" is high-impact — and the team has no real evidence for it. That is the one to test.
+
+## Evidence strength
+
+Not all findings carry the same weight. A rough hierarchy:
+
+1. **Observed behavior** (you watched it happen) — strongest.
+2. **Reported behavior** (they told you what they did) — medium.
+3. **Stated preference / prediction** (they told you what they want or would do) — weakest.
+
+> "Users said they want it faster" is a hunch wearing a lab coat.
+> "Three of five patients abandoned at the insurance step" is evidence.
+
+<Callout type="tip">
+
+When you read a finding, ask: did someone *observe* this, *hear* it, or *guess* it? Label the strength. Decisions built on stated preferences need more support before you trust them.
+
+</Callout>
+
+<Reveal label="A quick assumption test">
+
+For any belief driving your design, complete: "We believe ___. We're confident because ___. We'd be wrong if we saw ___." If the middle blank is empty or the last blank is unimaginable, you have found an assumption worth researching.
+
+</Reveal>
+
+## Carry forward
+
+Once you know the decision, the riskiest assumption, and what would change your mind, you can choose *how* to learn. The next lesson matches research methods to the kind of uncertainty you face.
+
+Continue to the next lesson, Choosing a method.

@@ -1,0 +1,156 @@
+id: "01-screens-to-systems"
+title: "Module 1 Assessment — From Screens to Systems"
+type: module
+covers: ["01-screens-to-systems"]
+pass_threshold: 0.8
+scenario: "enterprise"
+
+questions:
+  - id: q1
+    type: multiple_choice
+    difficulty: early
+    stem: "Which of the following is best described as a screen-level problem?"
+    options:
+      - text: "Two teams use different definitions of 'active user.'"
+        correct: false
+        feedback: "Conflicting definitions are a system problem — no layout change resolves them."
+      - text: "The 'export' button is hard to find on the page."
+        correct: true
+        feedback: "Correct. Button findability is a surface issue you can fix in the interface layer."
+      - text: "Users distrust the numbers and route around the tool."
+        correct: false
+        feedback: "Low data trust is a system problem about the data and its ownership, not the screen."
+
+  - id: q2
+    type: multiple_choice
+    difficulty: early
+    stem: "A screen is best understood as…"
+    options:
+      - text: "the product itself."
+        correct: false
+        feedback: "The screen is the visible surface, not the whole product or system beneath it."
+      - text: "the visible surface of a deeper system of objects, decisions, data, and people."
+        correct: true
+        feedback: "Correct. This is the module's core claim."
+      - text: "a neutral container that does not affect behavior."
+        correct: false
+        feedback: "Screens are never neutral — every choice on them encodes a decision."
+
+  - id: q3
+    type: multiple_choice
+    difficulty: mid
+    stem: "An operations team asks you to 'declutter' a dashboard. What should you investigate first?"
+    options:
+      - text: "Which widgets to remove to reduce visual noise."
+        correct: false
+        feedback: "Removing widgets is a surface move. It may delete something a team depends on."
+      - text: "What decisions the dashboard is meant to support, and for whom."
+        correct: true
+        feedback: "Correct. Purpose and audience tell you what belongs before you decide what to cut."
+      - text: "A new color palette to make it feel calmer."
+        correct: false
+        feedback: "Aesthetics do not address why the page lost a shared purpose."
+
+  - id: q4
+    type: multiple_choice
+    difficulty: mid
+    stem: "A team hides advanced settings to simplify a flow. Which is a likely second-order effect?"
+    options:
+      - text: "Power users escalate to support to recover lost functionality."
+        correct: true
+        feedback: "Correct. Complexity moved off the screen and into the support queue — a downstream dependency."
+      - text: "The page's contrast ratio improves."
+        correct: false
+        feedback: "That is an unrelated surface property, not a downstream consequence."
+      - text: "Nothing changes elsewhere in the system."
+        correct: false
+        feedback: "Simplifying a surface almost always moves complexity somewhere else."
+
+  - id: q5
+    type: multiple_select
+    difficulty: mid
+    stem: "Which of these are system-level signals hiding inside a 'make it simpler' request? (Choose all that apply.)"
+    options:
+      - text: "Stakeholders disagree about what the product is for."
+        correct: true
+        feedback: "Yes — conflicting purpose is a system signal."
+      - text: "Users do not trust the data shown."
+        correct: true
+        feedback: "Yes — data trust is a system issue."
+      - text: "The font size is slightly small."
+        correct: false
+        feedback: "Font size is a surface fix, not a system signal."
+      - text: "Different users need fundamentally different things from one view."
+        correct: true
+        feedback: "Yes — mismatched needs are a system tension a single layout cannot resolve."
+
+  - id: q6
+    type: true_false
+    difficulty: early
+    stem: "True or false: Simplifying a screen always reduces complexity in the overall system."
+    options:
+      - text: "True"
+        correct: false
+        feedback: "False. Simplifying the surface usually relocates complexity rather than removing it."
+      - text: "False"
+        correct: true
+        feedback: "Correct. Complexity tends to move — to another screen, team, or moment — not disappear."
+
+  - id: q7
+    type: multiple_choice
+    difficulty: late
+    stem: "Which design question best reflects working at the systems layer?"
+    options:
+      - text: "How can we make this button more prominent?"
+        correct: false
+        feedback: "That is an interface-layer question."
+      - text: "What objects, decisions, and consequences does this feature create, and who is affected?"
+        correct: true
+        feedback: "Correct. This question reaches the system beneath the surface."
+      - text: "Which template should we reuse here?"
+        correct: false
+        feedback: "Template reuse is an execution shortcut, not a system question."
+
+  - id: q8
+    type: multiple_choice
+    difficulty: late
+    stem: "In the Thoughtful Design Loop, this module's work belongs mostly to which step?"
+    options:
+      - text: "Shape — deciding what the experience becomes."
+        correct: false
+        feedback: "Shape comes later, after you understand what exists."
+      - text: "Model — mapping what already exists."
+        correct: true
+        feedback: "Correct. Module 1 is about seeing the system that exists before designing."
+      - text: "Adapt — deciding what to change next."
+        correct: false
+        feedback: "Adapt is the closing step after testing and accounting for consequences."
+
+  - id: q9
+    type: judgment
+    difficulty: late
+    no_single_correct: true
+    stem: "Leadership wants the dashboard 'simplified' before a board meeting next week. You have found that the real problem is three conflicting definitions of 'active account,' which will take longer than a week to reconcile. What do you do?"
+    options:
+      - text: "Ship a visual cleanup now and flag the definition problem as the real work to schedule next."
+        rationale: "Respects the deadline and stakeholder relationship while naming the system issue. Risk: the cleanup may signal the problem is 'solved' and the harder work gets deprioritized."
+      - text: "Refuse the cosmetic fix and insist on solving the definition problem first."
+        rationale: "Protects against shipping a misleading surface. Risk: ignores a real business constraint and can cost you the credibility you need to fix the system later."
+      - text: "Ship the cleanup but add one honest note on the dashboard about which definition each number uses."
+        rationale: "Improves the surface and increases transparency about the data's meaning. Risk: a caveat can undermine confidence in the very meeting it appears in if not worded carefully."
+    synthesis: "There is no single right answer. Thoughtful designers weigh the deadline, the relationship, and the integrity of the data. The strongest responses make the system problem visible rather than letting a cosmetic fix quietly bury it."
+
+  - id: q10
+    type: multiple_choice
+    difficulty: mid
+    stem: "Which statement best captures 'design as decision-making'?"
+    options:
+      - text: "Designers should defer all decisions to product managers."
+        correct: false
+        feedback: "That gives away the judgment that makes design thoughtful."
+      - text: "Each design choice quietly decides what matters and who benefits."
+        correct: true
+        feedback: "Correct. Defaults, ordering, and emphasis all encode decisions about value."
+      - text: "Good design has no tradeoffs if done well enough."
+        correct: false
+        feedback: "All design involves tradeoffs; pretending otherwise hides them."

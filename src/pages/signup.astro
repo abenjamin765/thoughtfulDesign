@@ -7,8 +7,22 @@ import { withBase } from '../lib/paths';
 <BaseLayout title="Sign up — Thoughtful Design">
   <div class="auth-shell container">
     <AuthForm client:load mode="signup" />
+    <p class="muted signup-consent">
+      By creating an account you agree to our
+      <a href={withBase('/terms')}>Terms of Use</a> and
+      <a href={withBase('/privacy')}>Privacy Policy</a>.
+    </p>
     <p class="muted" style="text-align: center;">
       Already have an account? <a href={withBase('/login')}>Sign in</a>
     </p>
   </div>
 </BaseLayout>
+
+<style>
+  .signup-consent {
+    text-align: center;
+    max-width: 32rem;
+    margin-inline: auto;
+    font-size: 0.9rem;
+  }
+</style>

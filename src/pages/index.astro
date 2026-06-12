@@ -1,35 +1,573 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getPublishedLessons, groupLessonsByModule } from '../lib/lessons';
+import ModuleCard from '../components/ModuleCard.astro';
+import {
+  getCourseMeta,
+  getParts,
+  getModuleLessons,
+  getLoop,
+} from '../lib/course';
+import { getLessonSlug } from '../lib/lessons';
 import { withBase } from '../lib/paths';
 
-const lessons = await getPublishedLessons();
-const modules = groupLessonsByModule(lessons);
+const meta = getCourseMeta();
+const parts = getParts();
+const loop = getLoop();
+
+// Build the curriculum preview from the registry. Cards are a public preview:
+// locked and NOT linked (requirements §15 item 10) — visitors can see the shape
+// of the program without entering the gated learning zone.
+const partsView = await Promise.all(
+  parts.map(async (part) => ({
+    name: part.name,
+    order: part.order,
+    modules: await Promise.all(
+      part.modules
+        .slice()
+        .sort((a, b) => a.order - b.order)
+        .map(async (module) => {
+          const lessons = (await getModuleLessons(module.id)).filter((l) => l.data.published);
+          const estimatedMinutes = lessons.reduce(
+            (sum, l) => sum + (l.data.estimated_minutes ?? 0),
+            0,
+          );
+          return {
+            id: module.id,
+            order: module.order,
+            title: module.title,
+            coreClaim: module.core_claim,
+            lessonCount: lessons.length,
+            estimatedMinutes,
+          };
+        }),
+    ),
+  })),
+);
+
+const moduleCount = partsView.reduce((sum, part) => sum + part.modules.length, 0);
+
+// How It Works — the typographic storytelling method (requirements §2).
+const method = [
+  {
+    step: 'Story',
+    body: 'Every lesson opens in a real product situation — a dashboard request, a design review that went nowhere, a conversion win with a quiet cost.',
+  },
+  {
+    step: 'Concept',
+    body: 'The situation reveals a framework or mental model, explained in plain language and connected to modern UX work.',
+  },
+  {
+    step: 'Example',
+    body: 'You see the concept applied to a concrete scenario, often as a before-and-after, not abstract theory alone.',
+  },
+  {
+    step: 'Question',
+    body: 'Inline checks interrupt the reading to ask you to predict, diagnose, choose, or critique — so learning stays active.',
+  },
+  {
+    step: 'Application',
+    body: 'A small, self-led exercise lets you practice the idea on your own work, with an example answer or rubric to compare against.',
+  },
+];
+
+// Tenets / manifesto — pull quotes drawn from the course's core ideas and the
+// §12 voice (positive framing, no hype, no absolutes).
+const tenets = [
+  'Start by understanding the system the screen belongs to.',
+  'Before you design what people do, understand what they are working with.',
+  'Every design decision changes behavior somewhere in the system.',
+  'Good design respects human variation.',
+  'AI increases the value of designers who can ask better questions and make better judgments.',
+];
+
+const included = [
+  {
+    title: '11 modules across 4 parts',
+    body: 'From seeing systems to object modeling, research, facilitation, strategy, craft, accessibility, ethics, and AI.',
+  },
+  {
+    title: 'Scored assessments',
+    body: '11 module assessments, 3 milestone assessments, and 1 final — each with an 80% pass threshold and retries after feedback.',
+  },
+  {
+    title: '12 framework templates',
+    body: 'Reusable, printable tools — object maps, assumption audits, ethical risk reviews, and more — you can use at work today.',
+  },
+  {
+    title: 'Self-led, no deadlines',
+    body: 'Asynchronous and text-based. Progress is tracked and surfaced; nothing blocks you from moving at your own pace.',
+  },
+  {
+    title: 'A certificate on completion',
+    body: 'Pass every assessment and the final, and your certificate is issued automatically — with an optional distinction at 90%.',
+  },
+  {
+    title: 'One public lesson per module',
+    body: 'Read a real lesson from each module before you enroll. The shape of the thinking is open; the full program is gated.',
+  },
+];
 ---
 
-<BaseLayout title="Thoughtful Design — Learn Object-Oriented UX">
+<BaseLayout
+  title="Thoughtful Design — A modern UX practice for systems, people, and AI"
+  description={meta.subtitle}
+>
+  <!-- Account-deletion confirmation (shown after /account deletion redirect) -->
+  <div id="deleted-banner" class="container" hidden>
+    <p class="deleted-banner" role="status">
+      Your account and learning data have been deleted. Thanks for spending time with Thoughtful Design.
+    </p>
+  </div>
+
+  <!-- 1. Hero -->
   <section class="hero container">
-    <p class="muted">A practical course in Object-Oriented UX</p>
-    <h1>Design systems that match how people think.</h1>
-    <p>
-      Learn through short lessons, reflection prompts, and knowledge checks.
-      Structure is flexible — the outline will grow as the curriculum matures.
+    <p class="hero__eyebrow muted">{meta.subtitle}</p>
+    <h1>Move from making interfaces to shaping systems.</h1>
+    <p class="hero__lead">
+      Thoughtful Design is a self-led course for UX and product designers who want
+      to design the system beneath the screen — to model complexity, understand the
+      people affected, and explain their decisions with clarity and judgment.
     </p>
     <div class="nav-links">
-      <a class="button button--primary" href={withBase('/signup')}>Start learning</a>
-      <a class="button button--secondary" href={withBase('/course')}>Browse lessons</a>
+      <a class="button button--primary" href={withBase('/signup')}>Enroll now</a>
+      <a class="button button--secondary" href="#curriculum">See the curriculum</a>
     </div>
   </section>
 
-  <section class="container" style="padding-bottom: 3rem;">
-    <h2>What you'll explore</h2>
+  <!-- 2. Value proposition -->
+  <section class="container section">
+    <div class="value-grid">
+      <article>
+        <h2 class="value__head">What you'll learn</h2>
+        <p>
+          To look at a complex product problem and ask better questions: identify the
+          underlying system, recognize the objects that matter, understand who is
+          affected, and make more intentional design decisions.
+        </p>
+      </article>
+      <article>
+        <h2 class="value__head">Why it matters now</h2>
+        <p>
+          Screen-level execution is increasingly automated. The work that compounds is
+          judgment — modeling systems, weighing trade-offs, and using AI as a collaborator
+          rather than an authority.
+        </p>
+      </article>
+      <article>
+        <h2 class="value__head">Who it's for</h2>
+        <p>
+          UX and product designers, researchers, and design-adjacent practitioners in the
+          early-to-mid stretch of their careers who want to move beyond the surface into
+          systems-level design.
+        </p>
+      </article>
+      <article>
+        <h2 class="value__head">What makes it different</h2>
+        <p>
+          Not a checklist or a slide deck. A guided intellectual journey built on real
+          scenarios, distributed assessment, and one recurring framework — the Thoughtful
+          Design Loop — that becomes your operating model.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 3. Curriculum preview -->
+  <section id="curriculum" class="container section">
+    <header class="section__head">
+      <h2>The curriculum</h2>
+      <p class="muted">
+        {moduleCount} modules across {parts.length} parts. Previews are open; the full
+        program unlocks when you enroll.
+      </p>
+    </header>
+
+    {partsView.map((part) => (
+      <div class="part-block">
+        <header class="part-block__head">
+          <span class="part-block__eyebrow muted">Part {part.order}</span>
+          <h3>{part.name}</h3>
+        </header>
+        <div class="card-grid">
+          {part.modules.map((module) => (
+            <ModuleCard
+              order={module.order}
+              title={module.title}
+              coreClaim={module.coreClaim}
+              lessonCount={module.lessonCount}
+              estimatedMinutes={module.estimatedMinutes}
+              locked={true}
+            />
+          ))}
+        </div>
+      </div>
+    ))}
+  </section>
+
+  <!-- 4. How it works -->
+  <section class="band">
+    <div class="container section">
+      <header class="section__head">
+        <h2>How a lesson works</h2>
+        <p class="muted">Every lesson uses the same typographic storytelling structure.</p>
+      </header>
+      <ol class="method-list">
+        {method.map((item, i) => (
+          <li class="method-item">
+            <span class="method-item__num">{i + 1}</span>
+            <div>
+              <h3 class="method-item__step">{item.step}</h3>
+              <p>{item.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- The Thoughtful Design Loop (the course-wide operating framework, §11) -->
+  <section class="container section">
+    <header class="section__head">
+      <h2>One framework, all the way through</h2>
+      <p class="muted">
+        The Thoughtful Design Loop is the operating model that connects every module.
+      </p>
+    </header>
+    <ol class="loop-list">
+      {loop.map((step) => (
+        <li class="loop-step">
+          <span class="loop-step__name">{step.step}</span>
+          <span class="loop-step__q muted">{step.question}</span>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <!-- 5. Tenets / manifesto -->
+  <section id="tenets" class="band band--accent">
+    <div class="container section">
+      <p class="tenets__eyebrow">The practice, in a few lines</p>
+      <div class="tenets">
+        {tenets.map((tenet) => (
+          <blockquote class="tenet">{tenet}</blockquote>
+        ))}
+      </div>
+      <p class="tenets__cta">
+        <a class="button button--primary" href={withBase('/signup')}>Enroll in Thoughtful Design</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 6. What's included -->
+  <section class="container section">
+    <header class="section__head">
+      <h2>What's included</h2>
+    </header>
     <div class="card-grid">
-      {modules.map((module) => (
+      {included.map((item) => (
         <article class="card">
-          <h3>{module.name}</h3>
-          <p class="muted">{module.lessons.length} lesson{module.lessons.length === 1 ? '' : 's'} available now</p>
+          <h3>{item.title}</h3>
+          <p class="muted">{item.body}</p>
         </article>
       ))}
     </div>
   </section>
+
+  <!-- 7. Author signal -->
+  <section class="band">
+    <div class="container section author">
+      <h2 class="section__head">Why this course exists</h2>
+      <p>
+        Thoughtful Design grew out of a simple frustration: most UX education stops at
+        the screen. It teaches patterns and tools, but not the judgment to decide what a
+        product should become and why.
+      </p>
+      <p>
+        This course takes the opposite stance. It treats design as decision-making —
+        modeling systems, understanding people, facilitating better conversations, and
+        accounting for consequences. The voice is direct and grounded, the examples are
+        drawn from real product work, and the assessments measure whether you can apply
+        the ideas, not just recall them.
+      </p>
+      <p class="muted">— The Thoughtful Design team</p>
+    </div>
+  </section>
+
+  <!-- 8. Enrollment CTA -->
+  <section class="container section">
+    <div class="enroll-cta">
+      <h2>Ready to design the system, not just the screen?</h2>
+      <p>
+        Enroll to unlock all {moduleCount} modules, every assessment, the resource
+        library, and your completion certificate. Self-led, yours to keep.
+      </p>
+      <div class="nav-links" style="justify-content: center;">
+        <a class="button button--primary" href={withBase('/signup')}>Enroll in Thoughtful Design</a>
+        <a class="button button--secondary" href={withBase('/blog')}>Read the blog</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Footer links -->
+  <section class="container landing-footer">
+    <nav class="landing-footer__links" aria-label="Site information">
+      <a href={withBase('/privacy')}>Privacy</a>
+      <a href={withBase('/terms')}>Terms</a>
+      <a href={withBase('/contact')}>Contact</a>
+      <a href={withBase('/resources')}>Resources</a>
+      <a href={withBase('/blog')}>Blog</a>
+    </nav>
+  </section>
+
+  <script>
+    if (new URLSearchParams(window.location.search).get('deleted') === '1') {
+      const banner = document.getElementById('deleted-banner');
+      if (banner) banner.hidden = false;
+    }
+  </script>
 </BaseLayout>
+
+<style>
+  .deleted-banner {
+    margin: 1.25rem 0 0;
+    padding: 0.85rem 1.1rem;
+    background: var(--accent-soft);
+    border: 1px solid #c5d9cf;
+    border-radius: var(--radius);
+    font-size: 0.95rem;
+  }
+
+  .section {
+    padding: 3rem 0;
+  }
+
+  .section__head {
+    margin-bottom: 1.5rem;
+  }
+
+  .section__head h2 {
+    font-family: var(--font-serif);
+    font-size: var(--step-3);
+    margin: 0 0 0.35rem;
+  }
+
+  .hero__eyebrow {
+    font-size: var(--step--1);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0 0 0.75rem;
+  }
+
+  .hero__lead {
+    font-size: var(--step-1);
+    color: var(--text);
+    max-width: var(--measure);
+  }
+
+  /* Value proposition */
+  .value-grid {
+    display: grid;
+    gap: 1.5rem 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  }
+
+  .value__head {
+    font-family: var(--font-serif);
+    font-size: var(--step-2);
+    margin: 0 0 0.5rem;
+  }
+
+  .value-grid p {
+    margin: 0;
+    max-width: 46ch;
+  }
+
+  /* Bands break the page rhythm between sections */
+  .band {
+    background: var(--surface);
+    border-block: 1px solid var(--border);
+  }
+
+  .band--accent {
+    background: var(--accent-soft);
+    border-color: #c5d9cf;
+  }
+
+  /* Curriculum preview */
+  .part-block + .part-block {
+    margin-top: 2.5rem;
+  }
+
+  .part-block__head {
+    margin-bottom: 1rem;
+  }
+
+  .part-block__eyebrow {
+    font-size: var(--step--1);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .part-block__head h3 {
+    font-family: var(--font-serif);
+    margin: 0.15rem 0 0;
+    font-size: var(--step-2);
+  }
+
+  /* How it works */
+  .method-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.25rem;
+    max-width: var(--measure);
+  }
+
+  .method-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .method-item__num {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .method-item__step {
+    font-family: var(--font-serif);
+    margin: 0 0 0.25rem;
+    font-size: var(--step-1);
+  }
+
+  .method-item p {
+    margin: 0;
+  }
+
+  /* Loop */
+  .loop-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  }
+
+  .loop-step {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.85rem 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  .loop-step__name {
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .loop-step__q {
+    font-size: 0.95rem;
+  }
+
+  /* Tenets */
+  .tenets__eyebrow {
+    font-size: var(--step--1);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0 0 1.5rem;
+  }
+
+  .tenets {
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .tenet {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: var(--font-serif);
+    font-size: var(--step-2);
+    line-height: 1.25;
+    max-width: 28ch;
+  }
+
+  .tenet:nth-child(even) {
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .tenets__cta {
+    margin: 2rem 0 0;
+  }
+
+  /* Author */
+  .author {
+    max-width: var(--measure);
+  }
+
+  .author p {
+    font-size: var(--step-1);
+  }
+
+  /* Enrollment CTA */
+  .enroll-cta {
+    text-align: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 2.5rem 1.5rem;
+  }
+
+  .enroll-cta h2 {
+    font-family: var(--font-serif);
+    font-size: var(--step-3);
+    margin: 0 0 0.75rem;
+  }
+
+  .enroll-cta p {
+    margin: 0 auto 1.5rem;
+    max-width: 48ch;
+    color: var(--muted);
+  }
+
+  /* Footer links */
+  .landing-footer {
+    padding-bottom: 2rem;
+  }
+
+  .landing-footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.95rem;
+  }
+
+  .landing-footer__links a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .landing-footer__links a:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+</style>

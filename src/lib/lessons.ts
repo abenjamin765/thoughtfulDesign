@@ -1,12 +1,22 @@
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { getLessonOrderMap } from './course';
 
-export type LessonEntry = Awaited<ReturnType<typeof getPublishedLessons>>[number];
+export type LessonEntry = CollectionEntry<'lessons'>;
 
 export async function getPublishedLessons() {
   const lessons = await getCollection('lessons');
+  const orderMap = getLessonOrderMap();
+  const positionFor = (lesson: LessonEntry) =>
+    orderMap.get(getLessonSlug(lesson)) ?? Number.POSITIVE_INFINITY;
+
   return lessons
     .filter((lesson) => lesson.data.published)
     .sort((a, b) => {
+      // Primary: canonical course.yaml order (part -> module -> lesson).
+      const positionDiff = positionFor(a) - positionFor(b);
+      if (positionDiff !== 0) return positionDiff;
+      // Fallback for any lesson not present in the registry: keep deterministic
+      // by module name then frontmatter order.
       if (a.data.module !== b.data.module) {
         return a.data.module.localeCompare(b.data.module);
       }

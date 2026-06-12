@@ -1,0 +1,143 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../lib/paths';
+
+export async function getStaticPaths() {
+  const resources = await getCollection('resources');
+  return resources.map((resource) => ({
+    params: { slug: resource.data.slug },
+    props: { resource },
+  }));
+}
+
+const { resource } = Astro.props;
+const { Content } = await render(resource);
+---
+
+<BaseLayout
+  title={`${resource.data.name} — Thoughtful Design`}
+  description={resource.data.description}
+>
+  <article class="container resource">
+    <!-- Toolbar is hidden when printing so the page reads as a clean template -->
+    <div class="resource__toolbar no-print">
+      <a class="resource__back" href={withBase('/resources')}>← All resources</a>
+      <button
+        type="button"
+        class="button button--primary"
+        id="print-resource"
+        data-resource={resource.data.slug}
+      >
+        Download / Print
+      </button>
+    </div>
+
+    <header class="resource__head">
+      <p class="resource__eyebrow muted">{resource.data.format} · {resource.data.module}</p>
+      <h1>{resource.data.name}</h1>
+      <p class="resource__desc">{resource.data.description}</p>
+    </header>
+
+    <div class="prose resource__body">
+      <Content />
+    </div>
+
+    <footer class="resource__footer no-print">
+      <p class="muted">
+        Taught in{' '}
+        <a href={withBase(`/course/modules/${resource.data.module_id}`)}>{resource.data.module}</a>.
+      </p>
+      <p>
+        Want the full method behind this template?{' '}
+        <a href={withBase('/signup')}>Enroll in Thoughtful Design →</a>
+      </p>
+    </footer>
+  </article>
+</BaseLayout>
+
+<script>
+  import { trackEvent } from '../../lib/analytics';
+
+  const printButton = document.getElementById('print-resource');
+  printButton?.addEventListener('click', () => {
+    void trackEvent('resource_downloaded', {
+      resource_slug: printButton.dataset.resource ?? null,
+    });
+    window.print();
+  });
+</script>
+
+<style>
+  .resource {
+    padding: 2rem 0 3rem;
+    max-width: var(--content-width);
+  }
+
+  .resource__toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+
+  .resource__back {
+    text-decoration: none;
+    color: var(--muted);
+  }
+
+  .resource__back:hover {
+    color: var(--accent);
+  }
+
+  .resource__head {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .resource__eyebrow {
+    font-size: var(--step--1);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem;
+  }
+
+  .resource__head h1 {
+    font-family: var(--font-serif);
+    margin: 0 0 0.5rem;
+  }
+
+  .resource__desc {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .resource__footer {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+</style>
+
+<!-- Print rules: render the template alone on the page (hide global chrome). -->
+<style is:global>
+  @media print {
+    .site-header,
+    .site-footer,
+    .no-print {
+      display: none !important;
+    }
+
+    body {
+      background: #fff;
+    }
+
+    main {
+      margin: 0;
+    }
+  }
+</style>

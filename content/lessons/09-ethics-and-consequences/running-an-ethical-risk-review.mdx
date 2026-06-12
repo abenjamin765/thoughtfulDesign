@@ -1,0 +1,97 @@
+---
+title: "Running an ethical risk review"
+module: "Ethics and Product Consequences"
+module_id: "09-ethics-and-consequences"
+part: "Shaping Responsible Experiences"
+order: 3
+estimated_minutes: 20
+published: true
+public_preview: false
+core_claim: "Thoughtful designers consider what their work makes easier, harder, normal, hidden, rewarded, or risky."
+loop_steps: ["Account"]
+scenario: "marketplace"
+quiz:
+  - prompt: "What information is being hidden from the user in a 'hidden costs' pattern?"
+    options:
+      - "The true total price until late in the flow."
+      - "The company's logo."
+      - "The number of other shoppers."
+    answer: 0
+    feedback: "Hidden-cost patterns conceal the real total (fees, add-ons) until the user is committed. The other options are not the hidden information that distorts the purchase decision."
+  - prompt: "An ethical risk review surfaces a real harm but leadership still wants the feature. What is the thoughtful next move?"
+    options:
+      - "Drop the issue; the decision is made."
+      - "Propose an alternative that preserves business value while reducing the harm."
+      - "Ship it and disclaim responsibility."
+    answer: 1
+    feedback: "Ethics in practice means finding the design that keeps legitimate value while reducing harm — not surrendering, and not washing your hands of it. Most ethical problems have a better-designed alternative."
+  - prompt: "Which alternative best preserves both business value and user trust for the protection plan?"
+    options:
+      - "Pre-check it but make the box slightly larger."
+      - "Leave it unchecked with an honest one-line case and easy one-tap accept."
+      - "Remove the plan entirely."
+    answer: 1
+    feedback: "An honest, easy opt-in keeps the revenue opportunity while respecting choice. A bigger pre-checked box is still manipulation, and removing the plan throws away legitimate value the review didn't require sacrificing."
+reflection:
+  prompt: "Run a quick ethical risk review on a feature you're working on. What's the safer alternative that keeps the value?"
+---
+
+## The situation
+
+The marketplace team agrees the pre-checked plan crossed a line. They want a way to catch these problems *before* shipping, not after refund requests spike. The tool is an ethical risk review — a short, structured check you can run on any feature.
+
+## The review
+
+Walk a proposed design through these questions:
+
+| Question | For the protection plan |
+| --- | --- |
+| Intended outcome | Increase revenue per checkout |
+| Affected users | All buyers, especially rushed and first-time ones |
+| Possible harms | Paying for something not chosen; lost trust |
+| Power imbalance | Marketplace controls defaults and pricing; buyer sees a clock |
+| Missing transparency | True cost and the default itself are easy to miss |
+| Safer alternative | Unchecked box, honest one-line case, easy accept |
+
+The review does not require canceling features. It requires naming the harm honestly and finding a design that keeps the legitimate value while reducing the cost to users.
+
+## From review to redesign
+
+Almost every ethical problem has a better-designed alternative that a team can live with. The pre-checked plan becomes an honest opt-in. Hidden fees become an upfront total. A buried cancel link becomes a clear one. In most cases the business keeps the real value and loses only the part that depended on users not noticing.
+
+> Ethics in product work is rarely about grand refusals.
+> It is mostly about choosing the honest version of a feature you were going to build anyway.
+
+## Try it
+
+Use the **Ethical Risk Review** resource. Take a real feature and answer the six questions: intended outcome, affected users, possible harms, power imbalance, missing transparency, and safer alternative. End with one concrete redesign that keeps the value and reduces the harm.
+
+<Callout type="warning">
+
+A common trap is using the review to *justify* a decision already made ("we considered ethics, so it's fine"). The review only matters if it can change the design. If yours never produces a safer alternative, you are rubber-stamping, not reviewing.
+
+</Callout>
+
+<Reveal label="What good looks like">
+
+A strong review names a specific, plausible harm and a specific person it lands on, acknowledges the power asymmetry honestly, and ends with a redesign the business can accept. For the marketplace: "Harm: rushed first-time buyers pay for an unchosen plan and feel tricked, raising refunds and eroding trust. Redesign: unchecked opt-in with an honest one-line case and one-tap accept. We keep most of the revenue and protect repeat purchase."
+
+</Reveal>
+
+## Summary
+
+- Ethics asks what a design makes easier, harder, normal, hidden, rewarded, or risky — and for whom.
+- Ethical problems usually look defensible and incremental, not villainous.
+- Persuasion respects the user's ability to choose; manipulation undermines it.
+- Dark patterns are manipulation made reusable; power asymmetry raises the stakes of every default.
+- An ethical risk review (outcome, users, harms, power, transparency, alternative) turns concern into a safer design.
+- Most ethical fixes keep the legitimate value and drop only the part that relied on users not noticing.
+- This module is the **Account** step of the loop.
+
+**Key terms:** design ethics, persuasion vs. manipulation, dark pattern, power asymmetry, transparency, consent, ethical risk review.
+
+## Carry forward
+
+You have completed Part 3: you can shape clear experiences, design for human variation, and account for ethical consequences. Milestone 3 brings these three lenses together on one product flow.
+
+Continue to Milestone 3: Shaping Responsible Experiences.

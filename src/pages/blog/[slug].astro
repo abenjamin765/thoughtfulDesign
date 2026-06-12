@@ -1,0 +1,154 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Callout from '../../components/Callout.astro';
+import Reveal from '../../components/Reveal.astro';
+import Shift from '../../components/Shift.astro';
+import { withBase } from '../../lib/paths';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog')).filter((post) => post.data.published);
+  return posts.map((post) => ({
+    params: { slug: post.id.replace(/\.mdx?$/, '') },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const dateFmt = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const words = (post.body ?? '').trim().split(/\s+/).filter(Boolean).length;
+const minutes = Math.max(1, Math.round(words / 200));
+---
+
+<BaseLayout title={`${post.data.title} — Thoughtful Design Blog`} description={post.data.excerpt}>
+  <article class="post container">
+    <nav class="post__back" aria-label="Breadcrumb">
+      <a href={withBase('/blog')}>← The Thoughtful Design Blog</a>
+    </nav>
+
+    <header class="post__head">
+      <h1 class="post__title">{post.data.title}</h1>
+      <div class="post__meta">
+        {post.data.author && <span>{post.data.author}</span>}
+        {post.data.author && <span aria-hidden="true">·</span>}
+        <time datetime={post.data.date.toISOString()}>{dateFmt.format(post.data.date)}</time>
+        <span aria-hidden="true">·</span>
+        <span>{minutes} min read</span>
+      </div>
+      {post.data.tags.length > 0 && (
+        <ul class="post__tags">
+          {post.data.tags.map((tag) => (
+            <li>{tag}</li>
+          ))}
+        </ul>
+      )}
+    </header>
+
+    <div class="post__body prose">
+      <Content components={{ Callout, Reveal, Shift }} />
+    </div>
+
+    <aside class="post__cta">
+      <h2>Ready to go deeper?</h2>
+      <p>
+        This is the thinking between the lessons. The course is where it becomes a
+        practice — modules, exercises, and assessments that build real design judgment.
+      </p>
+      <a class="button button--primary" href={withBase('/signup')}>Enroll in Thoughtful Design →</a>
+    </aside>
+  </article>
+</BaseLayout>
+
+<style>
+  /* Editorial template — intentionally distinct from the lesson reading layout:
+     larger serif headline, centered measure, no interactive lesson chrome. */
+  .post {
+    padding: 2.5rem 0 3rem;
+    max-width: 44rem;
+  }
+
+  .post__back {
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .post__back a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .post__back a:hover {
+    color: var(--accent);
+  }
+
+  .post__head {
+    margin-bottom: 2.5rem;
+  }
+
+  .post__title {
+    font-family: var(--font-serif);
+    font-size: var(--step-4);
+    line-height: 1.1;
+    margin: 0 0 1rem;
+  }
+
+  .post__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .post__tags {
+    list-style: none;
+    margin: 1rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .post__tags li {
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 999px;
+    padding: 0.2rem 0.7rem;
+  }
+
+  .post__body {
+    font-size: var(--step-1);
+    max-width: none;
+  }
+
+  .post__cta {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: var(--accent-soft);
+    border: 1px solid #c5d9cf;
+    border-radius: var(--radius);
+    text-align: center;
+  }
+
+  .post__cta h2 {
+    font-family: var(--font-serif);
+    margin: 0 0 0.5rem;
+  }
+
+  .post__cta p {
+    margin: 0 auto 1.5rem;
+    max-width: 46ch;
+    color: var(--text);
+  }
+</style>

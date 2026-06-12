@@ -1,0 +1,45 @@
+# Assessment authoring template.
+# Copy into content/assessments/{modules|milestones|final}/<id>.yaml and fill in.
+#
+# Question count by type (requirements §5):
+#   module    : 8–15 questions, 80% pass
+#   milestone : 12–18 questions, cross-module transfer
+#   final     : 30–40 questions, 8 sections, single rich scenario
+#
+# Every scored question requires feedback for correct AND each distractor (requirements §9.2).
+# Include at least one "judgment" question per module assessment (no single correct answer).
+
+id: "NN-module-id"          # matches course.yaml
+title: "Module N Assessment — Title"
+type: module                # module | milestone | final
+covers: ["NN-module-id"]    # module id(s) this assessment evaluates
+pass_threshold: 0.8         # 80%
+scenario: "school-analytics"
+
+questions:
+  - id: q1
+    type: multiple_choice     # multiple_choice | multiple_select | true_false | judgment | matching | ordering
+    difficulty: early         # early (identify/define) | mid (diagnose/apply) | late (evaluate/justify)
+    stem: "A scenario-based question stem."
+    options:
+      - text: "Distractor that is tempting but incomplete."
+        correct: false
+        feedback: "Why this is incomplete."
+      - text: "The best answer."
+        correct: true
+        feedback: "Why this is correct and what principle it tests."
+      - text: "A plausible distractor."
+        correct: false
+        feedback: "Why this misses the point."
+
+  - id: q2
+    type: judgment            # no single correct answer; every option gets rationale (requirements §9.1)
+    difficulty: late
+    stem: "A scenario where more than one answer is defensible."
+    no_single_correct: true
+    options:
+      - text: "Position A"
+        rationale: "What this choice prioritizes and what it risks."
+      - text: "Position B"
+        rationale: "What this choice prioritizes and what it risks."
+    synthesis: "The trade-off discussion shown after the learner answers."

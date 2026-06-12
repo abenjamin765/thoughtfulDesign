@@ -1,0 +1,54 @@
+---
+import FocusedLayout from '../../../../layouts/FocusedLayout.astro';
+import AuthGuard from '../../../../components/AuthGuard';
+import AssessmentRunner from '../../../../components/AssessmentRunner';
+import { getAllModules, getModule } from '../../../../lib/course';
+import { loadAssessment } from '../../../../lib/assessment-loader';
+import type { UnlockSpec } from '../../../../lib/assessments';
+import { withBase } from '../../../../lib/paths';
+
+export async function getStaticPaths() {
+  return getAllModules().map((module) => ({ params: { slug: module.id } }));
+}
+
+const { slug } = Astro.params;
+const module = getModule(slug!);
+const assessment = module ? await loadAssessment('module', module.id) : null;
+
+if (!module || !assessment) {
+  return Astro.redirect(withBase('/course'));
+}
+
+const modules = getAllModules();
+const position = modules.findIndex((entry) => entry.id === module.id);
+const nextModule = position >= 0 ? modules[position + 1] : undefined;
+
+const unlock: UnlockSpec = {
+  kind: 'module',
+  moduleLessonSlugs: module.lessons,
+};
+
+const exitHref = withBase(`/course/modules/${module.id}`);
+const continueHref = nextModule
+  ? withBase(`/course/modules/${nextModule.id}`)
+  : withBase('/course');
+const continueLabel = nextModule ? `Continue to ${nextModule.title}` : 'Back to course';
+---
+
+<FocusedLayout
+  title={`${assessment.title} — Thoughtful Design`}
+  exitHref={exitHref}
+  exitLabel="Exit assessment"
+>
+  <AuthGuard client:load>
+    <AssessmentRunner
+      client:load
+      assessment={assessment}
+      unlock={unlock}
+      continueHref={continueHref}
+      continueLabel={continueLabel}
+      exitHref={exitHref}
+      exitLabel="Back to module"
+    />
+  </AuthGuard>
+</FocusedLayout>

@@ -1,0 +1,48 @@
+---
+import FocusedLayout from '../../../../layouts/FocusedLayout.astro';
+import AuthGuard from '../../../../components/AuthGuard';
+import AssessmentRunner from '../../../../components/AssessmentRunner';
+import { getMilestones, getMilestone } from '../../../../lib/course';
+import { loadAssessment } from '../../../../lib/assessment-loader';
+import type { UnlockSpec } from '../../../../lib/assessments';
+import { withBase } from '../../../../lib/paths';
+
+export async function getStaticPaths() {
+  return getMilestones().map((milestone) => ({ params: { id: milestone.id } }));
+}
+
+const { id } = Astro.params;
+const milestone = getMilestone(id!);
+const assessment = milestone ? await loadAssessment('milestone', milestone.id) : null;
+
+if (!milestone || !assessment) {
+  return Astro.redirect(withBase('/course'));
+}
+
+// A milestone unlocks once all module assessments it covers have been passed.
+const unlock: UnlockSpec = {
+  kind: 'milestone',
+  requiredAssessmentIds: milestone.covers,
+};
+
+const exitHref = withBase('/course');
+const continueHref = withBase('/course');
+---
+
+<FocusedLayout
+  title={`${assessment.title} — Thoughtful Design`}
+  exitHref={exitHref}
+  exitLabel="Exit assessment"
+>
+  <AuthGuard client:load>
+    <AssessmentRunner
+      client:load
+      assessment={assessment}
+      unlock={unlock}
+      continueHref={continueHref}
+      continueLabel="Back to course"
+      exitHref={exitHref}
+      exitLabel="Back to course"
+    />
+  </AuthGuard>
+</FocusedLayout>

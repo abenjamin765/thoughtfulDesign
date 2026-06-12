@@ -1,0 +1,85 @@
+---
+title: "Flows, states, and feedback"
+module: "Interaction Design Craft"
+module_id: "07-interaction-design-craft"
+part: "Shaping Responsible Experiences"
+order: 2
+estimated_minutes: 18
+published: true
+public_preview: false
+core_claim: "Craft is where thoughtful decisions become visible."
+loop_steps: ["Shape"]
+scenario: "marketplace"
+quiz:
+  - prompt: "Which empty state best supports a new seller's next action?"
+    options:
+      - "A blank panel that says 'No listings.'"
+      - "'You haven't listed anything yet. Create your first listing — it takes about 3 minutes.' with a clear button."
+      - "A spinning loader that never resolves."
+    answer: 1
+    feedback: "A good empty state orients the user and offers the next step. 'No listings' states a fact but offers no path; a perpetual loader is a broken state, not an empty one."
+  - prompt: "Which error message is most helpful?"
+    options:
+      - "Error: invalid input."
+      - "Your price must be a whole number in dollars — for example, 25, not $25.00."
+      - "Something went wrong."
+    answer: 1
+    feedback: "A helpful error says what went wrong, where, and how to fix it, with an example. 'Invalid input' and 'something went wrong' name a problem without giving the user a way forward."
+  - prompt: "Why does timely feedback matter after a user acts?"
+    options:
+      - "It reassures users their action registered and tells them what happened."
+      - "It makes the interface look busier."
+      - "It is only needed for errors."
+    answer: 0
+    feedback: "Feedback closes the loop on an action — confirming it worked, failed, or is in progress. Without it, users repeat clicks or assume failure. It is needed for success and in-progress states too, not just errors."
+reflection:
+  prompt: "Pick a flow you own. List its empty, loading, and error states. Which one is weakest?"
+---
+
+## The situation
+
+The marketplace team revisits the "list your first item" flow, this time looking not at whether it works but at how it *feels* moment to moment. The biggest culprits turn out to be the flow's shape and the states it neglects.
+
+## Design the flow, not just the screens
+
+A flow is the path a user takes across screens to accomplish a goal. Craft means ordering that path to match the user's mindset, not the database.
+
+The marketplace flow asked for tax details first because that is how the backend was structured. But a seller is motivated by describing their item, not their taxes. Reordering the flow — describe the item, set a price, *then* handle payout details once they are invested — dramatically reduced abandonment. Same fields, different order, different outcome.
+
+## Design every state, not just the happy path
+
+Most flows are designed for the moment when everything goes right. Real products spend much of their life in other states.
+
+| State | The neglected question | A crafted answer |
+| --- | --- | --- |
+| Empty | What does a new user see before there's content? | Orient them and offer the first action |
+| Loading | What happens while we wait? | Show progress; reassure; never freeze silently |
+| Error | What happens when something fails? | Say what, where, and how to fix it |
+| Success | How does the user know it worked? | Confirm clearly and point to what's next |
+
+A blank "No listings" panel is a missed chance to onboard. A vague "Error: invalid input" is a dead end. These states are not edge cases — they are the experience.
+
+## Feedback closes the loop
+
+Every action a user takes deserves a response: it worked, it failed, or it is in progress. Without feedback, people click again, assume failure, or lose trust. Good feedback is timely, specific, and matched to what actually happened.
+
+> The happy path is the smallest part of a real product's life.
+> Craft is mostly about the other states.
+
+<Callout type="warning">
+
+A common trap is treating empty, loading, and error states as "we'll add those later." They are where users get stuck, confused, or lost. Designing them is the work, not the cleanup.
+
+</Callout>
+
+<Reveal label="A states checklist for any flow">
+
+For each screen in a flow, ask: What does it look like empty? While loading? On error? On success? On slow connections? If you cannot answer, those states will be designed by accident.
+
+</Reveal>
+
+## Carry forward
+
+Good flows and states reduce friction. The next lesson goes after the deeper enemy of usability: cognitive load — the mental effort your interface demands.
+
+Continue to the next lesson, Reducing cognitive load.

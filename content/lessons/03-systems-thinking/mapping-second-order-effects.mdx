@@ -1,0 +1,100 @@
+---
+title: "Mapping second-order effects"
+module: "Systems Thinking for UX"
+module_id: "03-systems-thinking"
+part: "Seeing the System"
+order: 3
+estimated_minutes: 22
+published: true
+public_preview: false
+core_claim: "Every design decision changes behavior somewhere in the system."
+loop_steps: ["Model", "Account"]
+scenario: "school-analytics"
+quiz:
+  - prompt: "What is the most useful first move when anticipating second-order effects of a change?"
+    options:
+      - "List every team, data source, and user group the change touches."
+      - "Pick the prettiest visual treatment."
+      - "Ship it and watch the primary metric."
+    answer: 0
+    feedback: "Mapping who and what the change touches surfaces the downstream paths where consequences appear. Visuals are unrelated, and shipping first to watch one metric is exactly how the onboarding change backfired."
+  - prompt: "A consequence map shows that a new 'auto-email parents' feature could increase parent anxiety. What is the thoughtful response?"
+    options:
+      - "Remove the feature entirely; any risk is unacceptable."
+      - "Keep the value but adjust the design to reduce the harm — for example, let teachers add context before sending."
+      - "Ship as-is; anxiety is the parents' problem."
+    answer: 1
+    feedback: "Thoughtful design keeps the benefit while mitigating the foreseeable harm. Removing all features with any risk is impractical; ignoring a foreseeable harm is the trap this module warns against."
+reflection:
+  prompt: "Take a change you are considering. Map its effects on users, support, data, business metrics, and long-term trust."
+---
+
+## The situation
+
+The school analytics team is about to ship a feature that automatically emails parents when a student is flagged at-risk. The first-order effect is obvious and good: parents get informed sooner. But the onboarding lesson taught them to look further before shipping.
+
+## A simple tool: the consequence map
+
+A **System Consequence Map** is a structured way to ask "what else moves?" For a proposed change, you trace its effects across the parts of the system that the screen does not show.
+
+Map the change across at least these dimensions:
+
+| Dimension | Question | Possible effect of auto-emailing parents |
+| --- | --- | --- |
+| Users | How does behavior change? | Some teachers stop flagging to avoid triggering emails |
+| Support | What new load appears? | Parents reply with questions; someone must answer |
+| Data | What gets distorted? | Under-flagging makes at-risk data less accurate |
+| Business metrics | What looks better or worse? | "Parent engagement" rises; "flags" fall misleadingly |
+| Trust | Who trusts the product less? | Teachers feel surveilled; parents may panic without context |
+| Long-term behavior | What becomes normal? | Flagging becomes a high-stakes act instead of a quiet signal |
+
+Suddenly a "simple notification" reveals a reinforcing loop that could corrupt the very data the platform depends on.
+
+## From map to design move
+
+A consequence map does not tell you to cancel the feature. It tells you where to design more carefully.
+
+- Let teachers **add context** before a parent email goes out (keeps value, reduces panic).
+- **Decouple** flagging from notifications so flagging stays a low-stakes signal (protects the data).
+- Show teachers **who will be notified** before they flag (no surprises, preserves trust).
+
+> A consequence map turns "ship and hope" into "anticipate and design."
+> The goal is not to avoid all consequences — it is to choose them deliberately.
+
+<Callout type="tip">
+
+Run a consequence map on changes that alter incentives, automate a human judgment, or touch sensitive data. Those three categories produce the most surprising second-order effects.
+
+</Callout>
+
+## Try it
+
+Use the **System Consequence Map** resource for this module. Take a real change you are considering and trace it across users, support, data, business metrics, trust, and long-term behavior. Then write one design move that keeps the benefit while reducing a harm you found.
+
+<Callout type="warning">
+
+A common trap is mapping consequences and then shipping unchanged anyway. The map only matters if it changes a decision. End every consequence map with at least one concrete design move.
+
+</Callout>
+
+<Reveal label="What good looks like">
+
+A strong consequence map finds at least one non-obvious effect (something nobody raised in the kickoff), connects it to a feedback loop or incentive, and ends with a specific, buildable design change. "Auto-email could make teachers under-flag, so we will decouple flagging from notifications" is far stronger than "we should be careful about notifications."
+
+</Reveal>
+
+## Summary
+
+- Every design decision changes behavior somewhere in the system.
+- Systems are made of feedback loops, constraints, incentives, dependencies, and boundaries.
+- Local optimization improves one metric while harming the whole; widen the boundary to see the global picture.
+- A System Consequence Map anticipates second-order effects across users, support, data, metrics, trust, and time.
+- This module touches the **Model** and **Account** steps of the Thoughtful Design Loop.
+
+**Key terms:** system, feedback loop, constraint, incentive, dependency, system boundary, local vs. global optimization, second-order effect.
+
+## Carry forward
+
+You have completed Part 1: you can now see systems, model their objects, and anticipate their consequences. Before moving on, the first milestone assessment asks you to bring all three skills together on one product.
+
+Continue to Milestone 1: Seeing the System.

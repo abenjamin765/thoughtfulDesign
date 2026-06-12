@@ -1,0 +1,203 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../lib/paths';
+
+// Public resources library — 12 framework templates (requirements §15 item 14).
+const resources = (await getCollection('resources')).sort((a, b) =>
+  a.data.module_id.localeCompare(b.data.module_id),
+);
+
+// Module filter chips: distinct modules present, in module_id order.
+const moduleMap = new Map<string, string>();
+for (const resource of resources) {
+  if (!moduleMap.has(resource.data.module_id)) {
+    moduleMap.set(resource.data.module_id, resource.data.module);
+  }
+}
+const modules = [...moduleMap.entries()]
+  .map(([id, label]) => ({ id, label }))
+  .sort((a, b) => a.id.localeCompare(b.id));
+---
+
+<BaseLayout
+  title="Frameworks and Templates — Thoughtful Design"
+  description="Twelve printable UX frameworks and templates from the Thoughtful Design course — object maps, assumption audits, ethical risk reviews, and more."
+>
+  <section class="container resources">
+    <header class="resources__head">
+      <p class="resources__eyebrow muted">Resources library</p>
+      <h1>Frameworks and Templates</h1>
+      <p class="resources__lead">
+        The reusable tools from the course, free to use at work. Each one is printable —
+        open a template, then download or print it for your next project.
+      </p>
+    </header>
+
+    <div class="filters" role="group" aria-label="Filter resources by module">
+      <button type="button" class="chip chip--active" data-filter="all" aria-pressed="true">
+        All ({resources.length})
+      </button>
+      {modules.map((module) => (
+        <button type="button" class="chip" data-filter={module.id} aria-pressed="false">
+          {module.label}
+        </button>
+      ))}
+    </div>
+
+    <div class="card-grid" id="resource-grid">
+      {resources.map((resource) => (
+        <article class="card resource-card" data-module={resource.data.module_id}>
+          <div class="resource-card__top">
+            <span class="resource-card__format">{resource.data.format}</span>
+            {resource.data.loop_step && (
+              <span class="resource-card__loop muted">Loop: {resource.data.loop_step}</span>
+            )}
+          </div>
+          <h2 class="resource-card__name">{resource.data.name}</h2>
+          <p class="resource-card__desc muted">{resource.data.description}</p>
+          <p class="resource-card__module">
+            Taught in{' '}
+            <a href={withBase(`/course/modules/${resource.data.module_id}`)}>
+              {resource.data.module}
+            </a>
+          </p>
+          <a class="button button--primary resource-card__cta" href={withBase(`/resources/${resource.data.slug}`)}>
+            View &amp; download
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('.chip'));
+  const cards = Array.from(document.querySelectorAll<HTMLElement>('.resource-card'));
+
+  function applyFilter(filter: string) {
+    for (const card of cards) {
+      const match = filter === 'all' || card.dataset.module === filter;
+      card.hidden = !match;
+    }
+    for (const button of buttons) {
+      const active = button.dataset.filter === filter;
+      button.classList.toggle('chip--active', active);
+      button.setAttribute('aria-pressed', String(active));
+    }
+  }
+
+  for (const button of buttons) {
+    button.addEventListener('click', () => applyFilter(button.dataset.filter ?? 'all'));
+  }
+</script>
+
+<style>
+  .resources {
+    padding: 2.5rem 0 3rem;
+  }
+
+  .resources__head {
+    margin-bottom: 1.75rem;
+  }
+
+  .resources__eyebrow {
+    font-size: var(--step--1);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem;
+  }
+
+  .resources__head h1 {
+    font-family: var(--font-serif);
+    margin: 0 0 0.5rem;
+  }
+
+  .resources__lead {
+    max-width: var(--measure);
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .chip {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    font: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .chip:hover {
+    border-color: var(--accent);
+  }
+
+  .chip--active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  .resource-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .resource-card__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .resource-card__format {
+    font-size: var(--step--1);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .resource-card__loop {
+    font-size: 0.8rem;
+  }
+
+  .resource-card__name {
+    font-family: var(--font-serif);
+    font-size: var(--step-1);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .resource-card__desc {
+    margin: 0;
+  }
+
+  .resource-card__module {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+
+  .resource-card__cta {
+    margin-top: auto;
+    align-self: flex-start;
+  }
+
+  @media (max-width: 48rem) {
+    .chip {
+      min-height: 44px;
+    }
+  }
+</style>

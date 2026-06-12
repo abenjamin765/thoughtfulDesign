@@ -1,0 +1,486 @@
+id: "thoughtful-design-final"
+title: "Final Assessment — Thoughtful Design"
+type: final
+covers:
+  - "01-screens-to-systems"
+  - "02-object-oriented-ux"
+  - "03-systems-thinking"
+  - "04-research-as-sensemaking"
+  - "05-facilitation-for-designers"
+  - "06-product-strategy"
+  - "07-interaction-design-craft"
+  - "08-accessibility-and-human-variation"
+  - "09-ethics-and-consequences"
+  - "10-ai-in-modern-ux"
+  - "11-thoughtful-designers-practice"
+pass_threshold: 0.8
+distinction_threshold: 0.85
+scenario: "school-analytics"
+
+# Format target (requirements §8): 30–40 questions; ~70% scenario MCQ/multi-select,
+# ~20% matching/ranking/ordering, ~10% short written rationale. Single rich scenario.
+
+scenario_brief: >
+  A school district analytics platform is adding an AI-powered recommendation
+  feature for teachers and administrators. The team wants to increase engagement,
+  reduce planning time, and make data easier to act on. However, users have
+  different goals, data quality is uneven, accessibility needs vary, and
+  administrators want more visibility into teacher behavior. Every question below
+  refers to this scenario.
+
+sections:
+  - id: section-1
+    title: "Section 1 — System Understanding"
+    questions:
+      - id: s1q1
+        type: multiple_choice
+        difficulty: mid
+        stem: "Administrators want the AI feature to surface 'which teachers act on recommendations.' What is the most likely second-order effect?"
+        options:
+          - text: "Teachers follow recommendations to look compliant, even when their judgment says otherwise."
+            correct: true
+            feedback: "Correct. Visibility into teacher behavior creates an incentive that can override professional judgment — a classic system consequence."
+          - text: "The dashboard loads faster."
+            correct: false
+            feedback: "A surface concern, not a system effect."
+          - text: "Nothing changes in teacher behavior."
+            correct: false
+            feedback: "Surveillance reliably reshapes behavior."
+      - id: s1q2
+        type: multiple_select
+        difficulty: mid
+        stem: "Who are the relevant stakeholders to consider for this feature? (Choose all that apply.)"
+        options:
+          - text: "Teachers (primary users acting on recommendations)"
+            correct: true
+            feedback: "Yes — the core users."
+          - text: "Administrators (want visibility and outcomes)"
+            correct: true
+            feedback: "Yes — they shape goals and incentives."
+          - text: "Students (subjects of the data and recommendations)"
+            correct: true
+            feedback: "Yes — affected even if not direct users."
+          - text: "The data team (owns uneven-quality pipelines)"
+            correct: true
+            feedback: "Yes — data quality is central here."
+      - id: s1q3
+        type: multiple_choice
+        difficulty: late
+        stem: "Where should the team draw the system boundary for this work?"
+        options:
+          - text: "Just the new AI recommendation UI."
+            correct: false
+            feedback: "Too narrow — it misses the incentives and data consequences."
+          - text: "The AI feature plus the teachers, administrators, students, data quality, and behaviors it affects."
+            correct: true
+            feedback: "Correct. A boundary wide enough to see the real consequences."
+          - text: "The entire school district's operations."
+            correct: false
+            feedback: "Too broad to act on; the boundary should match what the design affects."
+      - id: s1q4
+        type: short_rationale
+        difficulty: late
+        stem: "In two or three sentences, describe one feedback loop this feature could create and one design move to keep it healthy."
+        guidance: "A strong answer names a specific loop (e.g. recommendation-following tied to visibility → teachers comply to look good → data on 'what works' is distorted) and a concrete move (e.g. don't expose individual teacher compliance to administrators; report aggregate outcomes instead)."
+
+  - id: section-2
+    title: "Section 2 — Object Modeling"
+    questions:
+      - id: s2q1
+        type: multiple_choice
+        difficulty: early
+        stem: "Which is most likely a true object in this platform?"
+        options:
+          - text: "Recommendation"
+            correct: true
+            feedback: "Correct. A Recommendation has structure, distinct instances, and a clear purpose."
+          - text: "'Refresh'"
+            correct: false
+            feedback: "An action, not an object."
+          - text: "'Accuracy' (a percentage)"
+            correct: false
+            feedback: "An attribute, likely of a Recommendation."
+      - id: s2q2
+        type: matching
+        difficulty: mid
+        stem: "Match each item to its correct OOUX category."
+        pairs:
+          - left: "Student"
+            right: "Object"
+          - left: "Recommendation's confidence score"
+            right: "Attribute"
+          - left: "Teacher → Class"
+            right: "Relationship"
+          - left: "Dismiss a recommendation"
+            right: "Action (CTA)"
+        feedback: "Student is an object; a confidence score is an attribute of a Recommendation; Teacher→Class is a relationship; dismissing is an action performed on the Recommendation object."
+      - id: s2q3
+        type: multiple_choice
+        difficulty: mid
+        stem: "Which set of states best fits a Recommendation object?"
+        options:
+          - text: "new, viewed, accepted, dismissed"
+            correct: true
+            feedback: "Correct. These capture a recommendation's lifecycle."
+          - text: "red, yellow, green"
+            correct: false
+            feedback: "Those are color cues, not object states."
+          - text: "fast, slow"
+            correct: false
+            feedback: "Performance descriptors, not states of the object."
+      - id: s2q4
+        type: multiple_choice
+        difficulty: late
+        stem: "Why model objects before designing the recommendation screens?"
+        options:
+          - text: "Because unclear objects (e.g. what a 'Recommendation' is and relates to) cause the UI confusion downstream."
+            correct: true
+            feedback: "Correct. A shared object model prevents inconsistent, confusing screens."
+          - text: "Because it lets the team skip research."
+            correct: false
+            feedback: "Modeling complements research, not replaces it."
+          - text: "Because objects make the page load faster."
+            correct: false
+            feedback: "Performance is unrelated."
+
+  - id: section-3
+    title: "Section 3 — Research Judgment"
+    questions:
+      - id: s3q1
+        type: multiple_choice
+        difficulty: mid
+        stem: "What is the team's riskiest assumption about the AI feature?"
+        options:
+          - text: "That teachers will trust and act on AI recommendations built on uneven data."
+            correct: true
+            feedback: "Correct. High impact if wrong, and unverified — the priority to test."
+          - text: "That the accent color should be blue."
+            correct: false
+            feedback: "Low-impact cosmetic detail."
+          - text: "That the page should have a header."
+            correct: false
+            feedback: "Trivially true; not a risk."
+      - id: s3q2
+        type: multiple_choice
+        difficulty: mid
+        stem: "Which is a research question rather than an interview question?"
+        options:
+          - text: "Why do teachers ignore or distrust the current data views?"
+            correct: true
+            feedback: "Correct. It frames what the team needs to learn."
+          - text: "Don't you think these recommendations are helpful?"
+            correct: false
+            feedback: "A leading question."
+          - text: "Would you use this feature?"
+            correct: false
+            feedback: "A prediction that invites unreliable agreement."
+      - id: s3q3
+        type: multiple_choice
+        difficulty: late
+        stem: "Which finding is the strongest evidence to act on?"
+        options:
+          - text: "Observed: 4 of 6 teachers overrode recommendations when they conflicted with what they knew about a student."
+            correct: true
+            feedback: "Correct. Observed behavior is the strongest evidence tier."
+          - text: "A stakeholder believes teachers will love the feature."
+            correct: false
+            feedback: "An opinion, not evidence."
+          - text: "Surveyed teachers said they want 'smarter tools.'"
+            correct: false
+            feedback: "Vague stated preference — weak evidence."
+      - id: s3q4
+        type: ranking
+        difficulty: late
+        stem: "Rank these evidence types from strongest to weakest."
+        items:
+          - "Observed teacher behavior in a usability session"
+          - "Teacher-reported behavior in an interview"
+          - "Teacher stated preference on a survey"
+        correct_order:
+          - "Observed teacher behavior in a usability session"
+          - "Teacher-reported behavior in an interview"
+          - "Teacher stated preference on a survey"
+        feedback: "Observed beats reported beats stated. People are poor predictors of their own future behavior, so stated preference is weakest."
+
+  - id: section-4
+    title: "Section 4 — Facilitation and Strategy"
+    questions:
+      - id: s4q1
+        type: multiple_choice
+        difficulty: mid
+        stem: "How should the kickoff decision be framed?"
+        options:
+          - text: "'Let's discuss the AI feature.'"
+            correct: false
+            feedback: "Unframed; invites scattered feedback."
+          - text: "'Should the recommendation feature optimize for teacher trust or for administrator visibility when the two conflict?'"
+            correct: true
+            feedback: "Correct. A specific decision exposing the real tradeoff."
+          - text: "'Let's review the mockups.'"
+            correct: false
+            feedback: "A walkthrough, not a decision."
+      - id: s4q2
+        type: multiple_choice
+        difficulty: late
+        stem: "Teachers' and administrators' goals clearly conflict. What is the thoughtful facilitation move?"
+        options:
+          - text: "Name the conflict and make the tradeoff explicit so the group can decide it."
+            correct: true
+            feedback: "Correct. Surface disagreement rather than bury it."
+          - text: "Avoid the tension to keep the meeting pleasant."
+            correct: false
+            feedback: "Hidden conflict resurfaces after launch."
+          - text: "Let the most senior person decide silently."
+            correct: false
+            feedback: "Skips the shared reasoning a good decision needs."
+      - id: s4q3
+        type: multiple_choice
+        difficulty: late
+        stem: "Which rationale for prioritizing teacher trust is strongest?"
+        options:
+          - text: "It feels like the right thing to do."
+            correct: false
+            feedback: "An assertion, not reasoning."
+          - text: "Teachers override recommendations they distrust (observed); without trust the feature won't be used, so trust serves the engagement goal — trading some administrator visibility, which we'll address with aggregate reporting."
+            correct: true
+            feedback: "Correct. Connects evidence, user need, business goal, constraint, and tradeoff."
+          - text: "Competitors prioritize trust."
+            correct: false
+            feedback: "Trend-following is not rationale."
+      - id: s4q4
+        type: short_rationale
+        difficulty: late
+        stem: "In two or three sentences, write a decision rationale for whether to show administrators individual-teacher recommendation-following data."
+        guidance: "A strong answer recommends a choice, ties it to a user need and business goal, names the tradeoff, and includes a revisit trigger — e.g. report aggregate outcomes, not individual compliance, to protect trust while still giving administrators useful visibility."
+
+  - id: section-5
+    title: "Section 5 — Interaction Design"
+    questions:
+      - id: s5q1
+        type: multiple_choice
+        difficulty: mid
+        stem: "A teacher opens the feature for the first time with no recommendations yet. What's the best empty state?"
+        options:
+          - text: "A blank panel reading 'No data.'"
+            correct: false
+            feedback: "States a fact, offers no path."
+          - text: "An explanation of what recommendations are, when they'll appear, and what they're based on."
+            correct: true
+            feedback: "Correct. Orients the teacher and sets honest expectations."
+          - text: "A perpetual spinner."
+            correct: false
+            feedback: "A broken state."
+      - id: s5q2
+        type: multiple_choice
+        difficulty: mid
+        stem: "Which reduces cognitive load on the recommendations screen?"
+        options:
+          - text: "Show the top recommendation with reasoning, and let teachers expand the rest."
+            correct: true
+            feedback: "Correct. Progressive disclosure and fewer immediate choices (Hick's Law)."
+          - text: "Show all 25 recommendations at once with no hierarchy."
+            correct: false
+            feedback: "Overwhelms the user."
+          - text: "Hide recommendations behind an unlabeled icon."
+            correct: false
+            feedback: "Hides the core value."
+      - id: s5q3
+        type: multiple_choice
+        difficulty: mid
+        stem: "A teacher accepts a recommendation. What feedback should follow?"
+        options:
+          - text: "Clear confirmation of what changed and how to undo it."
+            correct: true
+            feedback: "Correct. Feedback closes the loop and supports recovery."
+          - text: "Nothing; silence is cleaner."
+            correct: false
+            feedback: "Users then doubt whether it worked."
+          - text: "An unexplained reload."
+            correct: false
+            feedback: "Ambiguous and unsettling."
+      - id: s5q4
+        type: ordering
+        difficulty: late
+        stem: "Order these steps into the lowest-friction recommendation flow."
+        items:
+          - "Show the recommendation with plain-language reasoning"
+          - "Let the teacher accept, adjust, or dismiss"
+          - "Confirm the change and offer undo"
+        correct_order:
+          - "Show the recommendation with plain-language reasoning"
+          - "Let the teacher accept, adjust, or dismiss"
+          - "Confirm the change and offer undo"
+        feedback: "Understand first, then act, then receive confirmation with a recovery path — a flow that matches the teacher's mindset."
+
+  - id: section-6
+    title: "Section 6 — Accessibility and Inclusion"
+    questions:
+      - id: s6q1
+        type: multiple_choice
+        difficulty: mid
+        stem: "Recommendations are flagged 'high/low priority' by color only. Why is this a risk?"
+        options:
+          - text: "Color-blind teachers and those in glare can't perceive the priority."
+            correct: true
+            feedback: "Correct. Add a text label or icon alongside color."
+          - text: "Color makes the page slower."
+            correct: false
+            feedback: "Not the issue."
+          - text: "It's only a branding concern."
+            correct: false
+            feedback: "It carries functional meaning that can be lost."
+      - id: s6q2
+        type: multiple_choice
+        difficulty: mid
+        stem: "Which recommendation explanation uses the clearest plain language?"
+        options:
+          - text: "Predictive model flagged anomalous engagement deltas."
+            correct: false
+            feedback: "Jargon that excludes many readers."
+          - text: "Three students in this class have fallen behind on recent assignments."
+            correct: true
+            feedback: "Correct. Concrete and readable under stress."
+          - text: "Status: ANOMALY (severity 3)."
+            correct: false
+            feedback: "Technical and unclear."
+      - id: s6q3
+        type: multiple_choice
+        difficulty: late
+        stem: "Which assumption would exclude the most users?"
+        options:
+          - text: "That all teachers can quickly interpret statistical confidence scores."
+            correct: true
+            feedback: "Correct. It assumes data literacy many users lack, especially when rushed."
+          - text: "That some teachers prefer dark mode."
+            correct: false
+            feedback: "A preference affecting fewer people."
+          - text: "That a few use older devices."
+            correct: false
+            feedback: "Smaller, more accommodatable group."
+      - id: s6q4
+        type: multiple_select
+        difficulty: late
+        stem: "Which changes improve both accessibility and overall clarity? (Choose all that apply.)"
+        options:
+          - text: "Pair priority color with a text label."
+            correct: true
+            feedback: "Yes — meaning survives any viewing condition."
+          - text: "Rewrite confidence scores as plain-language explanations."
+            correct: true
+            feedback: "Yes — helps everyone, not just low-data-literacy users."
+          - text: "Ensure the whole flow works by keyboard."
+            correct: true
+            feedback: "Yes — supports motor variation and assistive tech."
+          - text: "Add an animated celebratory confetti burst."
+            correct: false
+            feedback: "Adds motion and no clarity; can harm some users."
+
+  - id: section-7
+    title: "Section 7 — Ethics and Consequences"
+    questions:
+      - id: s7q1
+        type: multiple_choice
+        difficulty: late
+        stem: "Administrators want individual teacher-behavior tracking via the AI feature. What is the core ethical concern?"
+        options:
+          - text: "Power asymmetry and surveillance can erode trust and distort behavior."
+            correct: true
+            feedback: "Correct. Monitoring shifts power and incentives in ways that can harm both teachers and data quality."
+          - text: "Tracking would slow the page."
+            correct: false
+            feedback: "A performance issue, not the ethical one."
+          - text: "There is no concern; more data is always good."
+            correct: false
+            feedback: "More data can carry real costs to trust and autonomy."
+      - id: s7q2
+        type: multiple_choice
+        difficulty: mid
+        stem: "Students' data feeds the recommendations. Which is the strongest transparency practice?"
+        options:
+          - text: "Clearly explain what data is used, why, and who can see it."
+            correct: true
+            feedback: "Correct. Transparency supports consent and trust."
+          - text: "Bury data use in a long terms-of-service document."
+            correct: false
+            feedback: "Technically disclosed, practically hidden."
+          - text: "Don't mention it to avoid worrying people."
+            correct: false
+            feedback: "Concealment is the opposite of transparency."
+      - id: s7q3
+        type: multiple_choice
+        difficulty: late
+        stem: "Which design best preserves both administrator value and teacher trust?"
+        options:
+          - text: "Report aggregate outcomes (e.g. class-level progress) instead of individual teacher compliance."
+            correct: true
+            feedback: "Correct. Gives administrators useful insight without surveilling individuals."
+          - text: "Show a per-teacher 'recommendation obedience' leaderboard."
+            correct: false
+            feedback: "Maximizes the harmful incentive and erodes trust."
+          - text: "Hide all outcomes from administrators."
+            correct: false
+            feedback: "Discards legitimate visibility needs entirely."
+      - id: s7q4
+        type: short_rationale
+        difficulty: late
+        stem: "In two or three sentences, name one way this feature could manipulate rather than support teachers, and a safer alternative."
+        guidance: "A strong answer identifies a manipulation risk (e.g. nudging teachers toward the AI's choice by hiding the option to disagree, or implying non-compliance is tracked) and a safer design (make dismissing easy and non-penalized, show reasoning, report only aggregates)."
+
+  - id: section-8
+    title: "Section 8 — AI Design Judgment"
+    questions:
+      - id: s8q1
+        type: multiple_choice
+        difficulty: mid
+        stem: "Data quality is uneven. What should the AI recommendations communicate?"
+        options:
+          - text: "Honest confidence and what each recommendation is based on."
+            correct: true
+            feedback: "Correct. Users need to calibrate trust given imperfect data."
+          - text: "Maximum confidence to drive adoption."
+            correct: false
+            feedback: "False certainty is exactly the danger."
+          - text: "Nothing about confidence or sources."
+            correct: false
+            feedback: "Then teachers can't judge reliability."
+      - id: s8q2
+        type: multiple_choice
+        difficulty: late
+        stem: "Where must a human checkpoint stay in this feature?"
+        options:
+          - text: "Before any recommendation is acted on in a way that affects a student."
+            correct: true
+            feedback: "Correct. High-stakes, hard-to-reverse actions need teacher judgment."
+          - text: "Nowhere — auto-apply recommendations to save time."
+            correct: false
+            feedback: "Removes oversight where stakes are highest."
+          - text: "Only on the login screen."
+            correct: false
+            feedback: "Irrelevant to the recommendation's stakes."
+      - id: s8q3
+        type: multiple_choice
+        difficulty: late
+        stem: "A recommendation turns out to be wrong because of bad data. What's most important to have designed?"
+        options:
+          - text: "An easy way for the teacher to notice, dismiss, and correct it."
+            correct: true
+            feedback: "Correct. Error recovery is core when errors are inevitable."
+          - text: "A way to hide the error from the teacher."
+            correct: false
+            feedback: "Concealment erodes trust and safety."
+          - text: "A disclaimer shifting blame to the teacher."
+            correct: false
+            feedback: "Protects the company, not the user."
+      - id: s8q4
+        type: judgment
+        difficulty: late
+        no_single_correct: true
+        stem: "Leadership wants recommendations auto-applied to 'reduce planning time,' citing the engagement goal. Given uneven data and varied teacher trust, what do you recommend?"
+        options:
+          - text: "Keep recommendations as reviewable suggestions teachers approve, instrumented to measure time saved."
+            rationale: "Preserves judgment where data is unreliable while still pursuing the time-saving goal. Risk: less dramatic time savings than full automation."
+          - text: "Auto-apply only the highest-confidence, lowest-stakes recommendations; require review for the rest."
+            rationale: "Tunes automation to confidence and stakes. Risk: 'high confidence' on uneven data can still be wrong, and the tiering is hard to get right."
+          - text: "Pilot auto-apply with a small group and compare outcomes and trust before scaling."
+            rationale: "Replaces the bet with evidence. Risk: takes time leadership may not want to spend."
+        synthesis: "All are defensible. The strongest answers keep humans in control where data is unreliable and stakes are high, pursue the business goal with measurement rather than assumption, and are honest that 'reduce planning time' must not come at the cost of trust or student impact."

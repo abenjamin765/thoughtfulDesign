@@ -1,0 +1,76 @@
+---
+title: "The dashboard request"
+module: "From Screens to Systems"
+module_id: "01-screens-to-systems"
+part: "Seeing the System"
+order: 1
+estimated_minutes: 12
+published: true
+public_preview: true
+core_claim: "A screen is only the visible surface of a deeper system."
+loop_steps: ["Model"]
+scenario: "enterprise"
+quiz:
+  - prompt: "An operations team asks you to 'make the dashboard easier to use.' Which response best fits a thoughtful designer?"
+    options:
+      - "Start redesigning the layout to reduce visual clutter."
+      - "Ask what decisions the dashboard is supposed to help people make."
+      - "Add a search bar so users can find widgets faster."
+    answer: 1
+    feedback: "Before changing the surface, a thoughtful designer asks what the dashboard is for. Layout and search are screen-level fixes that may not touch the real problem: people do not agree on which decisions the dashboard supports. Tidying the surface can even hide that disagreement."
+  - prompt: "Which of these is a screen-level problem?"
+    options:
+      - "Three teams disagree about what 'active account' means."
+      - "The primary button is below the fold on smaller laptops."
+      - "Nobody knows who owns the data feeding the dashboard."
+    answer: 1
+    feedback: "A button position is a surface issue you can fix in the layout. The other two are system problems — shared definitions and data ownership — that no amount of layout work will resolve."
+reflection:
+  prompt: "Think of a 'just make it simpler' request you have received. What system question could you have asked before touching the design?"
+---
+
+## The situation
+
+You are handed a familiar request. An operations team that lives inside an internal analytics dashboard says: *"Can you make this easier to use? People are confused."*
+
+It sounds like a layout problem. Maybe the spacing is tight, the labels are vague, or there are too many widgets competing for attention. You could open the design file this afternoon and start cleaning up.
+
+But when you sit with three different users, you hear three different stories. The analyst wants more detail on the screen. The manager wants less. The finance stakeholder is not even sure the numbers are current, so they export everything to a spreadsheet and ignore the dashboard entirely.
+
+## The hidden problem
+
+The request was about a screen. The confusion is about something underneath it.
+
+| What the team asked for | What is actually happening |
+| --- | --- |
+| "Make the dashboard easier to use" | No one agrees what the dashboard is *for* |
+| "It's too cluttered" | Every team added its own widget, so the page has no shared purpose |
+| "People are confused" | "Active account" means three different things to three teams |
+
+If you only redesign the surface, you will produce a tidier version of the same confusion. The screen will look calmer. The disagreement underneath will still be there.
+
+> The team asked for a clearer screen.
+> The users needed a clearer system.
+
+## What a screen actually sits on
+
+A screen is the visible surface of a deeper system: the objects people care about, the decisions they are trying to make, the data feeding those decisions, and the people affected by them.
+
+When a screen feels confusing, the cause is often one layer down:
+
+- **Unclear objects** — people do not share definitions for the things on the page.
+- **Conflicting goals** — the page is trying to serve several decisions at once.
+- **Low data trust** — users do not believe the numbers, so they route around the tool.
+- **Mismatched needs** — one layout is asked to satisfy very different users.
+
+<Callout type="tip">
+
+When a stakeholder describes a surface problem, treat it as a clue, not a spec. The fix you ship will be better if you first find the system question hiding inside the request.
+
+</Callout>
+
+## Carry forward
+
+A "make it simpler" request is rarely just about simplicity. It is an invitation to understand the system the screen belongs to. That is the shift this whole course is built on, and it begins with one habit: ask what the screen is really for before you decide what it should show.
+
+In the next lesson, *Surface versus system*, we will look at the three layers of design work — interface, product, and system — and why modern UX increasingly lives in the deeper layers.

@@ -1,0 +1,85 @@
+---
+title: "Reducing cognitive load"
+module: "Interaction Design Craft"
+module_id: "07-interaction-design-craft"
+part: "Shaping Responsible Experiences"
+order: 3
+estimated_minutes: 20
+published: true
+public_preview: false
+core_claim: "Craft is where thoughtful decisions become visible."
+loop_steps: ["Shape"]
+scenario: "marketplace"
+quiz:
+  - prompt: "Which change best applies 'recognition over recall'?"
+    options:
+      - "Ask sellers to type the exact category code from memory."
+      - "Let sellers pick a category from a labeled list."
+      - "Hide categories until the seller asks for them."
+    answer: 1
+    feedback: "Recognition (choosing from shown options) is easier than recall (remembering codes). A labeled list lets users recognize; typing codes forces recall; hiding options removes the help entirely."
+  - prompt: "A flow shows the seller 30 options at once on one screen. Which principle is most relevant?"
+    options:
+      - "Hick's Law — more choices increase decision time."
+      - "Fitts's Law — distance and target size affect pointing time."
+      - "Neither applies to choices."
+    answer: 0
+    feedback: "Hick's Law says decision time grows with the number and complexity of choices. Fitts's Law is about how quickly you can hit a target based on its size and distance — relevant to buttons, not the count of options."
+  - prompt: "What is progressive disclosure?"
+    options:
+      - "Hiding important actions to reduce clutter."
+      - "Revealing complexity only as the user needs it."
+      - "Showing everything up front so nothing is missed."
+    answer: 1
+    feedback: "Progressive disclosure reveals advanced or rare options when they're relevant, keeping the default simple. It is not about hiding essential actions, nor about dumping everything at once."
+reflection:
+  prompt: "Find one screen in your work that overloads users. What could be deferred, grouped, or removed?"
+---
+
+## The situation
+
+The marketplace listing flow is reordered and its states are designed. But sellers still hesitate on the category step, where the interface presents a wall of forty subcategories and asks them to type a code from a help article. Every choice feels like a small test.
+
+## Cognitive load is the hidden tax
+
+Cognitive load is the mental effort an interface demands. Users have a limited budget of attention, and every unnecessary decision, memory task, or ambiguous label spends it. Reduce the load and the same task suddenly feels easy.
+
+A few reliable levers:
+
+**Recognition over recall.** Let people choose from what is shown rather than remember it. A labeled category list beats a memorized code every time.
+
+**Fewer, clearer choices (Hick's Law).** The more options you present at once, the longer decisions take. Group, prioritize, or stage choices instead of dumping them all on one screen.
+
+**Easy targets (Fitts's Law).** Make important controls large enough and close enough to where the user is looking. A tiny "list item" button in a far corner adds friction to your most important action.
+
+**Progressive disclosure.** Show the simple path by default; reveal advanced options only when they are relevant. Most sellers never need bulk-listing settings on their first item.
+
+## Clarity is craft, including the words
+
+UX writing is part of interaction craft. A label like "Payout cadence" taxes a first-time seller; "How often you get paid" does not. Plain, specific words reduce load as much as layout does.
+
+> Every unnecessary decision you remove is attention the user gets to spend on their actual goal.
+
+<Callout type="tip">
+
+Audit a screen by counting the decisions it forces. Then ask of each: can this be defaulted, deferred, grouped, or removed? Most overloaded screens shrink dramatically under that question.
+
+</Callout>
+
+<Callout type="warning">
+
+A common trap is "simplifying" by hiding essential actions. Reducing load means removing *unnecessary* effort, not burying the things users came to do. Progressive disclosure hides the rare, not the core.
+
+</Callout>
+
+<Reveal label="What good looks like">
+
+The marketplace team replaces the code field with a searchable, labeled category picker (recognition), shows the eight most common categories first with "more" expanding the rest (Hick's Law + progressive disclosure), enlarges the primary "Continue" button (Fitts's Law), and rewrites jargon labels in plain language. Sellers stop hesitating because each step now asks for one easy recognition, not a memory test.
+
+</Reveal>
+
+## Carry forward
+
+You now have principles for clarity and load. The final lesson of this module turns them into a repeatable habit: critiquing an interface with heuristics.
+
+Continue to the next lesson, Critique with heuristics.

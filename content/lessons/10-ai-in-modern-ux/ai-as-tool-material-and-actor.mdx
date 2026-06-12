@@ -1,0 +1,89 @@
+---
+title: "AI as tool, material, and actor"
+module: "AI in Modern UX"
+module_id: "10-ai-in-modern-ux"
+part: "Designing With Intelligence"
+order: 2
+estimated_minutes: 20
+published: true
+public_preview: false
+core_claim: "AI can accelerate design work, but thoughtful designers remain responsible for judgment."
+loop_steps: ["Understand", "Shape"]
+scenario: "ai-assistant"
+quiz:
+  - prompt: "Which UX task is AI most appropriate for as a first-draft tool?"
+    options:
+      - "Deciding which feature to build."
+      - "Generating a first pass at affinity clusters from notes for a human to verify."
+      - "Approving a final design with no review."
+    answer: 1
+    feedback: "AI is well suited to fast first drafts a human then checks — like clustering notes. Deciding what to build and approving final work are judgment calls that stay with people."
+  - prompt: "When AI is a 'design material' in a feature, what new design problem appears?"
+    options:
+      - "How to communicate uncertainty, sources, and error recovery to the user."
+      - "Only which font to use for AI text."
+      - "Nothing new — it's just another button."
+    answer: 0
+    feedback: "When AI output reaches users, you must design for confidence, transparency, and recovery from wrong answers. It is not just styling, and it raises genuinely new design questions a button never does."
+  - prompt: "Why think of AI as a 'system actor'?"
+    options:
+      - "Because it takes actions and shapes behavior, with consequences like any other part of the system."
+      - "Because it deserves legal rights."
+      - "Because it removes humans from the system."
+    answer: 0
+    feedback: "AI acts within the system — recommending, filtering, generating — so its effects, incentives, and second-order consequences must be designed and accounted for, just like any actor. It does not have rights, and good design keeps humans in the loop."
+reflection:
+  prompt: "For an AI feature you know, name one way it acts as a tool, a material, and an actor."
+---
+
+## The situation
+
+After the fabricated-quotes incident, the designer wants a clearer way to think about AI than "magic that's sometimes wrong." It helps to separate three roles AI plays in design work.
+
+## Three lenses on AI
+
+**AI as a tool** — something *you* use to do design work faster: synthesizing notes, drafting copy, generating ideas, modeling objects, running a first-pass critique. The output is an input to your judgment, never a replacement for it.
+
+**AI as a design material** — something that appears *in the product* for users: a writing assistant, a recommendation, an autocomplete. Now AI is a material you design with, and it brings new design problems — how to show confidence, where answers came from, and how users recover when it is wrong.
+
+**AI as a system actor** — something that *takes actions* inside the system: filtering, ranking, generating, deciding. Like any actor, it creates incentives and second-order effects (recall Module 3) and must be accounted for.
+
+| Lens | Where AI lives | The key question |
+| --- | --- | --- |
+| Tool | In your workflow | Did I verify the output? |
+| Material | In the user's interface | Does the user know how much to trust it? |
+| Actor | In the system | What behavior and consequences does it create? |
+
+## Prompting as structured thinking
+
+Using AI well as a tool is less about clever phrasing and more about clear thinking. A good prompt names the goal, the context, the constraints, and the form of the answer — the same clarity you would give a capable colleague. Vague prompts get generic output; structured prompts get useful drafts. Prompting is thinking made explicit.
+
+## Evaluating output critically
+
+For any AI output you might rely on, check:
+
+- **Grounding** — is it supported by real evidence or data, or invented?
+- **Completeness** — what did it leave out, especially the inconvenient parts?
+- **Bias** — whose perspective does it assume or erase?
+- **Confidence vs. accuracy** — does its certain tone match its actual reliability?
+
+> AI gives you a faster first draft.
+> It does not give you a free pass on judgment.
+
+<Callout type="warning">
+
+A common trap is letting fluency stand in for verification. The more polished the output, the more carefully it deserves checking — because polish is exactly what makes errors slip through.
+
+</Callout>
+
+<Reveal label="Tool vs. material in one example">
+
+In the AI writing assistant: as a *tool*, the designer uses AI to draft microcopy, then edits it. As a *material*, the product offers users AI-suggested sentences — so the team must design how suggestions show uncertainty, cite nothing falsely, and let users reject them easily. Same technology, two different design responsibilities.
+
+</Reveal>
+
+## Carry forward
+
+Seeing AI as material and actor raises the central design challenge of AI features: keeping humans meaningfully in control. The next lesson is about designing human-in-the-loop experiences.
+
+Continue to the next lesson, Designing human-in-the-loop.

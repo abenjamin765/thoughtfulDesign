@@ -1,0 +1,55 @@
+---
+import '../styles/global.css';
+import { withBase } from '../lib/paths';
+
+// Focused layout for the assessment flow (wireframe-plan page 6 / anti-pattern
+// check): minimal chrome, no primary nav, a single labelled exit link so the
+// learner can step out without the distraction of the full site navigation.
+
+interface Props {
+  title: string;
+  description?: string;
+  exitHref: string;
+  exitLabel?: string;
+  /** Page heading for the (visually hidden) h1; gives the page one top-level heading. */
+  heading?: string;
+}
+
+const {
+  title,
+  description = 'Thoughtful Design — assessment.',
+  exitHref,
+  exitLabel = 'Exit assessment',
+  heading,
+} = Astro.props;
+
+const pageHeading = heading ?? title.replace(/\s+—\s+Thoughtful Design$/, '');
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-header__inner">
+        <span class="brand">Thoughtful Design</span>
+        <a class="muted" href={exitHref}>{exitLabel}</a>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="container" style="padding: 2.5rem 0; max-width: var(--max-width);">
+        <div style="width: min(100%, 48rem); margin-inline: auto;">
+          <h1 class="visually-hidden">{pageHeading}</h1>
+          <slot />
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

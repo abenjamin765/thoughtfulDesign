@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { getSupabase } from '../lib/supabase';
 import { withBase } from '../lib/paths';
+import { trackEvent } from '../lib/analytics';
 
 type Mode = 'login' | 'signup';
 
@@ -49,8 +50,10 @@ export default function AuthForm({ mode, redirectTo = withBase('/course') }: Pro
       }
 
       if (data.user) {
+        void trackEvent('signup', { confirmed: true });
         window.location.href = redirectTo;
       } else {
+        void trackEvent('signup', { confirmed: false });
         setMessage('Check your email to confirm your account, then sign in.');
       }
       return;

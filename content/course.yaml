@@ -1,0 +1,212 @@
+# Thoughtful Design — Canonical Course Registry
+# Source of truth for part order, module order, core claims, loop steps,
+# resource links, and public-preview lesson selection.
+# Lesson sequence within a module is driven by each lesson's `order` frontmatter;
+# this file fixes the part/module ordering that frontmatter strings cannot guarantee.
+
+course:
+  title: "Thoughtful Design"
+  subtitle: "A modern UX practice for designing complex, intelligent, human-centered systems."
+  intro_lesson: "welcome-to-thoughtful-design"
+
+parts:
+  - id: part-1
+    name: "Seeing the System"
+    order: 1
+    modules:
+      - id: "01-screens-to-systems"
+        order: 1
+        title: "From Screens to Systems"
+        core_claim: "A screen is only the visible surface of a deeper system."
+        loop_steps: [Model]
+        scenario: enterprise
+        resource: null
+        preview_lesson: "the-dashboard-request"
+        lessons:
+          - the-dashboard-request
+          - surface-vs-system
+          - the-thoughtful-designer-role
+      - id: "02-object-oriented-ux"
+        order: 2
+        title: "Object-Oriented UX"
+        core_claim: "Before you design what people do, understand what they are working with."
+        loop_steps: [Model]
+        scenario: school-analytics
+        resource: object-map-template
+        preview_lesson: "objects-before-screens"
+        lessons:
+          - objects-before-screens
+          - the-four-ancient-truths
+          - the-sip-test
+          - building-an-object-map
+      - id: "03-systems-thinking"
+        order: 3
+        title: "Systems Thinking for UX"
+        core_claim: "Every design decision changes behavior somewhere in the system."
+        loop_steps: [Model, Account]
+        scenario: school-analytics
+        resource: system-consequence-map
+        preview_lesson: "the-onboarding-win-that-backfired"
+        lessons:
+          - the-onboarding-win-that-backfired
+          - feedback-loops-and-constraints
+          - mapping-second-order-effects
+    milestone:
+      id: "01-seeing-the-system"
+      title: "Milestone 1 — Seeing the System"
+      covers: ["01-screens-to-systems", "02-object-oriented-ux", "03-systems-thinking"]
+
+  - id: part-2
+    name: "Understanding People and Decisions"
+    order: 2
+    modules:
+      - id: "04-research-as-sensemaking"
+        order: 4
+        title: "Research as Sensemaking"
+        core_claim: "Research is not just validation. It is how teams learn what reality is asking of them."
+        loop_steps: [Understand, Test]
+        scenario: healthcare
+        resource: assumption-audit
+        secondary_resource: research-question-builder
+        preview_lesson: "we-need-to-validate-this"
+        lessons:
+          - we-need-to-validate-this
+          - questions-assumptions-and-evidence
+          - choosing-a-method
+          - synthesis-into-insight
+      - id: "05-facilitation-for-designers"
+        order: 5
+        title: "Facilitation for Designers"
+        core_claim: "A thoughtful designer does not only create artifacts. They create conditions for better decisions."
+        loop_steps: [Align]
+        scenario: enterprise
+        resource: facilitation-planner
+        preview_lesson: "the-design-review-that-went-nowhere"
+        lessons:
+          - the-design-review-that-went-nowhere
+          - framing-the-decision
+          - prompts-disagreement-and-decisions
+      - id: "06-product-strategy"
+        order: 6
+        title: "Product Strategy and Design Judgment"
+        core_claim: "Design judgment means choosing what matters most under real constraints."
+        loop_steps: [Align, Shape]
+        scenario: enterprise
+        resource: design-rationale-template
+        preview_lesson: "three-good-directions"
+        lessons:
+          - three-good-directions
+          - goals-constraints-and-tradeoffs
+          - writing-a-design-rationale
+    milestone:
+      id: "02-understanding-people-and-decisions"
+      title: "Milestone 2 — Understanding People and Decisions"
+      covers: ["04-research-as-sensemaking", "05-facilitation-for-designers", "06-product-strategy"]
+
+  - id: part-3
+    name: "Shaping Responsible Experiences"
+    order: 3
+    modules:
+      - id: "07-interaction-design-craft"
+        order: 7
+        title: "Interaction Design Craft"
+        core_claim: "Craft is where thoughtful decisions become visible."
+        loop_steps: [Shape]
+        scenario: marketplace
+        resource: interaction-heuristic-checklist
+        preview_lesson: "it-works-but-it-feels-wrong"
+        lessons:
+          - it-works-but-it-feels-wrong
+          - flows-states-and-feedback
+          - reducing-cognitive-load
+          - critique-with-heuristics
+      - id: "08-accessibility-and-human-variation"
+        order: 8
+        title: "Accessibility and Human Variation"
+        core_claim: "Good design respects human variation."
+        loop_steps: [Shape, Account]
+        scenario: healthcare
+        resource: human-variation-audit
+        preview_lesson: "the-user-who-isnt-disabled"
+        lessons:
+          - the-user-who-isnt-disabled
+          - barriers-and-wcag-thinking
+          - designing-for-variation
+      - id: "09-ethics-and-consequences"
+        order: 9
+        title: "Ethics and Product Consequences"
+        core_claim: "Thoughtful designers consider what their work makes easier, harder, normal, hidden, rewarded, or risky."
+        loop_steps: [Account]
+        scenario: marketplace
+        resource: ethical-risk-review
+        preview_lesson: "the-conversion-win-with-a-cost"
+        lessons:
+          - the-conversion-win-with-a-cost
+          - persuasion-versus-manipulation
+          - running-an-ethical-risk-review
+    milestone:
+      id: "03-shaping-responsible-experiences"
+      title: "Milestone 3 — Shaping Responsible Experiences"
+      covers: ["07-interaction-design-craft", "08-accessibility-and-human-variation", "09-ethics-and-consequences"]
+
+  - id: part-4
+    name: "Designing With Intelligence"
+    order: 4
+    modules:
+      - id: "10-ai-in-modern-ux"
+        order: 10
+        title: "AI in Modern UX"
+        core_claim: "AI can accelerate design work, but thoughtful designers remain responsible for judgment."
+        loop_steps: [Understand, Shape, Account]
+        scenario: ai-assistant
+        resource: ai-judgment-checklist
+        preview_lesson: "the-polished-answer-that-was-wrong"
+        lessons:
+          - the-polished-answer-that-was-wrong
+          - ai-as-tool-material-and-actor
+          - designing-human-in-the-loop
+      - id: "11-thoughtful-designers-practice"
+        order: 11
+        title: "The Thoughtful Designer's Practice"
+        core_claim: "The next generation of UX requires stronger thinking, not just stronger tools."
+        loop_steps: [Model, Understand, Align, Shape, Test, Account, Adapt]
+        scenario: ai-assistant
+        resource: design-decision-record
+        preview_lesson: "knowing-the-methods-isnt-enough"
+        lessons:
+          - knowing-the-methods-isnt-enough
+          - communicating-and-documenting-judgment
+          - your-thoughtful-design-practice
+    final_assessment:
+      id: "thoughtful-design-final"
+      title: "Final Assessment — Thoughtful Design"
+
+# The Thoughtful Design Loop — the course-wide operating framework (requirements §11)
+loop:
+  - step: Model
+    question: "What exists?"
+  - step: Understand
+    question: "Who is affected?"
+  - step: Align
+    question: "What decision are we making?"
+  - step: Shape
+    question: "What should the experience become?"
+  - step: Test
+    question: "What did we learn?"
+  - step: Account
+    question: "What consequences are we creating?"
+  - step: Adapt
+    question: "What should change next?"
+
+# Recurring product scenarios (requirements §9.4). See docs/content/scenario-bible.md.
+scenarios:
+  - id: school-analytics
+    name: "School analytics platform"
+  - id: healthcare
+    name: "Healthcare appointment portal"
+  - id: marketplace
+    name: "Marketplace onboarding flow"
+  - id: enterprise
+    name: "Internal enterprise dashboard"
+  - id: ai-assistant
+    name: "AI writing / recommendation assistant"

@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AuthGuard from '../components/AuthGuard';
+import SignOutButton from '../components/SignOutButton';
+import DeleteAccount from '../components/DeleteAccount';
+import { withBase } from '../lib/paths';
+---
+
+<BaseLayout title="Account settings — Thoughtful Design" description="Manage your Thoughtful Design account and data.">
+  <AuthGuard client:load>
+    <section class="container account">
+      <div class="account__top">
+        <div>
+          <h1>Account settings</h1>
+          <p class="muted">Manage your account and the data Thoughtful Design stores about you.</p>
+        </div>
+        <SignOutButton client:load />
+      </div>
+
+      <section class="account__section" aria-labelledby="data-heading">
+        <h2 id="data-heading">Your data</h2>
+        <p>
+          Thoughtful Design stores your email, display name, lesson progress and reflections,
+          quiz responses, assessment attempts, and certificate record. See the
+          <a href={withBase('/privacy')}>Privacy Policy</a> for the full detail of what we collect
+          and why.
+        </p>
+      </section>
+
+      <section class="account__section" aria-labelledby="delete-heading">
+        <h2 id="delete-heading" class="visually-hidden">Delete account</h2>
+        <DeleteAccount client:load />
+      </section>
+    </section>
+  </AuthGuard>
+</BaseLayout>
+
+<style>
+  .account {
+    padding: 2.5rem 0 3.5rem;
+    max-width: var(--content-width);
+  }
+
+  .account__top {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 1.75rem;
+  }
+
+  .account__top h1 {
+    margin: 0 0 0.35rem;
+  }
+
+  .account__section {
+    margin-top: 2.25rem;
+  }
+
+  .account__section > h2 {
+    margin: 0 0 0.75rem;
+  }
+</style>

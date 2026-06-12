@@ -1,0 +1,165 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { withBase } from '../../lib/paths';
+
+// Public editorial surface — published posts only (requirements §15 item 13).
+const posts = (await getCollection('blog'))
+  .filter((post) => post.data.published)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const dateFmt = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+function readingTime(body: string | undefined): number {
+  const words = (body ?? '').trim().split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.round(words / 200));
+}
+
+function postSlug(id: string): string {
+  return id.replace(/\.mdx?$/, '');
+}
+---
+
+<BaseLayout
+  title="The Thoughtful Design Blog"
+  description="Short essays on designing complex, intelligent, human-centered systems — the thinking between the lessons."
+>
+  <section class="container blog-index">
+    <header class="blog-index__head">
+      <p class="blog-index__eyebrow">The Thoughtful Design Blog</p>
+      <p class="blog-index__lead">
+        Short essays on designing complex, intelligent, human-centered systems — the
+        thinking between the lessons.
+      </p>
+    </header>
+
+    {posts.length === 0 ? (
+      <div class="blog-empty">
+        <p>No posts yet — the first essays are on the way.</p>
+        <a class="button button--primary" href={withBase('/signup')}>Enroll to start the course</a>
+      </div>
+    ) : (
+      <div class="post-list">
+        {posts.map((post) => (
+          <article class="post-card">
+            <div class="post-card__meta">
+              <time datetime={post.data.date.toISOString()}>{dateFmt.format(post.data.date)}</time>
+              <span aria-hidden="true">·</span>
+              <span>{readingTime(post.body)} min read</span>
+            </div>
+            <h2 class="post-card__title">
+              <a href={withBase(`/blog/${postSlug(post.id)}`)}>{post.data.title}</a>
+            </h2>
+            <p class="post-card__excerpt">{post.data.excerpt}</p>
+            {post.data.tags.length > 0 && (
+              <ul class="post-card__tags">
+                {post.data.tags.map((tag) => (
+                  <li>{tag}</li>
+                ))}
+              </ul>
+            )}
+          </article>
+        ))}
+      </div>
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .blog-index {
+    padding: 2.5rem 0 3rem;
+    max-width: 48rem;
+  }
+
+  .blog-index__head {
+    margin-bottom: 2.5rem;
+  }
+
+  .blog-index__eyebrow {
+    font-family: var(--font-serif);
+    font-size: var(--step-3);
+    margin: 0 0 0.5rem;
+    line-height: 1.15;
+  }
+
+  .blog-index__lead {
+    margin: 0;
+    color: var(--muted);
+    font-size: var(--step-1);
+    max-width: 52ch;
+  }
+
+  .post-list {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .post-card {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .post-card:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .post-card__meta {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .post-card__title {
+    font-family: var(--font-serif);
+    font-size: var(--step-2);
+    margin: 0 0 0.5rem;
+    line-height: 1.2;
+  }
+
+  .post-card__title a {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .post-card__title a:hover {
+    color: var(--accent);
+  }
+
+  .post-card__excerpt {
+    margin: 0 0 0.75rem;
+    color: var(--muted);
+  }
+
+  .post-card__tags {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .post-card__tags li {
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 999px;
+    padding: 0.2rem 0.7rem;
+  }
+
+  .blog-empty {
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
+  }
+</style>

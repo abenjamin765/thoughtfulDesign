@@ -1,0 +1,92 @@
+---
+title: "Barriers and WCAG thinking"
+module: "Accessibility and Human Variation"
+module_id: "08-accessibility-and-human-variation"
+part: "Shaping Responsible Experiences"
+order: 2
+estimated_minutes: 18
+published: true
+public_preview: false
+core_claim: "Good design respects human variation."
+loop_steps: ["Shape"]
+scenario: "healthcare"
+quiz:
+  - prompt: "Which issue would most affect keyboard-only users?"
+    options:
+      - "A 'confirm' button reachable only by hovering with a mouse."
+      - "A slightly muted shade of blue."
+      - "A long page that requires scrolling."
+    answer: 0
+    feedback: "If an action requires a mouse hover, keyboard and screen-reader users cannot reach it — a real barrier. Muted blue is a contrast concern (different barrier), and scrolling alone is not an access barrier."
+  - prompt: "Which message is written in the clearest plain language?"
+    options:
+      - "Your appointment requisition has been successfully adjudicated."
+      - "Your appointment is confirmed for Tuesday at 2 p.m."
+      - "Status: COMPLETE (code 200)."
+    answer: 1
+    feedback: "Plain language uses common words and concrete details. The jargon-heavy and technical options force the reader to decode meaning, which excludes people under stress or with lower health literacy."
+  - prompt: "Why is color alone an unreliable way to signal meaning?"
+    options:
+      - "Color-blind users, glare, and grayscale displays can all erase the distinction."
+      - "Color is never useful in interfaces."
+      - "It only matters for branding."
+    answer: 0
+    feedback: "Meaning carried by color alone disappears for color-blind users and in poor viewing conditions. Pair color with text or icons. Color is useful — it just cannot be the *only* signal."
+reflection:
+  prompt: "Find one place in your product where meaning is carried by color alone. How would you add a second signal?"
+---
+
+## The situation
+
+The healthcare team accepts that patients vary enormously. Now they need a way to find the specific barriers in their portal — and a framework so they are not just guessing.
+
+## Common barriers, by kind of variation
+
+Barriers map to the dimensions of human variation. A quick scan:
+
+| Variation | Example barrier in the portal |
+| --- | --- |
+| Visual | Low contrast text; meaning signaled by color alone |
+| Motor | Tiny tap targets; actions that require precise hovering |
+| Cognitive | Dense jargon; long forms with no progress or memory aids |
+| Auditory | Video instructions with no captions or transcript |
+| Linguistic | Idioms and acronyms that assume fluency |
+| Situational | Anything that fails under glare, stress, or one-handed use |
+
+Notice how many of these are the same craft issues from Module 7 — contrast, target size, plain language — now seen through the lens of who gets excluded.
+
+## WCAG-informed thinking
+
+The Web Content Accessibility Guidelines (WCAG) are the standard reference. You do not need them memorized, but four ideas guide most decisions. Content should be:
+
+- **Perceivable** — people can sense it (sufficient contrast, text alternatives for images, captions).
+- **Operable** — people can use it (full keyboard access, large enough targets, no reliance on hover).
+- **Understandable** — people can comprehend it (plain language, predictable behavior, clear errors).
+- **Robust** — it works with assistive technology (proper labels and structure for screen readers).
+
+> WCAG is not a box to tick at the end.
+> It is a set of questions to ask while you design: can people perceive, operate, understand, and rely on this?
+
+<Callout type="tip">
+
+Three checks catch a large share of barriers: navigate the whole flow with only the keyboard, view it in grayscale, and read every label aloud as if you were stressed and new to the domain.
+
+</Callout>
+
+<Callout type="warning">
+
+A common trap is treating WCAG as the ceiling — "we passed AA, we're done." Compliance is the floor. A flow can technically conform and still exhaust a stressed patient. Aim for genuine usability across variation, not just a passing audit.
+
+</Callout>
+
+<Reveal label="Color is a signal, not the only signal">
+
+In the portal, "urgent" appointments were shown in red and "routine" in green — invisible to many color-blind patients and washed out by glare. The fix kept color but added a text label and an icon, so the meaning survives any viewing condition. Never let color be the sole carrier of meaning.
+
+</Reveal>
+
+## Carry forward
+
+You can now spot barriers and apply WCAG-informed thinking. The final lesson turns this into a proactive practice with a structured audit you can run on any flow.
+
+Continue to the next lesson, Designing for variation.

@@ -1,0 +1,122 @@
+id: "03-shaping-responsible-experiences"
+title: "Milestone 3 — Shaping Responsible Experiences"
+type: milestone
+covers: ["07-interaction-design-craft", "08-accessibility-and-human-variation", "09-ethics-and-consequences"]
+pass_threshold: 0.8
+scenario: "marketplace"
+
+scenario_brief: >
+  A marketplace is redesigning its checkout. The current flow requests account
+  and payment details before showing the order total, presents a wall of shipping
+  options, pre-checks a paid "fast support" add-on, signals order status by color
+  alone, and offers a confirm button reachable only by mouse hover. Buyers
+  include first-time, rushed, one-handed, and lower-literacy users. Use this
+  scenario for every question below.
+
+questions:
+  - id: q1
+    type: multiple_choice
+    difficulty: mid
+    stem: "Buyers abandon before the total appears. Which craft fix addresses the root cause?"
+    options:
+      - text: "Show the order total early, before requesting payment details."
+        correct: true
+        feedback: "Correct. Matching the flow to the buyer's need-to-know reduces abandonment."
+      - text: "Animate the page transitions."
+        correct: false
+        feedback: "Cosmetic; doesn't address why buyers leave."
+      - text: "Add more shipping options."
+        correct: false
+        feedback: "Increases load — the opposite of the fix."
+
+  - id: q2
+    type: multiple_choice
+    difficulty: mid
+    stem: "Order status is shown by color alone (green/red). Why is this an accessibility problem?"
+    options:
+      - text: "Color-blind users and those in glare can't perceive the distinction."
+        correct: true
+        feedback: "Correct. Meaning must not rely on color alone; add labels or icons."
+      - text: "Color slows the page down."
+        correct: false
+        feedback: "Performance is not the issue here."
+      - text: "It's only a branding concern."
+        correct: false
+        feedback: "It carries functional meaning that can be lost."
+
+  - id: q3
+    type: multiple_choice
+    difficulty: mid
+    stem: "The confirm button works only on mouse hover. Which users are excluded?"
+    options:
+      - text: "Keyboard and screen-reader users."
+        correct: true
+        feedback: "Correct. Hover-only actions block non-mouse users."
+      - text: "Users with fast connections."
+        correct: false
+        feedback: "Connection speed is unrelated."
+      - text: "No one — hover is universal."
+        correct: false
+        feedback: "Hover is not available to keyboard or many touch users."
+
+  - id: q4
+    type: multiple_choice
+    difficulty: late
+    stem: "The pre-checked 'fast support' add-on lifts revenue. How should a thoughtful designer treat it?"
+    options:
+      - text: "Keep it — revenue is up."
+        correct: false
+        feedback: "Ignores the manipulation and trust cost."
+      - text: "Replace it with an honest, unchecked opt-in that's easy to accept."
+        correct: true
+        feedback: "Correct. Preserves value while respecting the buyer's choice."
+      - text: "Remove all add-ons from checkout."
+        correct: false
+        feedback: "Overcorrects; the value can be kept honestly."
+
+  - id: q5
+    type: multiple_select
+    difficulty: late
+    stem: "Which changes reduce cognitive load AND improve accessibility at once? (Choose all that apply.)"
+    options:
+      - text: "Rewrite jargon labels in plain language."
+        correct: true
+        feedback: "Yes — helps load and lower-literacy/stressed users."
+      - text: "Show the most common shipping options first, with the rest expandable."
+        correct: true
+        feedback: "Yes — fewer choices (Hick's) and less overwhelm."
+      - text: "Add a decorative hero image to checkout."
+        correct: false
+        feedback: "Adds nothing for load or access."
+      - text: "Enlarge the primary confirm button."
+        correct: true
+        feedback: "Yes — easier target (Fitts's) and better for motor variation."
+
+  - id: q6
+    type: multiple_choice
+    difficulty: late
+    stem: "Which sequence reflects thoughtful prioritization across the three lenses?"
+    options:
+      - text: "Fix the hover-only confirm (total exclusion) and the pre-checked add-on (trust harm) first."
+        correct: true
+        feedback: "Correct. A total access blocker and an ethical harm outrank cosmetic polish."
+      - text: "Start with page animations and color theme."
+        correct: false
+        feedback: "Cosmetic work before fixing exclusion and harm."
+      - text: "Add features first, fix issues later."
+        correct: false
+        feedback: "Defers the real defects."
+
+  - id: q7
+    type: judgment
+    difficulty: late
+    no_single_correct: true
+    stem: "You can ship one release before a major sale. The honest opt-in lowers projected add-on revenue, but the hover-only button and color-only status both exclude real users. Leadership wants the sale to go smoothly. What's your plan?"
+    options:
+      - text: "Ship the accessibility fixes now and the honest opt-in next release, with a trust case prepared."
+        rationale: "Removes total exclusions before the high-traffic sale while sequencing the revenue-sensitive change. Risk: the manipulative add-on runs through the sale, harming trust at peak volume."
+      - text: "Ship everything including the honest opt-in, accepting lower add-on revenue."
+        rationale: "Aligns the product with its values before maximum exposure. Risk: misses revenue leadership is counting on during the sale."
+      - text: "Ship accessibility fixes plus a softened add-on (unchecked but prominently recommended) as a compromise."
+        rationale: "Balances trust and revenue. Risk: 'prominent recommendation' can still shade into pressure if not designed carefully."
+    synthesis: "All are defensible under deadline pressure. The strongest answers treat total accessibility exclusions as non-negotiable, find a path that keeps legitimate revenue without manipulation, and make the long-term trust tradeoff explicit rather than hidden."

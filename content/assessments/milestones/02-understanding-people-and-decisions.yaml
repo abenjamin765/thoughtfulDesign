@@ -1,0 +1,122 @@
+id: "02-understanding-people-and-decisions"
+title: "Milestone 2 — Understanding People and Decisions"
+type: milestone
+covers: ["04-research-as-sensemaking", "05-facilitation-for-designers", "06-product-strategy"]
+pass_threshold: 0.8
+scenario: "enterprise"
+
+scenario_brief: >
+  An internal enterprise dashboard team must decide how to handle a new "alerts"
+  feature. Sales wants alerts surfaced aggressively to drive response; the ops
+  team is already notification-fatigued; leadership tracks mean time to
+  resolution. The team has three weeks, no backend changes, and only a hunch
+  about what ops actually needs. A cross-functional review is scheduled.
+  Use this scenario for every question below.
+
+questions:
+  - id: q1
+    type: multiple_choice
+    difficulty: mid
+    stem: "Before the review, what is the team's riskiest assumption to examine?"
+    options:
+      - text: "That a blue alert badge tests better than red."
+        correct: false
+        feedback: "Low-impact cosmetic detail."
+      - text: "That aggressive alerts will help, not harm, an already fatigued ops team."
+        correct: true
+        feedback: "Correct. High impact if wrong, and the team only has a hunch — the classic risky assumption."
+      - text: "That the dashboard loads in under two seconds."
+        correct: false
+        feedback: "A performance concern, not the core design risk here."
+
+  - id: q2
+    type: multiple_choice
+    difficulty: mid
+    stem: "With three weeks, what is the most useful research move?"
+    options:
+      - text: "A large company-wide satisfaction survey."
+        correct: false
+        feedback: "Too slow and broad for this specific, urgent question."
+      - text: "A few quick sessions with ops staff plus a look at current alert-response data."
+        correct: true
+        feedback: "Correct. Small qualitative depth plus existing data fits the constraint and the question."
+      - text: "Skip research; the deadline is too tight."
+        correct: false
+        feedback: "Even a tiny study beats guessing on the riskiest assumption."
+
+  - id: q3
+    type: multiple_choice
+    difficulty: mid
+    stem: "How should the cross-functional review be framed?"
+    options:
+      - text: "'Let's get everyone's thoughts on the alerts feature.'"
+        correct: false
+        feedback: "Unframed; invites scattered feedback and no decision."
+      - text: "'Should default alerts prioritize urgency for ops, or volume for sales visibility?'"
+        correct: true
+        feedback: "Correct. A specific decision with real, conflicting alternatives."
+      - text: "'Let's review the alert mockups.'"
+        correct: false
+        feedback: "A walkthrough, not a decision frame."
+
+  - id: q4
+    type: multiple_select
+    difficulty: late
+    stem: "Sales and ops clearly disagree in the review. Which facilitation moves help? (Choose all that apply.)"
+    options:
+      - text: "Name the disagreement and state the tradeoff explicitly."
+        correct: true
+        feedback: "Yes — surface it rather than bury it."
+      - text: "Anchor prompts to a real moment ('during an incident, what does ops need first?')."
+        correct: true
+        feedback: "Yes — specific prompts produce useful input."
+      - text: "Avoid the tension and move to the next agenda item."
+        correct: false
+        feedback: "Hidden disagreement resurfaces after launch."
+      - text: "Record the decision, rationale, and owner at the end."
+        correct: true
+        feedback: "Yes — makes the decision stick."
+
+  - id: q5
+    type: multiple_choice
+    difficulty: late
+    stem: "Research shows ops ignores alerts when overwhelmed. Which direction does judgment favor?"
+    options:
+      - text: "Aggressive alerts, because sales asked for visibility."
+        correct: false
+        feedback: "Ignores the evidence that volume backfires for the primary users."
+      - text: "Quiet, prioritized alerts with urgent items surfaced, instrumented for resolution time."
+        correct: true
+        feedback: "Correct. Serves the user need and measures the business goal under the constraint."
+      - text: "Full configurability so each user decides."
+        correct: false
+        feedback: "Most users never configure; it dodges the decision."
+
+  - id: q6
+    type: multiple_choice
+    difficulty: late
+    stem: "Which rationale best supports the chosen direction?"
+    options:
+      - text: "Prioritized alerts look cleaner and feel modern."
+        correct: false
+        feedback: "Taste and trend, not reasoning."
+      - text: "Ops ignores alerts when overwhelmed (observed); prioritized alerts surface urgent items, serve resolution time (goal), fit the 3-week constraint, and trade away sales' volume visibility, which we'll revisit."
+        correct: true
+        feedback: "Correct. Connects evidence, need, goal, constraint, and the tradeoff with a revisit trigger."
+      - text: "We picked the option sales disliked least."
+        correct: false
+        feedback: "Avoidance is not rationale."
+
+  - id: q7
+    type: judgment
+    difficulty: late
+    no_single_correct: true
+    stem: "After you decide on prioritized alerts, sales escalates to your shared director, who leans toward giving sales the aggressive view. How do you respond?"
+    options:
+      - text: "Bring the evidence and rationale to the director and propose a measured rollout with a check-in on resolution time."
+        rationale: "Leads with reasoning and offers a way to verify. Risk: the director may still overrule, and a rollout adds coordination."
+      - text: "Defer to the director's preference to preserve the relationship and revisit later."
+        rationale: "Keeps political capital intact. Risk: ships a design the evidence warns against and may harm the primary users."
+      - text: "Propose a small experiment so the data, not opinion, settles it."
+        rationale: "Depersonalizes the conflict and respects everyone. Risk: time and setup may strain the deadline."
+    synthesis: "All are defensible. The strongest responses keep the decision grounded in user evidence and product goals, treat the escalation as a chance to align on criteria rather than personalities, and stay honest about constraints."

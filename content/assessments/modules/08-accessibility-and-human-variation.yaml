@@ -1,0 +1,126 @@
+id: "08-accessibility-and-human-variation"
+title: "Module 8 Assessment — Accessibility and Human Variation"
+type: module
+covers: ["08-accessibility-and-human-variation"]
+pass_threshold: 0.8
+scenario: "healthcare"
+
+questions:
+  - id: q1
+    type: multiple_choice
+    difficulty: early
+    stem: "A patient books one-handed, in glare, while stressed. This is an example of…"
+    options:
+      - text: "a situational limitation that affects design like a permanent one."
+        correct: true
+        feedback: "Correct. Situational limitations create the same barriers and deserve the same care."
+      - text: "an edge case safe to ignore."
+        correct: false
+        feedback: "It describes a huge share of real usage."
+      - text: "irrelevant, since the patient isn't disabled."
+        correct: false
+        feedback: "Accessibility is about human variation, not a narrow category."
+
+  - id: q2
+    type: multiple_choice
+    difficulty: early
+    stem: "Which issue most affects keyboard-only users?"
+    options:
+      - text: "A confirm button reachable only by mouse hover."
+        correct: true
+        feedback: "Correct. Hover-only actions exclude keyboard and screen-reader users."
+      - text: "A slightly muted blue."
+        correct: false
+        feedback: "That's a contrast concern, a different barrier."
+      - text: "A page that requires scrolling."
+        correct: false
+        feedback: "Scrolling alone is not an access barrier."
+
+  - id: q3
+    type: multiple_choice
+    difficulty: mid
+    stem: "Which message is clearest plain language?"
+    options:
+      - text: "Your appointment requisition has been successfully adjudicated."
+        correct: false
+        feedback: "Jargon that forces decoding."
+      - text: "Your appointment is confirmed for Tuesday at 2 p.m."
+        correct: true
+        feedback: "Correct. Common words, concrete details."
+      - text: "Status: COMPLETE (code 200)."
+        correct: false
+        feedback: "Technical and meaningless to most patients."
+
+  - id: q4
+    type: multiple_choice
+    difficulty: mid
+    stem: "Why is color alone unreliable for signaling meaning?"
+    options:
+      - text: "Color-blindness, glare, and grayscale can all erase the distinction."
+        correct: true
+        feedback: "Correct. Pair color with text or icons."
+      - text: "Color is never useful in interfaces."
+        correct: false
+        feedback: "Color is useful — just not as the only signal."
+      - text: "It only matters for branding."
+        correct: false
+        feedback: "It carries functional meaning that can be lost."
+
+  - id: q5
+    type: multiple_select
+    difficulty: mid
+    stem: "Which are part of WCAG-informed thinking? (Choose all that apply.)"
+    options:
+      - text: "Perceivable — people can sense the content."
+        correct: true
+        feedback: "Yes — e.g. contrast and text alternatives."
+      - text: "Operable — people can use it (keyboard, target size)."
+        correct: true
+        feedback: "Yes — full operation without a mouse."
+      - text: "Understandable — plain language and predictable behavior."
+        correct: true
+        feedback: "Yes — comprehension matters."
+      - text: "Profitable — it increases revenue."
+        correct: false
+        feedback: "Not a WCAG principle."
+
+  - id: q6
+    type: true_false
+    difficulty: early
+    stem: "True or false: Passing a WCAG AA audit means the design is fully usable for everyone."
+    options:
+      - text: "True"
+        correct: false
+        feedback: "False. Compliance is the floor; a conformant flow can still exhaust a stressed user."
+      - text: "False"
+        correct: true
+        feedback: "Correct. Aim for genuine usability across variation, not just a passing audit."
+
+  - id: q7
+    type: multiple_choice
+    difficulty: late
+    stem: "Which assumption likely excludes the most users in the portal?"
+    options:
+      - text: "That patients understand medical jargon while stressed."
+        correct: true
+        feedback: "Correct. It excludes a large range across literacy, language, and emotion."
+      - text: "That some prefer dark mode."
+        correct: false
+        feedback: "A preference affecting far fewer people."
+      - text: "That a few use older browsers."
+        correct: false
+        feedback: "Smaller group, easier to accommodate."
+
+  - id: q8
+    type: judgment
+    difficulty: late
+    no_single_correct: true
+    stem: "A human variation audit surfaces several barriers but you can fix only two this release. How do you choose?"
+    options:
+      - text: "Fix the barriers that exclude the most people, like plain-language copy and contrast."
+        rationale: "Maximizes reach quickly. Risk: a smaller group with a severe, total barrier (e.g. keyboard trap) might be deprioritized unfairly."
+      - text: "Fix the most severe total blockers first, even if they affect fewer people."
+        rationale: "Ensures no one is fully locked out. Risk: leaves widespread friction in place for the majority."
+      - text: "Balance reach and severity: one broad fix and one total-blocker fix."
+        rationale: "Covers both dimensions. Risk: splitting effort can make each fix shallower."
+    synthesis: "All are defensible. The strongest answers weigh both how many people are affected and how severely, and treat total exclusions as high priority regardless of group size."

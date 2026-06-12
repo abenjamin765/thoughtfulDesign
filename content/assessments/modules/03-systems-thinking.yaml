@@ -1,0 +1,126 @@
+id: "03-systems-thinking"
+title: "Module 3 Assessment — Systems Thinking for UX"
+type: module
+covers: ["03-systems-thinking"]
+pass_threshold: 0.8
+scenario: "school-analytics"
+
+questions:
+  - id: q1
+    type: multiple_choice
+    difficulty: early
+    stem: "Which option describes a feedback loop?"
+    options:
+      - text: "A static list of curriculum standards."
+        correct: false
+        feedback: "A list has no output feeding back as input — no loop."
+      - text: "More flags → teachers intervene → fewer at-risk students → fewer flags."
+        correct: true
+        feedback: "Correct. The system's output (flags) feeds back to change its own input — a balancing loop."
+      - text: "A button that submits a form."
+        correct: false
+        feedback: "A single action is not a loop."
+
+  - id: q2
+    type: multiple_choice
+    difficulty: early
+    stem: "What distinguishes a symptom from a system cause?"
+    options:
+      - text: "A symptom is the visible effect; the cause is the structure producing it."
+        correct: true
+        feedback: "Correct. Treating symptoms moves the problem; treating causes resolves it."
+      - text: "A symptom is always smaller than a cause."
+        correct: false
+        feedback: "Size is not the distinction — visibility versus underlying structure is."
+      - text: "They are interchangeable terms."
+        correct: false
+        feedback: "They are different: effect versus generating structure."
+
+  - id: q3
+    type: multiple_choice
+    difficulty: mid
+    stem: "A team raises 'daily logins' by adding a streak counter. What is the most likely second-order effect to watch?"
+    options:
+      - text: "Users log in to protect the streak without doing meaningful work."
+        correct: true
+        feedback: "Correct. The incentive can produce hollow logins that inflate the metric without real value."
+      - text: "The login page renders more slowly."
+        correct: false
+        feedback: "That is unrelated to the incentive."
+      - text: "Nothing changes elsewhere."
+        correct: false
+        feedback: "Incentives reliably reshape behavior somewhere."
+
+  - id: q4
+    type: multiple_select
+    difficulty: mid
+    stem: "When changing how 'at-risk' is calculated, which dependencies should you check? (Choose all that apply.)"
+    options:
+      - text: "The data team that owns the pipeline."
+        correct: true
+        feedback: "Yes — they maintain the calculation's inputs."
+      - text: "Teachers who trust the current definition."
+        correct: true
+        feedback: "Yes — changing the meaning affects their decisions and trust."
+      - text: "The company's logo guidelines."
+        correct: false
+        feedback: "Unrelated to a calculation change."
+      - text: "Any downstream reports that use the at-risk figure."
+        correct: true
+        feedback: "Yes — reports depend on the figure's definition."
+
+  - id: q5
+    type: multiple_choice
+    difficulty: mid
+    stem: "Improving onboarding completion by skipping setup is an example of…"
+    options:
+      - text: "global optimization."
+        correct: false
+        feedback: "It improved one local metric at the expense of the whole."
+      - text: "local optimization."
+        correct: true
+        feedback: "Correct. One metric improved while overall system health declined."
+      - text: "a balancing feedback loop."
+        correct: false
+        feedback: "It is an optimization choice, not a loop description."
+
+  - id: q6
+    type: true_false
+    difficulty: early
+    stem: "True or false: A constraint is a bug to be removed from the system."
+    options:
+      - text: "True"
+        correct: false
+        feedback: "False. A constraint is a real limit (technical, legal, human) to design within."
+      - text: "False"
+        correct: true
+        feedback: "Correct. Good design works with constraints rather than denying them."
+
+  - id: q7
+    type: multiple_choice
+    difficulty: late
+    stem: "What makes a System Consequence Map useful rather than just interesting?"
+    options:
+      - text: "It produces a long list of risks for the record."
+        correct: false
+        feedback: "A list alone changes nothing."
+      - text: "It ends in at least one concrete design move that keeps value while reducing a harm."
+        correct: true
+        feedback: "Correct. The map matters only if it changes a decision."
+      - text: "It proves the feature should be cancelled."
+        correct: false
+        feedback: "The goal is deliberate design, not automatic cancellation."
+
+  - id: q8
+    type: judgment
+    difficulty: late
+    no_single_correct: true
+    stem: "A consequence map shows that auto-emailing parents could make teachers under-flag at-risk students. Leadership still wants the feature this quarter. What do you recommend?"
+    options:
+      - text: "Ship it but decouple flagging from notifications so flagging stays low-stakes."
+        rationale: "Preserves the data integrity that the whole platform depends on while keeping the parent-communication value. Risk: adds scope and a second mechanism to maintain."
+      - text: "Delay the feature until you can test the under-flagging risk with real teachers."
+        rationale: "Avoids shipping a change that could corrupt core data. Risk: misses the leadership timeline and the genuine benefit to parents in the meantime."
+      - text: "Ship as requested and monitor flagging rates closely after launch."
+        rationale: "Respects the timeline and gathers real evidence. Risk: if under-flagging happens, struggling students are missed before you detect and react."
+    synthesis: "No option is automatically correct. The strongest answers protect the at-risk data (the system's most important asset) while finding a way to deliver value and respect real constraints. Watch for reasoning that names the feedback loop explicitly."

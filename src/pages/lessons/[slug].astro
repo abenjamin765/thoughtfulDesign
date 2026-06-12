@@ -4,11 +4,19 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import AuthGuard from '../../components/AuthGuard';
 import Callout from '../../components/Callout.astro';
 import Reveal from '../../components/Reveal.astro';
+import Shift from '../../components/Shift.astro';
 import Quiz from '../../components/Quiz';
 import ReflectionPrompt from '../../components/ReflectionPrompt';
 import LessonComplete from '../../components/LessonComplete';
+import PreviewFooter from '../../components/PreviewFooter';
 import SignOutButton from '../../components/SignOutButton';
 import { getPublishedLessons, getLessonSlug } from '../../lib/lessons';
+import {
+  getModuleForLesson,
+  getPartForModule,
+  getNextLesson,
+  getPreviousLesson,
+} from '../../lib/course';
 import { withBase } from '../../lib/paths';
 
 export async function getStaticPaths() {
@@ -28,18 +36,53 @@ if (!lesson) {
 
 const { Content } = await render(lesson);
 const lessonSlug = getLessonSlug(lesson);
+
+// Lessons are open-access: any authenticated learner can navigate directly to
+// any lesson URL — there is no sequential / prerequisite lock (only assessments
+// are gated, which Phase 4 owns). Lessons flagged `public_preview` go one step
+// further and render without auth at all.
+const isPreview = Boolean(lesson.data.public_preview);
+
+// Registry-driven context: breadcrumb (Part → Module → Lesson) and prev/next
+// navigation in canonical course order (not alphabetical slug order).
+const module = getModuleForLesson(lessonSlug);
+const part = module ? getPartForModule(module.id) : undefined;
+const [nextLesson, prevLesson] = await Promise.all([
+  getNextLesson(lessonSlug),
+  getPreviousLesson(lessonSlug),
+]);
+
+const nextSlug = nextLesson ? getLessonSlug(nextLesson) : null;
+const prevSlug = prevLesson ? getLessonSlug(prevLesson) : null;
+const nextHref = nextSlug ? withBase(`/lessons/${nextSlug}`) : undefined;
+const prevHref = prevSlug ? withBase(`/lessons/${prevSlug}`) : undefined;
+const moduleHref = module ? withBase(`/course/modules/${module.id}`) : withBase('/course');
 ---
 
 <BaseLayout title={`${lesson.data.title} — Thoughtful Design`}>
-  <AuthGuard client:load>
+  <AuthGuard client:load preview={isPreview}>
     <article class="container" style="padding: 2.5rem 0;">
       <div style="display: flex; justify-content: space-between; gap: 1rem; align-items: center; flex-wrap: wrap;">
-        <a href={withBase('/course')} class="muted">← Back to course</a>
-        <SignOutButton client:load />
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href={withBase('/course')}>Course</a>
+          {part && (
+            <>
+              <span aria-hidden="true" class="breadcrumb__sep">›</span>
+              <span class="muted">{part.name}</span>
+            </>
+          )}
+          {module && (
+            <>
+              <span aria-hidden="true" class="breadcrumb__sep">›</span>
+              <a href={moduleHref}>{module.title}</a>
+            </>
+          )}
+        </nav>
+        {!isPreview && <SignOutButton client:load />}
       </div>
 
       <header style="margin: 1.5rem 0 2rem;">
-        <p class="muted">{lesson.data.module}</p>
+        <p class="muted">{module ? module.title : lesson.data.module}</p>
         <h1>{lesson.data.title}</h1>
         <div class="lesson-meta">
           <span>Lesson {lesson.data.order}</span>
@@ -48,7 +91,7 @@ const lessonSlug = getLessonSlug(lesson);
       </header>
 
       <div class="prose">
-        <Content components={{ Callout, Reveal }} />
+        <Content components={{ Callout, Reveal, Shift }} />
       </div>
 
       <div class="lesson-footer">
@@ -56,16 +99,104 @@ const lessonSlug = getLessonSlug(lesson);
           <Quiz client:load lessonSlug={lessonSlug} questions={lesson.data.quiz} />
         )}
 
-        {lesson.data.reflection && (
-          <ReflectionPrompt
+        {isPreview ? (
+          <PreviewFooter
             client:load
             lessonSlug={lessonSlug}
-            prompt={lesson.data.reflection.prompt}
+            nextHref={nextHref}
+            nextTitle={nextLesson?.data.title}
+            reflectionPrompt={lesson.data.reflection?.prompt}
+            signupHref={withBase('/signup')}
           />
+        ) : (
+          <>
+            {lesson.data.reflection && (
+              <ReflectionPrompt
+                client:load
+                lessonSlug={lessonSlug}
+                prompt={lesson.data.reflection.prompt}
+              />
+            )}
+
+            <LessonComplete
+              client:load
+              lessonSlug={lessonSlug}
+              nextHref={nextHref}
+              nextTitle={nextLesson?.data.title}
+            />
+          </>
         )}
 
-        <LessonComplete client:load lessonSlug={lessonSlug} />
+        <nav class="lesson-nav" aria-label="Lesson navigation">
+          {prevHref ? (
+            <a class="lesson-nav__link lesson-nav__link--prev" href={prevHref}>
+              <span class="muted">← Previous</span>
+              <span>{prevLesson?.data.title}</span>
+            </a>
+          ) : (
+            <span></span>
+          )}
+          {nextHref ? (
+            <a class="lesson-nav__link lesson-nav__link--next" href={nextHref}>
+              <span class="muted">Next →</span>
+              <span>{nextLesson?.data.title}</span>
+            </a>
+          ) : (
+            <a class="lesson-nav__link lesson-nav__link--next" href={moduleHref}>
+              <span class="muted">Back to →</span>
+              <span>{module ? module.title : 'Course'}</span>
+            </a>
+          )}
+        </nav>
       </div>
     </article>
   </AuthGuard>
 </BaseLayout>
+
+<style>
+  .breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .breadcrumb__sep {
+    color: var(--muted);
+  }
+
+  .lesson-nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .lesson-nav__link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.85rem 1.1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: inherit;
+    text-decoration: none;
+    max-width: 48%;
+    transition: border-color 0.15s ease;
+  }
+
+  .lesson-nav__link:hover {
+    border-color: var(--accent);
+  }
+
+  .lesson-nav__link--next {
+    text-align: right;
+    margin-left: auto;
+  }
+
+  .lesson-nav__link span:last-child {
+    font-weight: 600;
+  }
+</style>

@@ -43,7 +43,7 @@ export default function ReflectionPrompt({ lessonSlug, prompt }: Props) {
     const supabase = getSupabase();
     if (!supabase) {
       setStatus('error');
-      setError('Supabase is not configured yet.');
+      setError("Progress saving isn't available right now, so your reflection can't be stored. You can still copy your notes somewhere safe.");
       return;
     }
 
@@ -68,7 +68,7 @@ export default function ReflectionPrompt({ lessonSlug, prompt }: Props) {
 
     if (saveError) {
       setStatus('error');
-      setError(saveError.message);
+      setError(`We couldn't save your reflection (${saveError.message}). Check your connection and press “Save reflection” again.`);
       return;
     }
 

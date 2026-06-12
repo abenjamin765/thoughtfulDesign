@@ -1,0 +1,151 @@
+---
+// Shared module card. Presentational and surface-agnostic so it can be reused
+// across the landing preview (no link, locked), the course overview (linked),
+// and the dashboard (linked, with progress) — wireframe §Component Reuse Notes.
+//
+// Dynamic, per-user state (lesson completion, assessment badge) is injected via
+// the `status` slot — pass a client island there. Static surfaces (landing
+// preview) can omit the slot entirely.
+//
+// API:
+//   <ModuleCard
+//     order={1}
+//     title="From Screens to Systems"
+//     coreClaim="A screen is only the visible surface of a deeper system."
+//     lessonCount={3}
+//     estimatedMinutes={24}
+//     partName="Seeing the System"
+//     href="/course/modules/01-screens-to-systems"   // omit/null → not a link
+//     locked={false}                                  // landing preview hint
+//   >
+//     <SomeStatusIsland slot="status" client:load ... />
+//   </ModuleCard>
+interface Props {
+  order: number;
+  title: string;
+  coreClaim: string;
+  lessonCount: number;
+  estimatedMinutes?: number;
+  partName?: string;
+  href?: string | null;
+  locked?: boolean;
+}
+
+const {
+  order,
+  title,
+  coreClaim,
+  lessonCount,
+  estimatedMinutes,
+  partName,
+  href,
+  locked = false,
+} = Astro.props;
+
+const Tag = href ? 'a' : 'div';
+const lessonLabel = `${lessonCount} ${lessonCount === 1 ? 'lesson' : 'lessons'}`;
+---
+
+<Tag
+  class:list={['module-card', { 'module-card--link': Boolean(href), 'module-card--locked': locked }]}
+  {...href ? { href } : {}}
+>
+  <div class="module-card__head">
+    <span class="module-card__number">Module {order}</span>
+    {partName && <span class="module-card__part muted">{partName}</span>}
+  </div>
+
+  <h3 class="module-card__title">{title}</h3>
+  <p class="module-card__claim">{coreClaim}</p>
+
+  <p class="module-card__meta muted">
+    <span>{lessonLabel}</span>
+    {estimatedMinutes ? <span>· {estimatedMinutes} min</span> : null}
+    {locked && <span class="module-card__lock">· 🔒 Enroll to access</span>}
+  </p>
+
+  <div class="module-card__status">
+    <slot name="status" />
+  </div>
+</Tag>
+
+<style>
+  .module-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+    color: inherit;
+    text-decoration: none;
+    height: 100%;
+  }
+
+  .module-card--link {
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+
+  .module-card--link:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .module-card--locked {
+    opacity: 0.92;
+  }
+
+  .module-card__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .module-card__number {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .module-card__part {
+    font-size: 0.8rem;
+    text-align: right;
+  }
+
+  .module-card__title {
+    font-family: var(--font-serif);
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .module-card__claim {
+    margin: 0;
+    color: var(--text);
+  }
+
+  .module-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .module-card__lock {
+    color: var(--warning);
+  }
+
+  .module-card__status:empty {
+    display: none;
+  }
+
+  .module-card__status {
+    margin-top: auto;
+    padding-top: 0.5rem;
+  }
+</style>

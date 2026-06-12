@@ -1,0 +1,123 @@
+id: "06-product-strategy"
+title: "Module 6 Assessment — Product Strategy and Design Judgment"
+type: module
+covers: ["06-product-strategy"]
+pass_threshold: 0.8
+scenario: "enterprise"
+
+questions:
+  - id: q1
+    type: multiple_choice
+    difficulty: early
+    stem: "What separates design judgment from design taste?"
+    options:
+      - text: "Judgment is personal aesthetic preference."
+        correct: false
+        feedback: "That describes taste."
+      - text: "Judgment connects a choice to goals, constraints, and tradeoffs."
+        correct: true
+        feedback: "Correct. Judgment is reasoning about what serves the goal under limits."
+      - text: "Taste is more reliable than judgment."
+        correct: false
+        feedback: "Taste is useful but not a substitute for reasoned tradeoffs."
+
+  - id: q2
+    type: multiple_choice
+    difficulty: early
+    stem: "Which best distinguishes a user need from a business goal?"
+    options:
+      - text: "A user need is what a person is trying to accomplish; a business goal is an outcome the company wants."
+        correct: true
+        feedback: "Correct. They are distinct and often in tension."
+      - text: "User needs matter; business goals do not."
+        correct: false
+        feedback: "Both are legitimate and must be served honestly."
+      - text: "They are the same thing."
+        correct: false
+        feedback: "Conflating them produces designs that get overruled or harm users."
+
+  - id: q3
+    type: multiple_choice
+    difficulty: mid
+    stem: "A constraint says the feature must ship in 3 weeks with no backend changes. How should it affect the design?"
+    options:
+      - text: "Ignore it and design the ideal version."
+        correct: false
+        feedback: "An ideal that cannot ship wastes effort."
+      - text: "Treat it as a real boundary and pick the strongest option achievable within it."
+        correct: true
+        feedback: "Correct. Constraints shape the actual problem."
+      - text: "Cancel the feature."
+        correct: false
+        feedback: "Overreacting to a normal limit."
+
+  - id: q4
+    type: multiple_choice
+    difficulty: mid
+    stem: "What is satisficing under uncertainty?"
+    options:
+      - text: "Settling for low quality."
+        correct: false
+        feedback: "Satisficing is not low quality."
+      - text: "Choosing a good-enough option that meets real constraints rather than chasing the perfect one."
+        correct: true
+        feedback: "Correct. It is sound decision-making under real limits."
+      - text: "Refusing to decide until information is complete."
+        correct: false
+        feedback: "That is analysis paralysis, the opposite of satisficing."
+
+  - id: q5
+    type: multiple_choice
+    difficulty: late
+    stem: "Which design rationale is strongest?"
+    options:
+      - text: "I chose it because it looks cleaner."
+        correct: false
+        feedback: "An assertion of taste, not reasoning."
+      - text: "I chose prioritized alerts: ops is alert-fatigued (need) and we track resolution time (goal); it surfaces urgent items within our 3-week constraint, trading away configurability."
+        correct: true
+        feedback: "Correct. It connects need, goal, constraint, and tradeoff."
+      - text: "I chose it because it's the modern pattern."
+        correct: false
+        feedback: "Trend-following is not rationale."
+
+  - id: q6
+    type: multiple_choice
+    difficulty: mid
+    stem: "What information would most improve a shaky decision?"
+    options:
+      - text: "Whatever reduces the biggest uncertainty behind the choice."
+        correct: true
+        feedback: "Correct. Target the unknown that would most change the decision."
+      - text: "More color options."
+        correct: false
+        feedback: "Cosmetic; does not strengthen reasoning."
+      - text: "A longer rationale document."
+        correct: false
+        feedback: "Length is not strength."
+
+  - id: q7
+    type: true_false
+    difficulty: early
+    stem: "True or false: A good design rationale lists only the strengths of the chosen option."
+    options:
+      - text: "True"
+        correct: false
+        feedback: "False. A rationale without tradeoffs and risks is marketing, not reasoning."
+      - text: "False"
+        correct: true
+        feedback: "Correct. Every real decision gives something up; name it."
+
+  - id: q8
+    type: judgment
+    difficulty: late
+    no_single_correct: true
+    stem: "Two directions serve different goals: 'aggressive alerts' boosts the resolution-time metric leadership tracks; 'quiet prioritized alerts' better serves a fatigued ops team. Evidence is thin on both. What do you recommend?"
+    options:
+      - text: "Quiet prioritized alerts, prioritizing the user need, instrumented to watch resolution time."
+        rationale: "Protects fatigued users while measuring the business metric. Risk: if resolution time suffers, leadership may push back."
+      - text: "Aggressive alerts, prioritizing the tracked metric, with an easy opt-down."
+        rationale: "Serves the visible business goal directly. Risk: adds noise to an already fatigued team, which can backfire into ignored alerts."
+      - text: "Ship a small experiment comparing both on a subset before committing."
+        rationale: "Replaces guessing with evidence. Risk: costs time and setup the 3-week constraint may not allow."
+    synthesis: "No option is automatically right with thin evidence. The strongest answers name which goal leads and why, protect the other where possible, and build in a way to learn whether the bet was correct."

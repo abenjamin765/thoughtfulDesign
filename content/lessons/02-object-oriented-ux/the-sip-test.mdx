@@ -1,0 +1,98 @@
+---
+title: "The SIP test"
+module: "Object-Oriented UX"
+module_id: "02-object-oriented-ux"
+part: "Seeing the System"
+order: 3
+estimated_minutes: 18
+published: true
+public_preview: false
+core_claim: "Before you design what people do, understand what they are working with."
+loop_steps: ["Model"]
+scenario: "school-analytics"
+quiz:
+  - prompt: "In the SIP test, which question helps validate whether a noun is a true object?"
+    options:
+      - "Does it have a recognizable shape a user can point to?"
+      - "Does it have a hex color?"
+      - "Is it already in the navigation?"
+    answer: 0
+    feedback: "Structure asks whether users can point to the thing as a recognizable unit. Hex colors and current navigation are implementation details, not tests of objecthood."
+  - prompt: "Which SIP dimension asks whether the thing exists for a clear user-facing reason?"
+    options:
+      - "Structure"
+      - "Identity"
+      - "Purpose"
+    answer: 2
+    feedback: "Purpose asks whether users would miss it if it disappeared. Structure is about recognizable shape; Identity is about telling instances apart."
+  - prompt: "In a school analytics product, which is most likely a true object rather than an attribute or action?"
+    options:
+      - "'Submit'"
+      - "Assignment"
+      - "'GPA' (a number on a report)"
+    answer: 1
+    feedback: "Assignment passes SIP: it has structure, distinct instances, and a clear purpose. 'Submit' is an action (a CTA), and a GPA is an attribute of a Student or Report, not its own object."
+reflection:
+  prompt: "Pick three nouns from a current project. Run each through SIP in a sentence or two per letter."
+---
+
+## The situation
+
+Your team brainstorms the school analytics platform and produces a wall of sticky notes: Student, Submit, Assignment, GPA, Class, Filter, Report, Teacher, Export, Standard. Someone says, "Great, those are our objects." But half of them are not objects at all — they are actions, attributes, or features in disguise.
+
+Treat them all as objects and your model bloats, your navigation sprawls, and the Four Ancient Truths become impossible to honor.
+
+## A filter for real objects
+
+The **SIP test** separates true objects from attributes, actions, and implementation details. Run each candidate noun through three questions.
+
+- **S — Structure:** Does it have a recognizable shape a user can point to?
+- **I — Identity:** Can users tell one instance apart from another?
+- **P — Purpose:** Does it exist for a clear user-facing reason — would users miss it if it vanished?
+
+A true object passes all three.
+
+<Callout type="tip">
+
+Run SIP early, during object discovery. It prevents object sprawl and keeps your model aligned to how users actually think — which is exactly what makes the rest of OOUX work.
+
+</Callout>
+
+## Worked example: the school analytics platform
+
+| Candidate | SIP result |
+| --- | --- |
+| Student | Pass — clear shape, distinct instances, central purpose |
+| Assignment | Pass — teachers create, distinguish, and act on assignments |
+| "Submit" | Fail — an action (a CTA on Assignment), not an object |
+| GPA | Fail — an attribute of a Student or Report |
+| "Filter" | Fail — a feature for finding objects, not an object itself |
+| Standard | Pass — a curriculum standard is a distinct, persistent thing teachers reference |
+
+<Callout type="warning">
+
+A common trap is assuming that passing SIP means the object belongs in version one. SIP only validates that something *is* an object. Deciding which objects matter most comes later, in prioritization.
+
+</Callout>
+
+## Try it
+
+Pick three nouns from a product you know. For each, ask:
+
+1. Can a user point to it in the interface? (Structure)
+2. Would they describe two of them as different versions of the same kind of thing? (Identity)
+3. Would they miss it if it disappeared? (Purpose)
+
+Mark each as pass or fail, and note what the failures actually are.
+
+<Reveal label="What good looks like">
+
+A strong answer names *what* each failed candidate really is. For example, in a marketplace: "Listing" passes. "Buy" fails Purpose — it is an action on a Listing. "Price" fails Structure and Identity — it is an attribute of a Listing, not a thing you would give its own page. Naming the failure tells you where it belongs in the model.
+
+</Reveal>
+
+## Carry forward
+
+You can now spot real objects and you know what good object design feels like. The next step is to put them together into a picture of the whole domain.
+
+Continue to the next lesson, Building an object map.

@@ -1,0 +1,68 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/paths';
+
+// Simple contact page — the landing footer links here. No form/back end in the
+// MVP (static site); a direct email keeps it honest and low-maintenance.
+const contactEmail = 'hello@thoughtfuldesign.io';
+---
+
+<BaseLayout
+  title="Contact — Thoughtful Design"
+  description="Get in touch with the Thoughtful Design team."
+>
+  <article class="container legal">
+    <header class="legal__head">
+      <h1>Contact</h1>
+      <p class="muted">We read everything and aim to reply within a few business days.</p>
+    </header>
+
+    <div class="prose legal__body">
+      <p>
+        The fastest way to reach us is email:
+        <a href={`mailto:${contactEmail}`}>{contactEmail}</a>.
+      </p>
+
+      <h2>What to email about</h2>
+      <ul>
+        <li><strong>Course questions</strong> — content, assessments, or how something works.</li>
+        <li><strong>Account help</strong> — sign-in trouble or progress that isn't saving.</li>
+        <li>
+          <strong>Privacy and data requests</strong> — a copy of your data, or confirmation that your
+          account was fully removed. You can also delete your data yourself from
+          <a href={withBase('/account')}>account settings</a>.
+        </li>
+        <li><strong>Feedback</strong> — a lesson that landed, an assessment that didn't, or an idea.</li>
+      </ul>
+
+      <p class="muted">
+        Looking for something to read first? Try the
+        <a href={withBase('/blog')}>blog</a> or the free
+        <a href={withBase('/resources')}>framework templates</a>.
+      </p>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .legal {
+    padding: 2.5rem 0 3.5rem;
+    max-width: var(--content-width);
+  }
+
+  .legal__head {
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .legal__head h1 {
+    font-family: var(--font-serif);
+    margin: 0 0 0.35rem;
+  }
+
+  .legal__body h2 {
+    font-family: var(--font-serif);
+    margin-top: 2.25rem;
+  }
+</style>

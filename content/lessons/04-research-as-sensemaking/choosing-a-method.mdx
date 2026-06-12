@@ -1,0 +1,86 @@
+---
+title: "Choosing a method"
+module: "Research as Sensemaking"
+module_id: "04-research-as-sensemaking"
+part: "Understanding People and Decisions"
+order: 3
+estimated_minutes: 18
+published: true
+public_preview: false
+core_claim: "Research is not just validation. It is how teams learn what reality is asking of them."
+loop_steps: ["Understand", "Test"]
+scenario: "healthcare"
+quiz:
+  - prompt: "The team wants to know WHY patients abandon booking. Which method fits best?"
+    options:
+      - "A large survey asking patients to rate satisfaction."
+      - "Moderated sessions watching patients book and asking about their reasoning."
+      - "An A/B test of two button colors."
+    answer: 1
+    feedback: "'Why' questions need qualitative depth — watching and asking. Surveys give breadth but rarely deep 'why,' and an A/B test measures 'which performs better,' not the reasons behind behavior."
+  - prompt: "The team needs to know HOW MANY patients abandon at each step. Which method fits best?"
+    options:
+      - "Five in-depth interviews."
+      - "Funnel analytics across all sessions."
+      - "A hallway opinion poll."
+    answer: 1
+    feedback: "'How many / how often' is a quantitative question best answered by analytics across many sessions. Five interviews reveal 'why' but cannot tell you scale; an opinion poll measures neither behavior nor scale reliably."
+  - prompt: "Why pair qualitative and quantitative methods when possible?"
+    options:
+      - "To make the research look more rigorous to stakeholders."
+      - "Because quantitative tells you what and how much; qualitative tells you why."
+      - "Because more methods always means better research."
+    answer: 1
+    feedback: "The two answer different questions: numbers locate and size a problem; qualitative explains it. Method count is not the point, and rigor is about fit, not appearances."
+reflection:
+  prompt: "For your riskiest assumption, what is the smallest study that could change your mind?"
+---
+
+## The situation
+
+The healthcare team now has a sharp research question — *why do patients abandon booking before confirming?* — and a guess that the insurance step is the culprit. The question is what to actually do. Interview people? Run a survey? Look at the data?
+
+## Match the method to the uncertainty
+
+Method choice follows the *kind* of question you have.
+
+| If you need to know… | Reach for… | It tells you… |
+| --- | --- | --- |
+| Why something happens | Interviews, usability testing, contextual inquiry | Reasoning, motivation, friction |
+| How many / how often | Analytics, funnels, surveys at scale | Scale and frequency |
+| Whether A beats B on a metric | A/B test | Relative performance |
+| What the real context is | Contextual inquiry (observe in situ) | Environment, constraints, workarounds |
+
+For the portal, the team pairs two methods: **funnel analytics** to confirm *where* abandonment happens (it spikes at the insurance step), then **moderated usability sessions** to learn *why* (patients do not have their insurance details on hand when they book).
+
+## Qualitative and quantitative are partners
+
+Quantitative methods tell you *what* and *how much*. Qualitative methods tell you *why*. The portal team needed both: the numbers located the problem; the sessions explained it. Neither alone would have led to the fix — letting patients book first and add insurance later.
+
+<Callout type="tip">
+
+Start from the decision and the assumption, then pick the smallest method that could change your mind. A focused five-person usability study often beats a giant survey that answers the wrong question.
+
+</Callout>
+
+## Research ethics, briefly
+
+Especially in healthcare, research touches vulnerable people. Get informed consent, protect privacy, never deceive, and let participants stop at any time. Ethical research is also better research — people tell you the truth when they trust you.
+
+<Callout type="warning">
+
+A common trap is choosing the method you are most comfortable with rather than the one the question needs. A team that loves interviews will interview its way through a "how many" question and still not know the scale.
+
+</Callout>
+
+<Reveal label="What good looks like">
+
+A strong method choice names the decision, the assumption, the method, and why that method fits — and it is as small as it can be. For example: "To decide whether to split insurance out of booking, we'll watch 5 patients book (why) after confirming via funnel data that the insurance step is the top drop-off (how much)."
+
+</Reveal>
+
+## Carry forward
+
+Collecting observations is only half the work. The next lesson turns raw sessions into insights a team can actually act on.
+
+Continue to the next lesson, Synthesis into insight.

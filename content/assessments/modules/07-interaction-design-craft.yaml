@@ -1,0 +1,123 @@
+id: "07-interaction-design-craft"
+title: "Module 7 Assessment — Interaction Design Craft"
+type: module
+covers: ["07-interaction-design-craft"]
+pass_threshold: 0.8
+scenario: "marketplace"
+
+questions:
+  - id: q1
+    type: multiple_choice
+    difficulty: early
+    stem: "Which empty state best supports a new seller's next action?"
+    options:
+      - text: "A blank panel that says 'No listings.'"
+        correct: false
+        feedback: "States a fact but offers no path forward."
+      - text: "'You haven't listed anything yet. Create your first listing — about 3 minutes.' with a clear button."
+        correct: true
+        feedback: "Correct. It orients the user and offers the next step."
+      - text: "A spinner that never resolves."
+        correct: false
+        feedback: "That's a broken loading state, not an empty state."
+
+  - id: q2
+    type: multiple_choice
+    difficulty: early
+    stem: "Which error message is most helpful?"
+    options:
+      - text: "Error: invalid input."
+        correct: false
+        feedback: "Names a problem without a path to fix it."
+      - text: "Your price must be a whole number in dollars — for example, 25, not $25.00."
+        correct: true
+        feedback: "Correct. Says what, where, and how to fix, with an example."
+      - text: "Something went wrong."
+        correct: false
+        feedback: "Vague and unactionable."
+
+  - id: q3
+    type: multiple_choice
+    difficulty: mid
+    stem: "Sellers abandon a flow that asks for tax info before item details. Best fix?"
+    options:
+      - text: "Reorder so motivation (describe the item) comes before friction (tax info)."
+        correct: true
+        feedback: "Correct. Match the flow to the user's mindset."
+      - text: "Change the accent color."
+        correct: false
+        feedback: "Cosmetic; doesn't address the abandonment cause."
+      - text: "Add more fields for completeness."
+        correct: false
+        feedback: "Increases load — the opposite of what's needed."
+
+  - id: q4
+    type: multiple_choice
+    difficulty: mid
+    stem: "Showing 40 options on one screen slows decisions. Which principle applies?"
+    options:
+      - text: "Hick's Law — decision time grows with the number of choices."
+        correct: true
+        feedback: "Correct. Group, prioritize, or stage the choices."
+      - text: "Fitts's Law — target size and distance affect pointing time."
+        correct: false
+        feedback: "That's about hitting targets, not the count of choices."
+      - text: "Neither applies."
+        correct: false
+        feedback: "Hick's Law directly applies."
+
+  - id: q5
+    type: multiple_choice
+    difficulty: mid
+    stem: "Which change applies 'recognition over recall'?"
+    options:
+      - text: "Require typing a category code from memory."
+        correct: false
+        feedback: "That forces recall."
+      - text: "Let users pick from a labeled category list."
+        correct: true
+        feedback: "Correct. Recognizing beats remembering."
+      - text: "Hide categories until requested."
+        correct: false
+        feedback: "Removes the help entirely."
+
+  - id: q6
+    type: true_false
+    difficulty: early
+    stem: "True or false: If every field functions, a flow is well designed."
+    options:
+      - text: "True"
+        correct: false
+        feedback: "False. Working is not the same as usable; a functional flow can still be exhausting."
+      - text: "False"
+        correct: true
+        feedback: "Correct. Usability is about effort, clarity, and trust, not just function."
+
+  - id: q7
+    type: multiple_choice
+    difficulty: late
+    stem: "What makes a heuristic critique actionable?"
+    options:
+      - text: "Naming the principle, the specific instance, and a concrete fix — and prioritizing."
+        correct: true
+        feedback: "Correct. That turns opinion into something the team can act on."
+      - text: "Saying the design 'feels off.'"
+        correct: false
+        feedback: "Too vague to act on."
+      - text: "Listing every issue with no priority."
+        correct: false
+        feedback: "Leaves the team unsure what matters most."
+
+  - id: q8
+    type: judgment
+    difficulty: late
+    no_single_correct: true
+    stem: "You have time to fix only one issue before launch: the frozen loading state, the 40-option category screen, or the flow order that requests tax info first. Which do you fix?"
+    options:
+      - text: "Flow order, because it most directly drives the measured abandonment."
+        rationale: "Targets the biggest behavioral impact. Risk: reordering may touch backend assumptions and take longer than expected."
+      - text: "The loading state, because a frozen screen makes users think the product is broken."
+        rationale: "Removes a trust-destroying moment quickly. Risk: may be lower impact than the flow order on actual drop-off."
+      - text: "The category screen, because cognitive overload affects every seller every time."
+        rationale: "Helps the broadest set of users on a recurring step. Risk: may not be where users actually abandon."
+    synthesis: "All three are real defects. The strongest answers tie the choice to evidence about where users actually struggle and weigh impact against effort under the deadline."

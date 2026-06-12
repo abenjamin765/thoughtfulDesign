@@ -1,0 +1,87 @@
+---
+title: "Feedback loops and constraints"
+module: "Systems Thinking for UX"
+module_id: "03-systems-thinking"
+part: "Seeing the System"
+order: 2
+estimated_minutes: 18
+published: true
+public_preview: false
+core_claim: "Every design decision changes behavior somewhere in the system."
+loop_steps: ["Model"]
+scenario: "school-analytics"
+quiz:
+  - prompt: "Which option describes a feedback loop?"
+    options:
+      - "More flagged students → teachers intervene more → flags drop → teachers relax → flags rise again."
+      - "A button that submits a form."
+      - "A list of curriculum standards."
+    answer: 0
+    feedback: "A feedback loop is when a system's output feeds back as input. Intervention reducing flags, which reduces intervention, which lets flags rise, is a balancing loop. The other options are a single action and a static list."
+  - prompt: "Which team is a likely hidden dependency when a school dashboard changes how 'at-risk' is calculated?"
+    options:
+      - "The data team that maintains the pipeline feeding that calculation."
+      - "The marketing team's logo guidelines."
+      - "No one — a calculation change is self-contained."
+    answer: 0
+    feedback: "Changing the calculation touches the data team who owns the pipeline, plus every teacher who trusts the old definition. Calculation changes are rarely self-contained; logo guidelines are unrelated."
+  - prompt: "A constraint in systems thinking is best described as…"
+    options:
+      - "a limit the system operates under — technical, organizational, legal, or human."
+      - "a bug to be removed."
+      - "a feature users requested."
+    answer: 0
+    feedback: "Constraints are the real limits a system works within. They are not bugs or feature requests — and good design works with them rather than pretending they do not exist."
+reflection:
+  prompt: "Name one feedback loop and one constraint in a product you know. How does each shape user behavior?"
+---
+
+## The situation
+
+After the onboarding misstep, the school analytics team wants to think more carefully before they ship. But "think about the system" is vague advice. To do it, you need words for the parts of a system you cannot see on a screen.
+
+## A small vocabulary for systems
+
+- **Feedback loop** — when a system's output becomes its own input. Loops either *reinforce* (a snowball: more of X causes more of X) or *balance* (a thermostat: more of X causes less of X).
+- **Constraint** — a real limit the system works within: technical, organizational, legal, or human (attention, time, stress).
+- **Incentive** — what the system rewards. People and teams optimize what they are measured on, whether or not it serves the goal.
+- **Dependency** — what else is touched when you change one thing (other teams, other data, other screens).
+- **System boundary** — the line you draw around what counts as "the system" you are designing. Draw it too small and you miss the consequences.
+
+## Loops in the school platform
+
+Consider an "at-risk students" flag.
+
+- **Balancing loop:** more flags → teachers intervene → fewer students at risk → fewer flags → less intervention → flags creep back up. The system self-corrects, but only as fast as teachers can act.
+- **Reinforcing loop (the danger):** if the flag is tied to a public ranking, teachers may avoid flagging to protect their numbers → fewer flags recorded → struggling students go unseen → outcomes worsen → pressure rises. The incentive quietly corrupted the data.
+
+> An incentive is a design decision in disguise.
+> What you measure becomes what people do — including the things you did not intend.
+
+<Callout type="tip">
+
+When you add a metric, you are not just measuring behavior — you are shaping it. Always ask what people will do to make the number look good, and whether that helps or hurts the real goal.
+
+</Callout>
+
+## Local versus global optimization
+
+The onboarding story was a clash between **local** optimization (one metric: completion) and **global** health (teachers actually using a working product). Systems thinking is largely the discipline of widening the boundary until the global picture is in view.
+
+<Callout type="warning">
+
+A common trap is drawing the system boundary around your own feature. The support queue, the data team, and long-term trust are all "outside" your screen but very much inside the system your design affects.
+
+</Callout>
+
+<Reveal label="Symptom or cause?">
+
+When something goes wrong, ask: is this a symptom (the visible effect) or the cause (the structure producing it)? Rising support tickets are a symptom. The reinforcing loop between a ranking and under-reporting is the cause. Fixing symptoms feels productive but the problem returns; fixing causes lasts.
+
+</Reveal>
+
+## Carry forward
+
+You now have language for the invisible parts of a system. Next, you will put it to work with a simple tool that helps you anticipate consequences before you ship.
+
+Continue to the next lesson, Mapping second-order effects.

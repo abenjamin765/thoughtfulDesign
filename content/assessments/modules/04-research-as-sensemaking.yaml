@@ -1,0 +1,123 @@
+id: "04-research-as-sensemaking"
+title: "Module 4 Assessment — Research as Sensemaking"
+type: module
+covers: ["04-research-as-sensemaking"]
+pass_threshold: 0.8
+scenario: "healthcare"
+
+questions:
+  - id: q1
+    type: multiple_choice
+    difficulty: early
+    stem: "Which is a research question rather than an interview question?"
+    options:
+      - text: "Do you like this new screen?"
+        correct: false
+        feedback: "That is a leading question you'd (poorly) ask a participant."
+      - text: "Why do patients abandon booking before confirming?"
+        correct: true
+        feedback: "Correct. It frames what the team needs to learn."
+      - text: "Would you use this feature?"
+        correct: false
+        feedback: "A prediction question that invites unreliable agreement."
+
+  - id: q2
+    type: multiple_choice
+    difficulty: early
+    stem: "Which interview question is leading?"
+    options:
+      - text: "Walk me through the last time you booked an appointment."
+        correct: false
+        feedback: "Open and non-leading — good."
+      - text: "Don't you find the old flow frustrating?"
+        correct: true
+        feedback: "Correct. It plants the answer in the question."
+      - text: "What were you trying to do when you stopped?"
+        correct: false
+        feedback: "Open and grounded in real behavior."
+
+  - id: q3
+    type: multiple_choice
+    difficulty: mid
+    stem: "The team needs to know WHY patients abandon booking. Best method?"
+    options:
+      - text: "A large satisfaction survey."
+        correct: false
+        feedback: "Surveys give breadth, not deep 'why.'"
+      - text: "Moderated usability sessions watching patients book."
+        correct: true
+        feedback: "Correct. 'Why' needs qualitative depth — watching and asking."
+      - text: "An A/B test of button colors."
+        correct: false
+        feedback: "That measures which performs better, not the reasons."
+
+  - id: q4
+    type: multiple_choice
+    difficulty: mid
+    stem: "Which finding is the strongest evidence?"
+    options:
+      - text: "Users said they want a faster flow."
+        correct: false
+        feedback: "Stated preference — the weakest tier."
+      - text: "Four of five patients abandoned at the insurance step (observed)."
+        correct: true
+        feedback: "Correct. Observed behavior is the strongest evidence."
+      - text: "A stakeholder believes speed is the issue."
+        correct: false
+        feedback: "An opinion, not evidence."
+
+  - id: q5
+    type: multiple_choice
+    difficulty: mid
+    stem: "Which assumption should the team test first?"
+    options:
+      - text: "The one that is easiest to test."
+        correct: false
+        feedback: "Ease is convenient but not the priority criterion."
+      - text: "The high-impact, low-evidence belief driving the design."
+        correct: true
+        feedback: "Correct. Prioritize by risk: big if wrong, little known."
+      - text: "The one the loudest stakeholder named."
+        correct: false
+        feedback: "Volume is not risk."
+
+  - id: q6
+    type: multiple_choice
+    difficulty: mid
+    stem: "Which is an insight rather than a raw observation?"
+    options:
+      - text: "Patient 3 paused 20 seconds on the insurance screen."
+        correct: false
+        feedback: "A single raw observation."
+      - text: "Patients abandon when asked for information they don't have on hand."
+        correct: true
+        feedback: "Correct. It generalizes a pattern toward a decision."
+      - text: "Patient 3 said 'hmm' twice."
+        correct: false
+        feedback: "A raw observation, not an insight."
+
+  - id: q7
+    type: true_false
+    difficulty: early
+    stem: "True or false: The goal of research is to validate that the team's design is good."
+    options:
+      - text: "True"
+        correct: false
+        feedback: "False. Research reduces uncertainty so the team can decide well — not to seek approval."
+      - text: "False"
+        correct: true
+        feedback: "Correct. Research is sensemaking, not validation theater."
+
+  - id: q8
+    type: judgment
+    difficulty: late
+    no_single_correct: true
+    stem: "You have one week and budget for a small study before a decision on splitting insurance out of booking. What do you do?"
+    options:
+      - text: "Run 5 moderated booking sessions to learn why patients stall."
+        rationale: "Directly targets the 'why' behind abandonment. Risk: small n means you learn reasons but not exact scale."
+      - text: "Pull funnel analytics to confirm where abandonment concentrates first."
+        rationale: "Cheap, fast, and sizes the problem. Risk: tells you where but not why, so you may still guess at the cause."
+      - text: "Do both: analytics to locate, then 2–3 quick sessions to explain."
+        rationale: "Combines scale and reason within the constraint. Risk: splitting limited time across two methods can make each thinner."
+    synthesis: "All are defensible under the constraint. The strongest reasoning ties the method to the specific decision and is honest about what each approach can and cannot tell you within one week."

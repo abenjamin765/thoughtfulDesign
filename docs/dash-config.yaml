@@ -1,0 +1,81 @@
+# Design Dash Configuration — thoughtfulDesigner.io
+# Generated: 2026-06-11
+# Facilitator: Cursor AI Agent (autonomous run)
+
+project:
+  name: thoughtfulDesigner.io
+  slug: thoughtful-designer
+  url: https://thoughtfuldesigner.io
+  build_mode: enhance  # core LMS scaffold exists; adding landing, blog, resources, tenets
+
+tier: Standard
+
+tier_rationale: |
+  Trigger: Multi-role platform (Learner + Admin/Course Author).
+  Trigger: Payment/subscription surface (course purchase).
+  Trigger: Projected reach 500–9,999 active learners within 12 months of launch.
+  No High-stakes triggers: adults only (no K-12, no FERPA/COPPA/SOPIPA), no student PII,
+  no grading of minors, no district/school enrollment.
+  Designer may escalate to High-stakes when paid team licensing is added.
+
+mandatory_gates:
+  - name: Evidence Gate
+    phase: P1
+    status: complete
+  - name: Reconciliation Gate
+    phase: P4
+    status: complete
+  - name: Selection Gate
+    phase: P5
+    status: complete
+  - name: Edge/Ethics/Equity Gate
+    phase: P6
+    status: complete
+  - name: Learning Gate
+    phase: P8
+    status: deferred  # autonomous run — no named owner; log as evidence debt
+
+phases:
+  P0: "Preconditions + Tier Classification"
+  P1: "Opportunity & Evidence"
+  P2: "Intake & Context"
+  P3: "Framing"
+  P4: "Synthesis (Scenario Flow Mapping)"
+  P5: "Divergence + Selection"
+  P6: "Wireframe & Critique"
+  P7: "Build (wireframe plan only — prototype deferred)"
+  P8: "Validate & Learn"
+
+artifacts:
+  - docs/dash-config.yaml
+  - docs/assumptions.md
+  - docs/opportunity-statement.md
+  - docs/object-discovery.md
+  - docs/nom.md
+  - docs/cta-matrix.md
+  - docs/object-map.md
+  - docs/scenario-flow.md
+  - docs/concept-divergence.md
+  - docs/wireframe-plan.md
+  - docs/ethics-equity-checklist.md
+  - docs/sign-off-ledger.md
+  - docs/metrics.md
+
+user_roles:
+  - Learner (primary — mid-career UX/product designer, self-directed)
+  - Admin/Course Author (secondary — platform owner managing content)
+
+scope_note: |
+  In-scope for this dash:
+    - Landing page (marketing + conversion)
+    - LMS course system (self-led async, 11 modules)
+    - Blog (editorial/thought leadership)
+    - Resources library (downloadable templates + frameworks)
+    - Core Tenets / Manifesto section
+    - Learner dashboard + progress tracking
+    - Certificate/completion system
+  Out of scope for this dash:
+    - Payment/billing implementation (wired into assumptions as deferred)
+    - Community/peer discussion
+    - Live workshop or instructor-led cohort mode
+    - Team/enterprise licensing

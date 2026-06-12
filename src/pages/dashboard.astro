@@ -1,26 +1,173 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AuthGuard from '../components/AuthGuard';
-import DashboardProgress from '../components/DashboardProgress';
 import SignOutButton from '../components/SignOutButton';
+import DashboardProgress from '../components/DashboardProgress';
+import ModuleCard from '../components/ModuleCard.astro';
+import ModuleCardStatus from '../components/ModuleCardStatus';
+import ModuleAssessmentStrip from '../components/ModuleAssessmentStrip';
+import CertificateCallout from '../components/CertificateCallout';
+import {
+  getCourseMeta,
+  getParts,
+  getAllModules,
+  getMilestones,
+  getFinalAssessment,
+  getLessonOrder,
+  getModuleLessons,
+  getModuleForLesson,
+} from '../lib/course';
 import { getPublishedLessons, getLessonSlug } from '../lib/lessons';
+import { withBase } from '../lib/paths';
 
-const lessons = await getPublishedLessons();
-const lessonSlugs = lessons.map(getLessonSlug);
+const meta = getCourseMeta();
+const parts = getParts();
+
+// --- Resume CTA data: canonical lesson order joined to published entries -----
+// The island only needs slug + title + href + a module label; it resolves
+// per-user completion to find the first incomplete lesson.
+const publishedLessons = await getPublishedLessons();
+const lessonBySlug = new Map(publishedLessons.map((lesson) => [getLessonSlug(lesson), lesson]));
+const orderedLessons = getLessonOrder()
+  .map((slug) => {
+    const entry = lessonBySlug.get(slug);
+    if (!entry) return null;
+    const module = getModuleForLesson(slug);
+    return {
+      slug,
+      title: entry.data.title,
+      href: withBase(`/lessons/${slug}`),
+      moduleLabel: module ? `Module ${module.order}` : 'Introduction',
+    };
+  })
+  .filter((lesson): lesson is NonNullable<typeof lesson> => lesson !== null);
+
+// --- Progress overview: 11 module cards + assessment strip ------------------
+const partsView = await Promise.all(
+  parts.map(async (part) => ({
+    name: part.name,
+    modules: await Promise.all(
+      part.modules
+        .slice()
+        .sort((a, b) => a.order - b.order)
+        .map(async (module) => {
+          const lessons = (await getModuleLessons(module.id)).filter((l) => l.data.published);
+          const lessonSlugs = lessons.map(getLessonSlug);
+          const estimatedMinutes = lessons.reduce(
+            (sum, l) => sum + (l.data.estimated_minutes ?? 0),
+            0,
+          );
+          return { module, lessonSlugs, estimatedMinutes };
+        }),
+    ),
+  })),
+);
+
+const moduleCards = partsView.flatMap((part) =>
+  part.modules.map((entry) => ({ ...entry, partName: part.name })),
+);
+
+const stripModules = moduleCards.map(({ module, lessonSlugs }) => ({
+  id: module.id,
+  order: module.order,
+  title: module.title,
+  lessonSlugs,
+}));
+
+const final = getFinalAssessment();
+const requiredAssessmentIds = [
+  ...getAllModules().map((module) => module.id),
+  ...getMilestones().map((milestone) => milestone.id),
+  ...(final ? [final.id] : []),
+];
+
+const certificateHref = withBase('/certificate');
 ---
 
-<BaseLayout title="Dashboard — Thoughtful Design">
+<BaseLayout title={`Dashboard — ${meta.title}`} description="Your Thoughtful Design progress.">
   <AuthGuard client:load>
-    <section class="container" style="padding: 2.5rem 0;">
-      <div style="display: flex; justify-content: space-between; gap: 1rem; align-items: center; flex-wrap: wrap;">
+    <section class="container dashboard">
+      <div class="dashboard__top">
         <div>
-          <h1>Your progress</h1>
-          <p class="muted">Track completed lessons and pick up where you left off.</p>
+          <h1>Your dashboard</h1>
+          <p class="muted">Pick up where you left off and track your progress through {meta.title}.</p>
         </div>
-        <SignOutButton client:load />
+        <div class="dashboard__account">
+          <a class="button button--ghost" href={withBase('/account')}>Account settings</a>
+          <SignOutButton client:load />
+        </div>
       </div>
 
-      <DashboardProgress client:load lessonSlugs={lessonSlugs} />
+      <DashboardProgress client:load lessons={orderedLessons} certificateHref={certificateHref} />
+
+      <section class="dashboard__section" aria-labelledby="progress-heading">
+        <h2 id="progress-heading">Your progress</h2>
+        <div class="card-grid">
+          {moduleCards.map(({ module, lessonSlugs, estimatedMinutes, partName }) => (
+            <ModuleCard
+              order={module.order}
+              title={module.title}
+              coreClaim={module.core_claim}
+              lessonCount={lessonSlugs.length}
+              estimatedMinutes={estimatedMinutes}
+              partName={partName}
+              href={withBase(`/course/modules/${module.id}`)}
+            >
+              <ModuleCardStatus
+                slot="status"
+                client:load
+                moduleId={module.id}
+                assessmentId={module.id}
+                lessonSlugs={lessonSlugs}
+              />
+            </ModuleCard>
+          ))}
+        </div>
+      </section>
+
+      <section class="dashboard__section" aria-labelledby="assessments-heading">
+        <h2 id="assessments-heading">Module assessments</h2>
+        <ModuleAssessmentStrip client:load modules={stripModules} />
+      </section>
+
+      <section class="dashboard__section" aria-labelledby="certificate-heading">
+        <h2 id="certificate-heading">Certificate</h2>
+        <CertificateCallout
+          client:load
+          requiredAssessmentIds={requiredAssessmentIds}
+          certificateHref={certificateHref}
+        />
+      </section>
     </section>
   </AuthGuard>
 </BaseLayout>
+
+<style>
+  .dashboard {
+    padding: 2.5rem 0 3.5rem;
+  }
+
+  .dashboard__top {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 1.75rem;
+  }
+
+  .dashboard__account {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .dashboard__section {
+    margin-top: 2.75rem;
+  }
+
+  .dashboard__section > h2 {
+    margin: 0 0 1rem;
+  }
+</style>
